@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>测试 | 原豪的个人博客</title>
+  <title>hadoop 2.7.2集群搭建 | 原豪的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
 注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
 前期准备就不详细说明1.修改Linux主机名2.修改IP3.修改主机名和IP的映射关系
 ######">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
+<meta property="og:title" content="hadoop 2.7.2集群搭建">
 <meta property="og:url" content="http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/index.html">
 <meta property="og:site_name" content="原豪的个人博客">
 <meta property="og:description" content="hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
 注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
 前期准备就不详细说明1.修改Linux主机名2.修改IP3.修改主机名和IP的映射关系
 ######">
-<meta property="og:updated_time" content="2016-06-14T00:32:01.000Z">
+<meta property="og:updated_time" content="2016-06-14T00:40:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
+<meta name="twitter:title" content="hadoop 2.7.2集群搭建">
 <meta name="twitter:description" content="hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
 注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
 前期准备就不详细说明1.修改Linux主机名2.修改IP3.修改主机名和IP的映射关系
@@ -223,7 +223,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      测试
+      hadoop 2.7.2集群搭建
     </h1>
   
 
@@ -245,7 +245,7 @@
 <pre><code>######注意######如果是租用的服务器或是使用的云主机（如华为用主机、阿里云主机等）
 /etc/hosts里面要配置的是内网IP地址和主机名的映射关系    
 </code></pre><p>4.关闭防火墙<br>5.ssh免登陆<br>6.安装JDK，配置环境变量等</p>
-<p>集群规划：<br>    主机名        IP        安装的软件                运行的进程<br>    yun01    192.168.1.201    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun02    192.168.1.202    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun03    192.168.1.203    jdk、hadoop            ResourceManager<br>    yun04    192.168.1.204    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun05    192.168.1.205    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun06    192.168.1.206    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain</p>
+<p>集群规划：<br>    主机名        IP            安装的软件                运行的进程<br>    yun01    192.168.1.201    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun02    192.168.1.202    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun03    192.168.1.203    jdk、hadoop            ResourceManager<br>    yun04    192.168.1.204    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun05    192.168.1.205    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun06    192.168.1.206    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain</p>
 <p>说明：<br>    在hadoop2.0中通常由两个NameNode组成，一个处于active状态，另一个处于standby状态。Active NameNode对外提供服务，而Standby NameNode则不对外提供服务，仅同步active namenode的状态，以便能够在它失败时快速进行切换。<br>    hadoop2.0官方提供了两种HDFS HA的解决方案，一种是NFS，另一种是QJM。这里我们使用简单的QJM。在该方案中，主备NameNode之间通过一组JournalNode同步元数据信息，一条数据只要成功写入多数JournalNode即认为写入成功。通常配置奇数个JournalNode<br>    这里还配置了一个zookeeper集群，用于ZKFC（DFSZKFailoverController）故障转移，当Active NameNode挂掉了，会自动切换Standby NameNode为standby状态</p>
 <p>安装步骤：<br>    1.安装配置zooekeeper集群<br>        1.1解压<br>            tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/<br>        1.2修改配置<br>            cd /hadoop/zookeeper-3.4.5/conf/<br>            cp zoo_sample.cfg zoo.cfg<br>            vim zoo.cfg<br>            修改：dataDir=/hadoop/zookeeper-3.4.5/tmp<br>            在最后添加：<br>            server.1=yun04:2888:3888<br>            server.2=yun05:2888:3888<br>            server.3=yun06:2888:3888<br>            保存退出<br>            然后创建一个tmp文件夹<br>            mkdir /hadoop/zookeeper-3.4.5/tmp<br>            再创建一个空文件<br>            touch /hadoop/zookeeper-3.4.5/tmp/myid<br>            最后向该文件写入ID<br>            echo 1 &gt; /hadoop/zookeeper-3.4.5/tmp/myid<br>        1.3将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)<br>            scp -r /hadoop/zookeeper-3.4.5/ yun05:/hadoop/<br>            scp -r /hadoop/zookeeper-3.4.5/ yun06:/hadoop/</p>
 <pre><code>        注意：修改yun05、yun06对应/hadoop/zookeeper-3.4.5/tmp/myid内容
@@ -528,7 +528,7 @@ OK，大功告成！！！
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="hadoop 2.7.2集群搭建 手把手教程" data-title="测试" data-url="http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/"></div>
+	<div class="ds-thread" data-thread-key="hadoop 2.7.2集群搭建 手把手教程" data-title="hadoop 2.7.2集群搭建" data-url="http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
