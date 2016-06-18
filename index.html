@@ -198,6 +198,76 @@
 
       <div class="body-wrap">
   
+    <article id="post-计算机基础及Linux入门" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/18/计算机基础及Linux入门/" class="article-date">
+  	<time datetime="2016-06-18T13:42:01.000Z" itemprop="datePublished">2016-06-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>计算机是 电子数字计算机的简称。
+程序和数据 成为计算机软件。
+pc服务器：1U=4.445cm
+互联网企业都用戴尔服务器。其次 惠普、IBM
+BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才能启动操作系统。记录了电脑最基本的信息，是软件与硬件打交道的最基础的桥梁。
+硬盘未来是调优的关键点，硬盘的性能是决定网站的新年能的重要因素。
+磁盘和内存的优化：
+1、内存临时储存用户的数据，然后再写到disk中。（门户网站）
+     1）速度快     2）丢数据
+2、写时：用户数据写到disk中，读时：数据再读到内存中再发给用户。 （并发量不大的中小企业）
+     1）性能低     2）不丢数据
+
+
+
+生产中的硬件应用小杰
+</code></pre><p>1、PC服务器<br>     互联网公司，品牌DELL，HP，IBM。<br>     Dell品牌：2010年以前 1U的1850 1950，2U的2850 2950<br>     2010到2014：1U的R410/420 R610/620<br>IBM： 2U的3750/3850/3950</p>
+<p>2、内存<br>     进程：运行着的程序，进程会放在内存里。<br>     程序：静态的，在磁盘里。<br>企业案例：<br>     1）、门户极端案例：高并发，大数据量：会把数据先写到内存，然后在定时或者定量的写到磁盘，最终还是会加载到内存。<br>     特点：<br>     a、高兵打的写入性能高。<br>     b、可能会丢失一部分在内存中还没来得及存入磁盘的数据。<br>     2）、中小企业案例：并发不是很大网站，会先把数据存放到磁盘，然后通过程序吧数据读入到内存里，再对外提供访问服务。<br>     由于90%的是网站都是读取为主，写入为辅，读写比例10：1，所以并发写入不是问题。<br>     提醒：这里的内存和硬盘，可能是多台机器组成的。</p>
+<p>3、磁盘<br>     磁盘接口：SAS SATA（这两个都是机械硬盘） SSD（固态硬盘）<br>     性能：SSD&gt;SATA&gt;SAS，<br>     应用：常规工作场景选SAS（转速15K）；<br>               SATA（转速7.2K-1W）线下的备份；<br>               高并发SSD。<br>     淘宝网：SATA和SSD混合起来用。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Linux 必须掌握的30个命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
