@@ -15,25 +15,28 @@
 
 
 
-<meta name="description" content="hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
+<meta name="description" content="###hadoop 2.0简介hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
 注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
-前期准备就不详细说明1.修改Linux主机名2.修改IP3.修改主机名和IP的映射关系
-######">
+###前期准备
+####1.修改Linux主机名
+####2.修改IP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hadoop 2.7.2集群搭建">
-<meta property="og:url" content="http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/index.html">
+<meta property="og:title" content="hadoop 2.7.2集群搭建（6台）">
+<meta property="og:url" content="http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/index.html">
 <meta property="og:site_name" content="原豪的个人博客">
-<meta property="og:description" content="hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
+<meta property="og:description" content="###hadoop 2.0简介hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
 注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
-前期准备就不详细说明1.修改Linux主机名2.修改IP3.修改主机名和IP的映射关系
-######">
-<meta property="og:updated_time" content="2016-06-14T00:40:39.000Z">
+###前期准备
+####1.修改Linux主机名
+####2.修改IP">
+<meta property="og:updated_time" content="2016-06-20T16:56:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hadoop 2.7.2集群搭建">
-<meta name="twitter:description" content="hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
+<meta name="twitter:title" content="hadoop 2.7.2集群搭建（6台）">
+<meta name="twitter:description" content="###hadoop 2.0简介hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
 注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
-前期准备就不详细说明1.修改Linux主机名2.修改IP3.修改主机名和IP的映射关系
-######">
+###前期准备
+####1.修改Linux主机名
+####2.修改IP">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -65,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>hadoop 2.7.2集群搭建 | 原豪的个人博客</title>
+<title>hadoop 2.7.2集群搭建（6台） | 原豪的个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -178,7 +181,7 @@
                     <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="mailto:153516796@qq.com" title="Email"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
                             
@@ -204,7 +207,7 @@
                     
                       <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
                     
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://yuanhao.space/">MOxFIVE</a>
                     
                     </div>
                 </section>
@@ -214,7 +217,7 @@
                 
                 <section class="switch-part switch-part4">
                 
-                    <div id="js-aboutme">专注于前端</div>
+                    <div id="js-aboutme">专注与大数据</div>
                 </section>
                 
             </div>
@@ -254,7 +257,7 @@
             <nav class="header-nav">
                         <ul class="social">
                             
-                                <a class="fa Email" target="_blank" href="mailto:123@123.com" title="Email"></a>
+                                <a class="fa Email" target="_blank" href="mailto:153516796@qq.com" title="Email"></a>
                             
                                 <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
                             
@@ -266,10 +269,10 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-hadoop 2.7.2集群搭建 手把手教程" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-hadoop 2.7.2集群搭建 手把手教程（6台）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/" class="article-date">
+      <a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/" class="article-date">
       <time datetime="2016-06-12T04:02:30.000Z" itemprop="datePublished">2016-06-12</time>
 </a>
     </div>
@@ -283,7 +286,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      hadoop 2.7.2集群搭建
+      hadoop 2.7.2集群搭建（6台）
     </h1>
   
 
@@ -300,15 +303,20 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。</p>
+        <p>###hadoop 2.0简介<br>hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。</p>
 <p>注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，<br>所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译</p>
-<p>前期准备就不详细说明<br>1.修改Linux主机名<br>2.修改IP<br>3.修改主机名和IP的映射关系</p>
+<p>###前期准备</p>
+<p>####1.修改Linux主机名</p>
+<p>####2.修改IP</p>
+<p>####3.修改主机名和IP的映射关系</p>
 <pre><code>######注意######如果是租用的服务器或是使用的云主机（如华为用主机、阿里云主机等）
 /etc/hosts里面要配置的是内网IP地址和主机名的映射关系    
-</code></pre><p>4.关闭防火墙<br>5.ssh免登陆<br>6.安装JDK，配置环境变量等</p>
-<p>集群规划：<br>    主机名        IP            安装的软件                运行的进程<br>    yun01    192.168.1.201    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun02    192.168.1.202    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun03    192.168.1.203    jdk、hadoop            ResourceManager<br>    yun04    192.168.1.204    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun05    192.168.1.205    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun06    192.168.1.206    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain</p>
-<p>说明：<br>    在hadoop2.0中通常由两个NameNode组成，一个处于active状态，另一个处于standby状态。Active NameNode对外提供服务，而Standby NameNode则不对外提供服务，仅同步active namenode的状态，以便能够在它失败时快速进行切换。<br>    hadoop2.0官方提供了两种HDFS HA的解决方案，一种是NFS，另一种是QJM。这里我们使用简单的QJM。在该方案中，主备NameNode之间通过一组JournalNode同步元数据信息，一条数据只要成功写入多数JournalNode即认为写入成功。通常配置奇数个JournalNode<br>    这里还配置了一个zookeeper集群，用于ZKFC（DFSZKFailoverController）故障转移，当Active NameNode挂掉了，会自动切换Standby NameNode为standby状态</p>
-<p>安装步骤：<br>    1.安装配置zooekeeper集群<br>        1.1解压<br>            tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/<br>        1.2修改配置<br>            cd /hadoop/zookeeper-3.4.5/conf/<br>            cp zoo_sample.cfg zoo.cfg<br>            vim zoo.cfg<br>            修改：dataDir=/hadoop/zookeeper-3.4.5/tmp<br>            在最后添加：<br>            server.1=yun04:2888:3888<br>            server.2=yun05:2888:3888<br>            server.3=yun06:2888:3888<br>            保存退出<br>            然后创建一个tmp文件夹<br>            mkdir /hadoop/zookeeper-3.4.5/tmp<br>            再创建一个空文件<br>            touch /hadoop/zookeeper-3.4.5/tmp/myid<br>            最后向该文件写入ID<br>            echo 1 &gt; /hadoop/zookeeper-3.4.5/tmp/myid<br>        1.3将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)<br>            scp -r /hadoop/zookeeper-3.4.5/ yun05:/hadoop/<br>            scp -r /hadoop/zookeeper-3.4.5/ yun06:/hadoop/</p>
+</code></pre><p>####4.关闭防火墙</p>
+<p>####5.ssh免登陆 </p>
+<p>####6.安装JDK，配置环境变量等</p>
+<p>###集群规划：<br>    主机名        IP            安装的软件                运行的进程<br>    yun01    192.168.1.201    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun02    192.168.1.202    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun03    192.168.1.203    jdk、hadoop            ResourceManager<br>    yun04    192.168.1.204    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun05    192.168.1.205    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun06    192.168.1.206    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain</p>
+<p>####说明：<br>    在hadoop2.0中通常由两个NameNode组成，一个处于active状态，另一个处于standby状态。Active NameNode对外提供服务，而Standby NameNode则不对外提供服务，仅同步active namenode的状态，以便能够在它失败时快速进行切换。<br>    hadoop2.0官方提供了两种HDFS HA的解决方案，一种是NFS，另一种是QJM。这里我们使用简单的QJM。在该方案中，主备NameNode之间通过一组JournalNode同步元数据信息，一条数据只要成功写入多数JournalNode即认为写入成功。通常配置奇数个JournalNode<br>    这里还配置了一个zookeeper集群，用于ZKFC（DFSZKFailoverController）故障转移，当Active NameNode挂掉了，会自动切换Standby NameNode为standby状态</p>
+<p>###安装步骤：<br>    1.安装配置zooekeeper集群<br>        1.1解压<br>            tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/<br>        1.2修改配置<br>            cd /hadoop/zookeeper-3.4.5/conf/<br>            cp zoo_sample.cfg zoo.cfg<br>            vim zoo.cfg<br>            修改：dataDir=/hadoop/zookeeper-3.4.5/tmp<br>            在最后添加：<br>            server.1=yun04:2888:3888<br>            server.2=yun05:2888:3888<br>            server.3=yun06:2888:3888<br>            保存退出<br>            然后创建一个tmp文件夹<br>            mkdir /hadoop/zookeeper-3.4.5/tmp<br>            再创建一个空文件<br>            touch /hadoop/zookeeper-3.4.5/tmp/myid<br>            最后向该文件写入ID<br>            echo 1 &gt; /hadoop/zookeeper-3.4.5/tmp/myid<br>        1.3将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)<br>            scp -r /hadoop/zookeeper-3.4.5/ yun05:/hadoop/<br>            scp -r /hadoop/zookeeper-3.4.5/ yun06:/hadoop/</p>
 <pre><code>        注意：修改yun05、yun06对应/hadoop/zookeeper-3.4.5/tmp/myid内容
         yun05：
             echo 2 &gt; /hadoop/zookeeper-3.4.5/tmp/myid
@@ -510,13 +518,9 @@
     2.10启动YARN(#####注意#####：是在yun03上执行start-yarn.sh，把namenode和resourcemanager分开是因为性能问题，因为他们都要占用大量资源，所以把他们分开了，他们分开了就要分别在不同的机器上启动)
         sbin/start-yarn.sh
 
-到此，hadoop2.2.0配置完毕，可以统计浏览器访问:
-    http://192.168.1.201:50070
-    NameNode &apos;yun01:9000&apos; (active)
-    http://192.168.1.202:50070
-    NameNode &apos;yun02:9000&apos; (standby)
-
-验证HDFS HA
+    hadoop2.7.2配置完毕
+</code></pre><p>###测试集群，通过浏览器访问:<br>        <a href="http://192.168.1.201:50070" target="_blank" rel="external">http://192.168.1.201:50070</a><br>        NameNode ‘yun01:9000’ (active)<br>        <a href="http://192.168.1.202:50070" target="_blank" rel="external">http://192.168.1.202:50070</a><br>        NameNode ‘yun02:9000’ (standby)</p>
+<pre><code>验证HDFS HA
     首先向hdfs上传一个文件
     hadoop fs -put /etc/profile /profile
     hadoop fs -ls /
@@ -537,9 +541,8 @@
 验证YARN：
     运行一下hadoop提供的demo中的WordCount程序：
     hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar wordcount /profile /out
+</code></pre><p>OK，集群搭建成功，enjoy it！</p>
 
-OK，大功告成！！！
-</code></pre>
       
     </div>
     
@@ -547,13 +550,13 @@ OK，大功告成！！！
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/">hadoop 2.7.2集群搭建</a></p>
+        <p><span>Title:</span><a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
         <p><span>Created:</span>2016-06-12, 12:02:30</p>
-        <p><span>Updated:</span>2016-06-14, 08:40:39</p>
+        <p><span>Updated:</span>2016-06-21, 00:56:10</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/" title="hadoop 2.7.2集群搭建">http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/</a>
-            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/" title="hadoop 2.7.2集群搭建（6台）">http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/</a>
+            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -610,7 +613,7 @@ OK，大功告成！！！
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"hadoop 2.7.2集群搭建　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"hadoop 2.7.2集群搭建（6台）　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -642,7 +645,7 @@ OK，大功告成！！！
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/心得/">心得</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/Linux 必须掌握的30个命令/">Linux 必须掌握的30个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/hadoop生态/">hadoop 生态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/Linux 下oracle的安装/">Linux 下oracle的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/测试/">测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程/">hadoop 2.7.2集群搭建</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/心得/">我的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/Linux 必须掌握的30个命令/">Linux 必须掌握的30个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/hadoop生态/">hadoop 生态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/Linux 下oracle的安装/">Linux 下oracle的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/测试/">测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a></li></ul>
 
 
 
