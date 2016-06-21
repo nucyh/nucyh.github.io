@@ -547,13 +547,11 @@
 <p>###查看SElinux状态：<br>    /usr/sbin/sestatus -v</p>
 <p>##二、linux CentOS(RedHat)命令行永久修改IP地址、网关、DNS</p>
 <p>###1.设置IP</p>
-<p>####[root@localhost etc]# vi /etc/sysconfig/network-scripts/ifcfg-eth0</p>
+<p>[root@localhost etc]# vi /etc/sysconfig/network-scripts/ifcfg-eth0</p>
 <pre><code>DEVICE=eth0
 BOOTPROTO=static
 ONBOOT=yes
 HWADDR=00:16:36:66:a3:ec
-
-
 
 IPADDR=10.0.0.11
 NETMASK=255.255.255.0
@@ -568,39 +566,26 @@ PEERDNS=yes
 
 1.BOOTPROTO=static 就是手动设置静态IP，不需要自动获取(static/dhcp/bootp)
 2.USERCTL=no     不允许非root用户控制该设备
-3.PEERDNS=no     不修改/etc/resolv.conf(如果使用DHCP，则yes是默认选项)
-
-4.TYPE=Ethernet 类型以太网
-
-5.GATEWAY 网关
-
-6.NETMASK 掩码
-
-7.ONBOOT=yes 开机重启会自动加载
-
+3.PEERDNS=no     不修改/etc/resolv.conf(如果使用DHCP，则yes是默认选项)    
+4.TYPE=Ethernet 类型以太网    
+5.GATEWAY 网关    
+6.NETMASK 掩码    
+7.ONBOOT=yes 开机重启会自动加载    
 Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的选项动态创建的。
 </code></pre><p>###2.修改网关</p>
-<pre><code>vim /etc/sysconfig/network
-
-增加一条网关信息
+<p>vim /etc/sysconfig/network</p>
+<pre><code>增加一条网关信息
 
 GATEWAY=192.168.1.1
 </code></pre><p>###3.修改DNS</p>
-<pre><code>vim /etc/resolv.conf
-
-增加DNS信息即可
+<p>vim /etc/resolv.conf</p>
+<pre><code>增加DNS信息即可
 
 nameserver 192.168.1.1
 </code></pre><p>##三、检查必要条件 </p>
-<p>###3.1、检查内存及交换分区</p>
-<p>###Oracle要求2GB以上的内存</p>
-<pre><code>·查看内存大小
-grep MemTotal /proc/meminfo 
-·查看交换区大小
-grep SwapTotal /proc/meminfo
-·也可以使用下面的命令查看内存大小 free -m
-</code></pre><p>##四、系统配置<br>    说明：<br>    在安装光盘的iso文件中有个文件夹（package），在虚拟机中加载该iso文件后，可以在linux界面中直接打开光盘，进入该目录，然后右键-》打开终端，在终端中进行安装。<br>    安装时，有些rpm包的版本和本文挡中的不同，可以先用“ls 包名前几个字母”然后按“tab”键，查找到该包名的完整名称，然后拷贝名称后进行安装。</p>
-<p>###4.1、检查相应的rpm包的情况(等于或者高于下面版本）<br>    rpm -qa | grep pagename(grep是搜索)</p>
+<p>###3.1、检查内存及交换分区###Oracle要求2GB以上的内存<br>     ·查看内存大小    grep MemTotal /proc/meminfo<br>     ·查看交换区大小    grep SwapTotal /proc/meminfo    ·也可以使用下面的命令查看内存大小 free -m</p>
+<p>##四、系统配置<br>    说明：<br>    在安装光盘的iso文件中有个文件夹（package），在虚拟机中加载该iso文件后，可以在linux界面中直接打开光盘，进入该目录，然后右键-》打开终端，在终端中进行安装。<br>    安装时，有些rpm包的版本和本文挡中的不同，可以先用“ls 包名前几个字母”然后按“tab”键，查找到该包名的完整名称，然后拷贝名称后进行安装。</p>
+<p>###4.1、检查相应的rpm包的情况(等于或者高于下面版本）<br>rpm -qa | grep pagename(grep是搜索)</p>
 <pre><code>binutils-2.17.50.0.6
 compat-libstdc++-33-3.2.3
 compat-libstdc++-33-3.2.3 (32 bit)
@@ -674,26 +659,18 @@ session required pam_limits.so
 echo $ORACLE_HOME
 </code></pre><hr>
 <p>###4.9:解压缩oracle文件，<br>    如果是root拷贝过去的，用root解压缩，然后还要赋予oracle的权限。<br>    使用：unzip 压缩文件名称    即可</p>
-<p>###4.10:设置编码方式：在oracle用户下：<br>    export LANG=en_US.UTF-8</p>
+<p>###4.10:设置编码方式：在oracle用户下：<br>    export LANG=en_US.UTF-8<br>​    </p>
 <p>##五、安装Oracle </p>
-<p>###5.1解压Oracle安装文件<br>    将Oracle拷贝至Linux服务器上,然后解压<br>    如果使用光盘安装,则使用 mount -t iso9660 /dev/dvd /mnt/dvd 挂载光盘 </p>
-<p>###5.2设置安装环境<br>    如果Linux系统字符编码是中文的,在安装过程中Oracle安装界面会全部乱码。可使<br>    用 export LANG=en_US ,将会话的字符集改为英文字符集,然后再安装就不会出现乱码。<br>    另外,Oracle安装时需要图形界面的支持。</p>
-<p>###6.3开始安装Oracle<br>    1) cd database/ 切换到安装目录,然后执行 ./runInstaller<br>    2)然后点击“next”,进入选择安装类型的界面<br>    3)选择“Create and configure a database”,然后点击“next”<br>    4)选择“Server Class”,然后点击“next”<br>    5)选择“Single instance database installation”,然后点击“next”<br>    6)选择“Advanced install”,然后点击“next”<br>    7)将简体中文(Simplified Chinese),添加到语言支持,然后点击“next”<br>    8)选择“企业版(Enterprise Edition)”,然后点击“next”<br>    9)配置安装目录,然后点击“next”<br>    10)配置“Oracle Inventory”,然后点击“next”<br>    11)选择“General Purpose / Transaction Processing”,然后点击“next”<br>    12)配置Oracle的SID,然后点击“next”<br>    13)配置内存字符集等，默认就OK，点击“next”<br>    14)直接使用默认,然后点击“next”<br>        再点击“next”<br>        再点击“next”<br>    15)选择“Use the same password for all account ”配置系统用户的密码,然后点击“next” 如果密码不够复杂,Oracle会提示密码过于简单<br>    直接“yes”(如有需要可以设置的复杂一点)<br>    16)直接使用默认,然后点击“next”,开始检查系统环境<br>    17)有部分没有通过,这些软件都已安装,这里选择“ignore all”,然后点击“next”,出现 Oracle安装设置信息<br>    18)点击“Finish”,开始安装Oracle（等待30分左右……）<br>        稍后会出现创建数据库的界面<br>        数据库创建完后，弹出一个窗口,可以通过“Password Management”可以修改密码,如果不需要直接“OK”,然后弹出下面的窗 口。<br>        提示需要在root用户下执行两个脚本：<br>        oraInstRoot.sh和root.sh<br>        这是需要打开一个命令行,然后切换到Root用户执行这两个脚本,然后点击“OK”,回到安装 界面。<br>        稍候就安装成功！<br>    点击“Close”,安装结束。</p>
+<p>###5.1解压Oracle安装文件    将Oracle拷贝至Linux服务器上,然后解压    如果使用光盘安装,则使用 mount -t iso9660 /dev/dvd /mnt/dvd 挂载光盘 </p>
+<p>###5.2设置安装环境    如果Linux系统字符编码是中文的,在安装过程中Oracle安装界面会全部乱码。可使    用 export LANG=en_US ,将会话的字符集改为英文字符集,然后再安装就不会出现乱码。    另外,Oracle安装时需要图形界面的支持。</p>
+<p>###5.3开始安装Oracle<br>    1) cd database/ 切换到安装目录,然后执行 ./runInstaller<br>    2)然后点击“next”,进入选择安装类型的界面<br>    3)选择“Create and configure a database”,然后点击“next”<br>    4)选择“Server Class”,然后点击“next”<br>    5)选择“Single instance database installation”,然后点击“next”<br>    6)选择“Advanced install”,然后点击“next”<br>    7)将简体中文(Simplified Chinese),添加到语言支持,然后点击“next”<br>    8)选择“企业版(Enterprise Edition)”,然后点击“next”<br>    9)配置安装目录,然后点击“next”<br>    10)配置“Oracle Inventory”,然后点击“next”<br>    11)选择“General Purpose / Transaction Processing”,然后点击“next”<br>    12)配置Oracle的SID,然后点击“next”<br>    13)配置内存字符集等，默认就OK，点击“next”<br>    14)直接使用默认,然后点击“next”<br>        再点击“next”<br>        再点击“next”<br>    15)选择“Use the same password for all account ”配置系统用户的密码,然后点击“next” 如果密码不够复杂,Oracle会提示密码过于简单<br>    直接“yes”(如有需要可以设置的复杂一点)<br>    16)直接使用默认,然后点击“next”,开始检查系统环境<br>    17)有部分没有通过,这些软件都已安装,这里选择“ignore all”,然后点击“next”,出现 Oracle安装设置信息<br>    18)点击“Finish”,开始安装Oracle（等待30分左右……）<br>        稍后会出现创建数据库的界面<br>        数据库创建完后，弹出一个窗口,可以通过“Password Management”可以修改密码,如果不需要直接“OK”,然后弹出下面的窗 口。<br>        提示需要在root用户下执行两个脚本：<br>        oraInstRoot.sh和root.sh<br>        这是需要打开一个命令行,然后切换到Root用户执行这两个脚本,然后点击“OK”,回到安装 界面。<br>        稍候就安装成功！<br>    点击“Close”,安装结束。</p>
 <p>##七、测试安装结果<br>    切换到Oracle用户 su - oracle ,然后输入 sqlplus / as sysdba 登录到Oracle数据库, 然后执行 desc tab ,如果能够打印出表结构证明Oracle已经安装并启动成功了。</p>
 <p>##八、修改防火墙配置,将Oracle端口添加 到例外</p>
-<p>###使用 vi /etc/sysconfig/iptables ,打开防火墙配置文件。在 -A INPUT -i lo -j ACCEPT 下添加下面的内容</p>
-<pre><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
-</code></pre><p>###然后使用 service iptables restart 重启防火墙使配置生效。</p>
-<p>##九、将Oracle设置自启动<br>    使用 vi /etc/oratab 编辑oratab,进入vi编辑器后,找<br>    到 orcl:/u01/app/oracle/product/11.2.0/dbhome_1:N ,改<br>    为 orcl:/u01/app/oracle/product/11.2.0/dbhome_1:Y 。修改完成后,保存退出。</p>
-<pre><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
-</code></pre><p>###然后编辑rc.local</p>
-<pre><code>vi /etc/rc.d/rc.local
-####加入下面的内容,并保存####
-su oracle -lc &quot;/u01/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start&quot;
-su oracle -lc /u01/app/oracle/product/11.2.0/dbhome_1/bin/dbstart
-</code></pre><p>使用 reboot 重启。</p>
-<p>重启完成后使用 lsnrctl status 检查监听是否启动。</p>
-<p>###然后重复”七、测试安装结果“可测试数据库是否正常启动。</p>
+<p>###使用 vi /etc/sysconfig/iptables ,打开防火墙配置文件。在 -A INPUT -i lo -j ACCEPT 下添加下面的内容<br>      -A INPUT -m state –state NEW -m tcp -p tcp –dport 22 -j ACCEPT</p>
+<p>###然后使用 service iptables restart 重启防火墙使配置生效。</p>
+<p>##九、将Oracle设置自启动<br>    使用 vi /etc/oratab 编辑oratab,进入vi编辑器后,找    到 orcl:/u01/app/oracle/product/11.2.0/dbhome_1:N ,改    为 orcl:/u01/app/oracle/product/11.2.0/dbhome_1:Y 。修改完成后,保存退出。        -A INPUT -m state –state NEW -m tcp -p tcp –dport 22 -j ACCEPT</p>
+<p>###然后编辑rc.local<br>     vi /etc/rc.d/rc.local    ####加入下面的内容,并保存####    su oracle -lc “/u01/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start”    su oracle -lc /u01/app/oracle/product/11.2.0/dbhome_1/bin/dbstart<br>使用 reboot 重启。<br>重启完成后使用 lsnrctl status 检查监听是否启动。</p>
+<p>###然后重复”七、测试安装结果“可测试数据库是否正常启动。    </p>
 
       
     </div>
