@@ -802,7 +802,8 @@ sed -n 20,30p err.txt
 <p>解压： tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/</p>
 <p>修改配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /hadoop/zookeeper-3.4.5/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
-<figure class="highlight vim"><figcaption><span>zoo.cfg```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">修改：</span><br><span class="line"></span><br><span class="line">```dataDir=/hadoop/zookeeper-<span class="number">3.4</span>.<span class="number">5</span>/tmp</span><br></pre></td></tr></table></figure>
+<p>vim zoo.cfg 修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataDir=/hadoop/zookeeper-3.4.5/tmp</span><br></pre></td></tr></table></figure>
 <p>在最后添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.1=yun04:2888:3888</span><br><span class="line">server.2=yun05:2888:3888</span><br><span class="line">server.3=yun06:2888:3888</span><br></pre></td></tr></table></figure>
 <p>保存退出<br>然后创建一个<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```mkdir /hadoop/zookeeper-3.4.5/tmp</span><br></pre></td></tr></table></figure></p>
