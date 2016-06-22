@@ -25,7 +25,7 @@
 <meta property="og:description" content="hadoop 2.x简介hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
 注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
 前期准备修改Linux主机名修改IP修改主机名和IP的映射关系12注意:如">
-<meta property="og:updated_time" content="2016-06-22T06:00:12.000Z">
+<meta property="og:updated_time" content="2016-06-22T06:02:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hadoop 2.7.2集群搭建（6台）">
 <meta name="twitter:description" content="hadoop 2.x简介hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
@@ -367,7 +367,7 @@
 <h4 id="安装配置hadoop集群"><a href="#安装配置hadoop集群" class="headerlink" title="安装配置hadoop集群"></a>安装配置hadoop集群</h4><h5 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h5><p><code>tar -zxvf hadoop-2.7.2.tar.gz -C /hadoop/</code></p>
 <h5 id="配置HDFS（hadoop2-x所有的配置文件都在-HADOOP-HOME-etc-hadoop目录下）"><a href="#配置HDFS（hadoop2-x所有的配置文件都在-HADOOP-HOME-etc-hadoop目录下）" class="headerlink" title="配置HDFS（hadoop2.x所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）"></a>配置HDFS（hadoop2.x所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）</h5><p>将hadoop添加到环境变量中<br>vim /etc/profile</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br><span class="line">export HADOOP_HOME=/hadoop/hadoop-2.7.2</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>hadoop 2.x的配置文件全部在<code>$HADOOP_HOME/etc/hadoop</code>下<br><code>cd /hadoop/hadoop-2.7.2/etc/hadoop</code><br>​            </p>
+<p>hadoop 2.x的配置文件全部在$HADOOP_HOME/etc/hadoop下<br><code>cd /hadoop/hadoop-2.7.2/etc/hadoop</code><br>​            </p>
 <h5 id="修改hadoop-env-sh"><a href="#修改hadoop-env-sh" class="headerlink" title="修改hadoop-env.sh"></a>修改hadoop-env.sh</h5><p>vi hadoop-env.sh</p>
 <p><code>export JAVA_HOME=/usr/java/jdk1.8</code></p>
 <h5 id="修改core-site-xml"><a href="#修改core-site-xml" class="headerlink" title="修改core-site.xml"></a>修改core-site.xml</h5><p>vi core-site.xml</p>
@@ -417,7 +417,7 @@
         <p><span>Title:</span><a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
         <p><span>Created:</span>2016-06-12, 12:02:30</p>
-        <p><span>Updated:</span>2016-06-22, 14:00:12</p>
+        <p><span>Updated:</span>2016-06-22, 14:02:28</p>
         <p>
             <span>Full URL:</span><a class="post-url" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/" title="hadoop 2.7.2集群搭建（6台）">http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/</a>
             <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
