@@ -540,138 +540,84 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>##一、关闭防火墙</p>
-<p>###1.怎样查看iptables和SElinux状态：<br>    service iptables status<br>    getenforce</p>
-<p>###2、关闭iptables和SElinux：<br>    service iptables stop   #临时关闭防火墙<br>    chkconfig iptables off    #永久关闭防火墙，开机不自启动，想自启动改成on<br>    setenforce 0    #临时关闭SElinux,临时打开SElinux状态命令：setenforce 1</p>
-<p>###3、永久关闭SElinux<br>    vim /etc/selinux/config,然后将SELINUX改成disabled，这样即使重启操作系统SElinux也是关闭状态。</p>
-<p>###查看SElinux状态：<br>    /usr/sbin/sestatus -v</p>
-<p>##二、linux CentOS(RedHat)命令行永久修改IP地址、网关、DNS</p>
-<p>###1.设置IP</p>
-<p>[root@localhost etc]# vi /etc/sysconfig/network-scripts/ifcfg-eth0</p>
-<pre><code>DEVICE=eth0
-BOOTPROTO=static
-ONBOOT=yes
-HWADDR=00:16:36:66:a3:ec
-
-IPADDR=10.0.0.11
-NETMASK=255.255.255.0
-GATEWAY=10.0.0.1
-TYPE=Ethernet
-USERCTL=no
-IPV6INIT=no
-PEERDNS=yes
-
-
-#################解释#################
-
-1.BOOTPROTO=static 就是手动设置静态IP，不需要自动获取(static/dhcp/bootp)
-2.USERCTL=no     不允许非root用户控制该设备
-3.PEERDNS=no     不修改/etc/resolv.conf(如果使用DHCP，则yes是默认选项)    
-4.TYPE=Ethernet 类型以太网    
-5.GATEWAY 网关    
-6.NETMASK 掩码    
-7.ONBOOT=yes 开机重启会自动加载    
-Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的选项动态创建的。
-</code></pre><p>###2.修改网关</p>
-<p>vim /etc/sysconfig/network</p>
-<pre><code>增加一条网关信息
-
-GATEWAY=192.168.1.1
-</code></pre><p>###3.修改DNS</p>
-<p>vim /etc/resolv.conf</p>
-<pre><code>增加DNS信息即可
-
-nameserver 192.168.1.1
-</code></pre><p>##三、检查必要条件 </p>
-<p>###3.1、检查内存及交换分区###Oracle要求2GB以上的内存<br>     ·查看内存大小    grep MemTotal /proc/meminfo<br>     ·查看交换区大小    grep SwapTotal /proc/meminfo    ·也可以使用下面的命令查看内存大小 free -m</p>
-<p>##四、系统配置<br>    说明：<br>    在安装光盘的iso文件中有个文件夹（package），在虚拟机中加载该iso文件后，可以在linux界面中直接打开光盘，进入该目录，然后右键-》打开终端，在终端中进行安装。<br>    安装时，有些rpm包的版本和本文挡中的不同，可以先用“ls 包名前几个字母”然后按“tab”键，查找到该包名的完整名称，然后拷贝名称后进行安装。</p>
-<p>###4.1、检查相应的rpm包的情况(等于或者高于下面版本）<br>rpm -qa | grep pagename(grep是搜索)</p>
-<pre><code>binutils-2.17.50.0.6
-compat-libstdc++-33-3.2.3
-compat-libstdc++-33-3.2.3 (32 bit)
-elfutils-libelf-0.125
-elfutils-libelf-devel-0.125
-gcc-4.1.2
-gcc-c++-4.1.2
-glibc-2.5-24
-glibc-2.5-24 (32 bit)
-glibc-common-2.5
-glibc-devel-2.5
-glibc-devel-2.5 (32 bit)
-glibc-headers-2.5
-ksh-20060214
-libaio-0.3.106
-libaio-0.3.106 (32 bit)
-libaio-devel-0.3.106
-libaio-devel-0.3.106 (32 bit)
-libgcc-4.1.2
-libgcc-4.1.2 (32 bit)
-libstdc++-4.1.2
-libstdc++-4.1.2 (32 bit)
-libstdc++-devel 4.1.2
-make-3.81
-numactl-devel-0.9.8.x86_64
-sysstat-7.0.2
-unixODBC-2.2.11
-unixODBC-2.2.11 (32 bit)
-unixODBC-devel-2.2.11
-unixODBC-devel-2.2.11 (32 bit)
-</code></pre><p>###务必先在光盘中找到以上包名安装后，大约有1-2个包名在光盘中无法找到，可以到我给那你们发送的文件夹中找（只找需要的，不能全部安装）</p>
+        <h2 id="一、关闭防火墙"><a href="#一、关闭防火墙" class="headerlink" title="一、关闭防火墙"></a>一、关闭防火墙</h2><h3 id="1-1-怎样查看iptables和SElinux状态："><a href="#1-1-怎样查看iptables和SElinux状态：" class="headerlink" title="1.1 怎样查看iptables和SElinux状态："></a>1.1 怎样查看iptables和SElinux状态：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables status</span><br><span class="line">getenforce</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-关闭iptables和SElinux："><a href="#1-2-关闭iptables和SElinux：" class="headerlink" title="1.2 关闭iptables和SElinux："></a>1.2 关闭iptables和SElinux：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop   #临时关闭防火墙</span><br><span class="line">chkconfig iptables off    #永久关闭防火墙，开机不自启动，想自启动改成on</span><br><span class="line">setenforce 0    #临时关闭SElinux,临时打开SElinux状态命令：setenforce 1</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-永久关闭SElinux"><a href="#1-3-永久关闭SElinux" class="headerlink" title="1.3 永久关闭SElinux"></a>1.3 永久关闭SElinux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config,然后将SELINUX改成disabled，这样即使重启操作系统SElinux也是关闭状态。</span><br></pre></td></tr></table></figure>
+<h3 id="1-4-查看SElinux状态："><a href="#1-4-查看SElinux状态：" class="headerlink" title="1.4 查看SElinux状态："></a>1.4 查看SElinux状态：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/sestatus -v</span><br></pre></td></tr></table></figure>
+<h2 id="二、linux-CentOS-RedHat-命令行永久修改IP地址、网关、DNS"><a href="#二、linux-CentOS-RedHat-命令行永久修改IP地址、网关、DNS" class="headerlink" title="二、linux CentOS(RedHat)命令行永久修改IP地址、网关、DNS"></a>二、linux CentOS(RedHat)命令行永久修改IP地址、网关、DNS</h2><h3 id="2-1-设置IP"><a href="#2-1-设置IP" class="headerlink" title="2.1 设置IP"></a>2.1 设置IP</h3><p>[root@localhost etc]# vi /etc/sysconfig/network-scripts/ifcfg-eth0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">ONBOOT=yes</span><br><span class="line">HWADDR=00:16:36:66:a3:ec</span><br><span class="line">IPADDR=10.0.0.11</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=10.0.0.1</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">USERCTL=no</span><br><span class="line">IPV6INIT=no</span><br><span class="line">PEERDNS=yes</span><br><span class="line"></span><br><span class="line">#################解释#################</span><br><span class="line"></span><br><span class="line">1.BOOTPROTO=static 就是手动设置静态IP，不需要自动获取(static/dhcp/bootp)</span><br><span class="line">2.USERCTL=no     不允许非root用户控制该设备</span><br><span class="line">3.PEERDNS=no     不修改/etc/resolv.conf(如果使用DHCP，则yes是默认选项)	</span><br><span class="line">4.TYPE=Ethernet 类型以太网	</span><br><span class="line">5.GATEWAY 网关	</span><br><span class="line">6.NETMASK 掩码	</span><br><span class="line">7.ONBOOT=yes 开机重启会自动加载	</span><br><span class="line">Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的选项动态创建的。</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-修改网关"><a href="#2-2-修改网关" class="headerlink" title="2.2 修改网关"></a>2.2 修改网关</h3><p>vim /etc/sysconfig/network</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">增加一条网关信息</span><br><span class="line">GATEWAY=192.168.1.1</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-修改DNS"><a href="#2-3-修改DNS" class="headerlink" title="2.3 修改DNS"></a>2.3 修改DNS</h3><p>vim /etc/resolv.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">增加DNS信息即可</span><br><span class="line">nameserver 192.168.1.1</span><br></pre></td></tr></table></figure>
+<p>##三、检查必要条件 </p>
+<p>###3.1、检查内存及交换分区###Oracle要求2GB以上的内存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">·查看内存大小	grep MemTotal /proc/meminfo 	</span><br><span class="line">·查看交换区大小	grep SwapTotal /proc/meminfo	</span><br><span class="line">·也可以使用下面的命令查看内存大小 free -m</span><br></pre></td></tr></table></figure></p>
+<p>##四、系统配置<br>系统配置说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在安装光盘的iso文件中有个文件夹（package），在虚拟机中加载该iso文件后，可以在linux界面中直接打开光盘，进入该目录，然后右键-&gt;打开终端，在终端中进行安装。</span><br><span class="line">安装时，有些rpm包的版本和本文挡中的不同，可以先用“ls 包名前几个字母”然后按“tab”键，查找到该包名的完整名称，然后拷贝名称后进行安装。</span><br></pre></td></tr></table></figure>
+<p>###4.1、检查相应的rpm包的情况(等于或者高于下面版本）<br>rpm -qa | grep pagename(grep是搜索)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">binutils-2.17.50.0.6</span><br><span class="line">compat-libstdc++-33-3.2.3</span><br><span class="line">compat-libstdc++-33-3.2.3 (32 bit)</span><br><span class="line">elfutils-libelf-0.125</span><br><span class="line">elfutils-libelf-devel-0.125</span><br><span class="line">gcc-4.1.2</span><br><span class="line">gcc-c++-4.1.2</span><br><span class="line">glibc-2.5-24</span><br><span class="line">glibc-2.5-24 (32 bit)</span><br><span class="line">glibc-common-2.5</span><br><span class="line">glibc-devel-2.5</span><br><span class="line">glibc-devel-2.5 (32 bit)</span><br><span class="line">glibc-headers-2.5</span><br><span class="line">ksh-20060214</span><br><span class="line">libaio-0.3.106</span><br><span class="line">libaio-0.3.106 (32 bit)</span><br><span class="line">libaio-devel-0.3.106</span><br><span class="line">libaio-devel-0.3.106 (32 bit)</span><br><span class="line">libgcc-4.1.2</span><br><span class="line">libgcc-4.1.2 (32 bit)</span><br><span class="line">libstdc++-4.1.2</span><br><span class="line">libstdc++-4.1.2 (32 bit)</span><br><span class="line">libstdc++-devel 4.1.2</span><br><span class="line">make-3.81</span><br><span class="line">numactl-devel-0.9.8.x86_64</span><br><span class="line">sysstat-7.0.2</span><br><span class="line">unixODBC-2.2.11</span><br><span class="line">unixODBC-2.2.11 (32 bit)</span><br><span class="line">unixODBC-devel-2.2.11</span><br><span class="line">unixODBC-devel-2.2.11 (32 bit)</span><br></pre></td></tr></table></figure></p>
+<p>###务必先在光盘中找到以上包名安装后，大约有1-2个包名在光盘中无法找到，可以到我给那你们发送的文件夹中找（只找需要的，不能全部安装）</p>
 <hr>
-<pre><code>pdksh-5.2.14-1 ---这个包需要下载，安装前需要卸载掉    ksh-20100621-6.el6包
-在安装oracle11gR2时，需要安装pdksh-5.2.14-1.i386.rpm包。安装该包时，出现了以下问题：
-[root@localhost ~]# rpm -Uvh pdksh-5.2.14-1.i386.rpm 
-</code></pre><p>error: Failed dependencies:<br>    pdksh conflicts with ksh-20100621-12.el6.i686</p>
-<p>####解决方法：<br>    [root@localhost rpm_for_AS6]# rpm -e ksh-20100621-12.el6.i686<br>    [root@localhost ~]# rpm -Uvh pdksh-5.2.14-1.i386.rpm<br>    Preparing…                ########################################### [100%]</p>
-<pre><code>1:pdksh                  ########################################### [100%]
-</code></pre><hr>
-<pre><code> rpm -e ksh-20100621-6.el6
-
-安装缺少的rpm包
-rpm -ivh pagename(根据提示，如果缺少依赖包，也需要加上去)
-</code></pre><p>###4.2、添加组和用户<br>    /usr/sbin/groupadd oinstall（添加oinstall组）<br>    /usr/sbin/groupadd -g 502 dba（添加dba组）<br>    /usr/sbin/useradd -u 502 -g oinstall -G dba oracle（添加用户oracle，主组oinstall，辅助组dba）<br>    passwd oracle（修改oracle用户密码）这里输入：oracle 后重复，不管提示</p>
-<p>###4.3、创建文件夹并修改组和用户所属关系和相关权限(命令格式：chown -R 用户：用户组 文件夹)<br>    mkdir -p /opt/oracle(创建文件u01/oracle)<br>    chown -R oracle:oinstall /opt/oracle(使得/opt/oracle文件夹输入oracle用户和oinstall组)<br>    chmod -R 775 /opt/oracle(修改u01文件夹访问权限)—可选（最好执行下）</p>
-<pre><code>mkdir -p /opt/oradata(创建文件u01/oracle)
-chown -R oracle:oinstall /opt/oracle(使得/opt/oradata文件夹输入oracle用户和oinstall组)
-chmod -R 775 /opt/oradata(修改u01文件夹访问权限)—可选（最好执行下）
-
-mkdir -p /opt/oraInventory
-chown -R oracle:oinstall /opt/oraInventory
-chown -R oracle /opt/oraInventory
-chmod -R 775 /opt/oraInventory
-</code></pre><p>###4.4、添加/etc/hosts中dns解析信息<br>    192.168.1.102             oracle(自己的主机名)<br>    192.168.1.102             localhost</p>
-<p>###4.5、在/etc/security/limits.conf中添加用户限制信息<br>    oracle soft nproc 2047<br>    oracle hard nproc 16384<br>    oracle soft nofile 1024<br>    oracle hard nofile 65536<br>    oracle hard stack 10240</p>
-<pre><code>vi /etc/pam.d/login
-session required /lib/security/pam_limits.so
-session required pam_limits.so
-</code></pre><p>###4.6、修改或者添加/etc/sysctl.conf中信息<br>    fs.aio-max-nr = 1048576<br>    fs.file-max = 6815744<br>    kernel.shmall = 1048576<br>    kernel.shmmax = 536870912<br>    kernel.shmmni = 4096<br>    kernel.sem = 250 32000 100 128<br>    net.ipv4.ip_local_port_range = 9000 65500<br>    net.core.rmem_default = 262144<br>    net.core.rmem_max = 4194304<br>    net.core.wmem_default = 262144<br>    net.core.wmem_max = 1048586<br>    net.ipv4.tcp_wmem = 262144 262144 262144<br>    net.ipv4.tcp_rmem = 4194304 4194304 4194304</p>
-<p>####注意注释掉</p>
-<pre><code># Disable netfilter on bridges.
-#net.bridge.bridge-nf-call-ip6tables = 0
-#net.bridge.bridge-nf-call-iptables = 0
-#net.bridge.bridge-nf-call-arptables = 0
-—/sbin/sysctl �Cp（重新加载这些参数，不用重启系统）
-</code></pre><p>###4.7、编辑vi /etc/profile<br>    if [ $USER = “oracle” ]; then<br>        if [ $SHELL = “/bin/ksh” ];    then<br>              ulimit -p 16384<br>              ulimit -n 65536<br>        else<br>              ulimit -u 16384 -n 65536<br>        fi<br>    fi<br>    -注意空格，在用户切换时使用su �C username，这样才会加载后面的环境变量的配置信息（不要使用su username切换）</p>
-<p>###4.8、配置环境变量<br>    在oracle用户下的.bash_profile文件中添加下面信息<br>    ORACLE_BASE=/opt/oracle<br>    ORACLE_HOME=$ORACLE_BASE/oracle<br>    ORACLE_SID=zqaccp(这里要写要安装的oracle的sid)<br>    PATH=$ORACLE_HOME/bin:$PATH<br>    NLS_LANG=AMERICAN_AMERICA.ZHS16GBK<br>    export ORACLE_BASE ORACLE_HOME ORACLE_SID PATH NLS_LANG</p>
+<p>pdksh-5.2.14-1 —这个包需要下载，安装前需要卸载掉    ksh-20100621-6.el6包在安装oracle11gR2时，需要安装pdksh-5.2.14-1.i386.rpm包。安装该包时，出现了以下问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -Uvh pdksh-5.2.14-1.i386.rpm </span><br><span class="line">error: Failed dependencies:</span><br><span class="line">pdksh conflicts with ksh-20100621-12.el6.i686</span><br></pre></td></tr></table></figure>
+<p>####解决方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rpm_for_AS6]# rpm -e ksh-20100621-12.el6.i686</span><br><span class="line">[root@localhost ~]# rpm -Uvh pdksh-5.2.14-1.i386.rpm </span><br><span class="line">Preparing...                ########################################### [100%]</span><br><span class="line">1:pdksh                  ########################################### [100%]</span><br></pre></td></tr></table></figure></p>
 <hr>
-<pre><code>source ~/.bash_profile  环境变量立即生效
-用echo命令测试环境变量设置是否正确：
-echo $ORACLE_HOME
-</code></pre><hr>
-<p>###4.9:解压缩oracle文件，<br>    如果是root拷贝过去的，用root解压缩，然后还要赋予oracle的权限。<br>    使用：unzip 压缩文件名称    即可</p>
-<p>###4.10:设置编码方式：在oracle用户下：<br>    export LANG=en_US.UTF-8<br>​    </p>
-<p>##五、安装Oracle </p>
-<p>###5.1解压Oracle安装文件    将Oracle拷贝至Linux服务器上,然后解压    如果使用光盘安装,则使用 mount -t iso9660 /dev/dvd /mnt/dvd 挂载光盘 </p>
-<p>###5.2设置安装环境    如果Linux系统字符编码是中文的,在安装过程中Oracle安装界面会全部乱码。可使    用 export LANG=en_US ,将会话的字符集改为英文字符集,然后再安装就不会出现乱码。    另外,Oracle安装时需要图形界面的支持。</p>
-<p>###5.3开始安装Oracle<br>    1) cd database/ 切换到安装目录,然后执行 ./runInstaller<br>    2)然后点击“next”,进入选择安装类型的界面<br>    3)选择“Create and configure a database”,然后点击“next”<br>    4)选择“Server Class”,然后点击“next”<br>    5)选择“Single instance database installation”,然后点击“next”<br>    6)选择“Advanced install”,然后点击“next”<br>    7)将简体中文(Simplified Chinese),添加到语言支持,然后点击“next”<br>    8)选择“企业版(Enterprise Edition)”,然后点击“next”<br>    9)配置安装目录,然后点击“next”<br>    10)配置“Oracle Inventory”,然后点击“next”<br>    11)选择“General Purpose / Transaction Processing”,然后点击“next”<br>    12)配置Oracle的SID,然后点击“next”<br>    13)配置内存字符集等，默认就OK，点击“next”<br>    14)直接使用默认,然后点击“next”<br>        再点击“next”<br>        再点击“next”<br>    15)选择“Use the same password for all account ”配置系统用户的密码,然后点击“next” 如果密码不够复杂,Oracle会提示密码过于简单<br>    直接“yes”(如有需要可以设置的复杂一点)<br>    16)直接使用默认,然后点击“next”,开始检查系统环境<br>    17)有部分没有通过,这些软件都已安装,这里选择“ignore all”,然后点击“next”,出现 Oracle安装设置信息<br>    18)点击“Finish”,开始安装Oracle（等待30分左右……）<br>        稍后会出现创建数据库的界面<br>        数据库创建完后，弹出一个窗口,可以通过“Password Management”可以修改密码,如果不需要直接“OK”,然后弹出下面的窗 口。<br>        提示需要在root用户下执行两个脚本：<br>        oraInstRoot.sh和root.sh<br>        这是需要打开一个命令行,然后切换到Root用户执行这两个脚本,然后点击“OK”,回到安装 界面。<br>        稍候就安装成功！<br>    点击“Close”,安装结束。</p>
-<p>##七、测试安装结果<br>    切换到Oracle用户 su - oracle ,然后输入 sqlplus / as sysdba 登录到Oracle数据库, 然后执行 desc tab ,如果能够打印出表结构证明Oracle已经安装并启动成功了。</p>
-<p>##八、修改防火墙配置,将Oracle端口添加 到例外</p>
-<p>###使用 vi /etc/sysconfig/iptables ,打开防火墙配置文件。在 -A INPUT -i lo -j ACCEPT 下添加下面的内容<br>      -A INPUT -m state –state NEW -m tcp -p tcp –dport 22 -j ACCEPT</p>
-<p>###然后使用 service iptables restart 重启防火墙使配置生效。</p>
-<p>##九、将Oracle设置自启动<br>    使用 vi /etc/oratab 编辑oratab,进入vi编辑器后,找    到 orcl:/u01/app/oracle/product/11.2.0/dbhome_1:N ,改    为 orcl:/u01/app/oracle/product/11.2.0/dbhome_1:Y 。修改完成后,保存退出。        -A INPUT -m state –state NEW -m tcp -p tcp –dport 22 -j ACCEPT</p>
-<p>###然后编辑rc.local<br>     vi /etc/rc.d/rc.local    ####加入下面的内容,并保存####    su oracle -lc “/u01/app/oracle/product/11.2.0/dbhome_1/bin/lsnrctl start”    su oracle -lc /u01/app/oracle/product/11.2.0/dbhome_1/bin/dbstart<br>使用 reboot 重启。<br>重启完成后使用 lsnrctl status 检查监听是否启动。</p>
-<p>###然后重复”七、测试安装结果“可测试数据库是否正常启动。    </p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -e ksh-20100621-6.el6</span><br><span class="line">安装缺少的rpm包</span><br><span class="line">rpm -ivh pagename(根据提示，如果缺少依赖包，也需要加上去)</span><br></pre></td></tr></table></figure>
+<h3 id="4-2-添加组和用户"><a href="#4-2-添加组和用户" class="headerlink" title="4.2 添加组和用户"></a>4.2 添加组和用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/groupadd oinstall（添加oinstall组）</span><br><span class="line">/usr/sbin/groupadd -g 502 dba（添加dba组）</span><br><span class="line">/usr/sbin/useradd -u 502 -g oinstall -G dba oracle（添加用户oracle，主组oinstall，辅助组dba）</span><br><span class="line">passwd oracle（修改oracle用户密码）这里输入：oracle 后重复，不管提示</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-创建文件夹并修改组和用户所属关系和相关权限-命令格式：chown-R-用户：用户组-文件夹"><a href="#4-3-创建文件夹并修改组和用户所属关系和相关权限-命令格式：chown-R-用户：用户组-文件夹" class="headerlink" title="4.3 创建文件夹并修改组和用户所属关系和相关权限(命令格式：chown -R 用户：用户组 文件夹)"></a>4.3 创建文件夹并修改组和用户所属关系和相关权限(命令格式：chown -R 用户：用户组 文件夹)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/oracle(创建文件opt/oracle)</span><br><span class="line">chown -R oracle:oinstall /opt/oracle(使得/opt/oracle文件夹输入oracle用户和oinstall组)</span><br><span class="line">chmod -R 775 /opt/oracle(修改opt文件夹访问权限)—可选（最好执行下）</span><br><span class="line">mkdir -p /opt/oradata(创建文件opt/oracle)</span><br><span class="line">chown -R oracle:oinstall /opt/oracle(使得/opt/oradata文件夹输入oracle用户和oinstall组)</span><br><span class="line">chmod -R 775 /opt/oradata(修改opt文件夹访问权限)—可选（最好执行下）</span><br><span class="line">mkdir -p /opt/oraInventory</span><br><span class="line">chown -R oracle:oinstall /opt/oraInventory</span><br><span class="line">chown -R oracle /opt/oraInventory</span><br><span class="line">chmod -R 775 /opt/oraInventory</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-添加-etc-hosts中dns解析信息"><a href="#4-4-添加-etc-hosts中dns解析信息" class="headerlink" title="4.4 添加/etc/hosts中dns解析信息"></a>4.4 添加/etc/hosts中dns解析信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.102             oracle(自己的主机名)</span><br><span class="line">192.168.1.102             localhost</span><br></pre></td></tr></table></figure>
+<h3 id="4-5-在-etc-security-limits-conf中添加用户限制信息"><a href="#4-5-在-etc-security-limits-conf中添加用户限制信息" class="headerlink" title="4.5 在/etc/security/limits.conf中添加用户限制信息"></a>4.5 在/etc/security/limits.conf中添加用户限制信息</h3><p>vi /etc/security/limits.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">oracle soft nproc 2047</span><br><span class="line">oracle hard nproc 16384</span><br><span class="line">oracle soft nofile 1024</span><br><span class="line">oracle hard nofile 65536</span><br><span class="line">oracle hard stack 10240</span><br></pre></td></tr></table></figure>
+<p>vi /etc/pam.d/login</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session required /lib/security/pam_limits.so</span><br><span class="line">session required pam_limits.so</span><br></pre></td></tr></table></figure>
+<h3 id="4-6-修改或者添加-etc-sysctl-conf中信息"><a href="#4-6-修改或者添加-etc-sysctl-conf中信息" class="headerlink" title="4.6 修改或者添加/etc/sysctl.conf中信息"></a>4.6 修改或者添加/etc/sysctl.conf中信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fs.aio-max-nr = 1048576</span><br><span class="line">fs.file-max = 6815744</span><br><span class="line">kernel.shmall = 1048576</span><br><span class="line">kernel.shmmax = 536870912</span><br><span class="line">kernel.shmmni = 4096</span><br><span class="line">kernel.sem = 250 32000 100 128</span><br><span class="line">net.ipv4.ip_local_port_range = 9000 65500</span><br><span class="line">net.core.rmem_default = 262144</span><br><span class="line">net.core.rmem_max = 4194304</span><br><span class="line">net.core.wmem_default = 262144</span><br><span class="line">net.core.wmem_max = 1048586</span><br><span class="line">net.ipv4.tcp_wmem = 262144 262144 262144</span><br><span class="line">net.ipv4.tcp_rmem = 4194304 4194304 4194304</span><br></pre></td></tr></table></figure>
+<p>####注意注释掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Disable netfilter on bridges.</span><br><span class="line">#net.bridge.bridge-nf-call-ip6tables = 0</span><br><span class="line">#net.bridge.bridge-nf-call-iptables = 0</span><br><span class="line">#net.bridge.bridge-nf-call-arptables = 0</span><br></pre></td></tr></table></figure></p>
+<p>—/sbin/sysctl -p（重新加载这些参数，不用重启系统）</p>
+<h3 id="4-7-编辑vi-etc-profile"><a href="#4-7-编辑vi-etc-profile" class="headerlink" title="4.7 编辑vi /etc/profile"></a>4.7 编辑vi /etc/profile</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if [ $USER = &quot;oracle&quot; ]; then</span><br><span class="line">	if [ $SHELL = &quot;/bin/ksh&quot; ];    </span><br><span class="line">		then</span><br><span class="line">  			ulimit -p 16384</span><br><span class="line">	  		ulimit -n 65536</span><br><span class="line">		else</span><br><span class="line">	  		ulimit -u 16384 -n 65536</span><br><span class="line">	fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>-注意空格，在用户切换时使用su - username，这样才会加载后面的环境变量的配置信息（不要使用su username切换）</p>
+<h3 id="4-8-配置环境变量"><a href="#4-8-配置环境变量" class="headerlink" title="4.8 配置环境变量"></a>4.8 配置环境变量</h3><p>在oracle用户下的.bash_profile文件中添加下面信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ORACLE_BASE=/opt/oracle</span><br><span class="line">ORACLE_HOME=$ORACLE_BASE/oracle</span><br><span class="line">ORACLE_SID=zqaccp(这里要写要安装的oracle的sid)</span><br><span class="line">PATH=$ORACLE_HOME/bin:$PATH</span><br><span class="line">NLS_LANG=AMERICAN_AMERICA.ZHS16GBK</span><br><span class="line">export ORACLE_BASE ORACLE_HOME ORACLE_SID PATH NLS_LANG</span><br></pre></td></tr></table></figure>
+<p>source ~/.bash_profile  环境变量立即生效<br>用echo命令测试环境变量设置是否正确：<br>echo $ORACLE_HOME</p>
+<hr>
+<h3 id="4-9-解压缩oracle文件"><a href="#4-9-解压缩oracle文件" class="headerlink" title="4.9 解压缩oracle文件"></a>4.9 解压缩oracle文件</h3><p>使用：unzip 压缩文件名称    即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip linux_11gR2_database_1of2.zip</span><br><span class="line">unzip linux_11gR2_database_2of2.zip</span><br></pre></td></tr></table></figure>
+<p>如果是root拷贝过去的，用root解压缩，然后还要赋予oracle的权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R oracle:oinstall /opt/oracle/database</span><br></pre></td></tr></table></figure>
+<h3 id="4-10-设置编码方式：在oracle用户下："><a href="#4-10-设置编码方式：在oracle用户下：" class="headerlink" title="4.10 设置编码方式：在oracle用户下："></a>4.10 设置编码方式：在oracle用户下：</h3><figure class="highlight plain"><figcaption><span>LANG=en_US.UTF-8```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 五、安装Oracle </span><br><span class="line">### 5.1 解压Oracle安装文件	</span><br><span class="line"></span><br><span class="line">将Oracle拷贝至Linux服务器上,然后解压	</span><br><span class="line">如果使用光盘安装,则使用 mount -t iso9660 /dev/dvd /mnt/dvd 挂载光盘 </span><br><span class="line"></span><br><span class="line">### 5.2 设置安装环境	</span><br><span class="line">如果Linux系统字符编码是中文的,在安装过程中Oracle安装界面会全部乱码。可使用 ```export LANG=en_US``` ,将会话的字符集改为英文字符集,然后再安装就不会出现乱码。	另外,Oracle安装时需要图形界面的支持。</span><br><span class="line">### 5.3 开始安装Oracle</span><br></pre></td></tr></table></figure>
+<pre><code>1) cd database/ 切换到安装目录,然后执行 ./runInstaller 
+2)然后点击“next”,进入选择安装类型的界面
+3)选择“Create and configure a database”,然后点击“next”
+4)选择“Server Class”,然后点击“next”
+5)选择“Single instance database installation”,然后点击“next”
+6)选择“Advanced install”,然后点击“next”
+7)将简体中文(Simplified Chinese),添加到语言支持,然后点击“next”
+8)选择“企业版(Enterprise Edition)”,然后点击“next”
+9)配置安装目录,然后点击“next”
+10)配置“Oracle Inventory”,然后点击“next”
+11)选择“General Purpose / Transaction Processing”,然后点击“next”
+12)配置Oracle的SID,然后点击“next”
+13)配置内存字符集等，默认就OK，点击“next”
+14)直接使用默认,然后点击“next”
+    再点击“next”
+    再点击“next”
+15)选择“Use the same password for all account ”配置系统用户的密码,然后点击“next” 如果密码不够复杂,Oracle会提示密码过于简单
+直接“yes”(如有需要可以设置的复杂一点)
+16)直接使用默认,然后点击“next”,开始检查系统环境
+17)有部分没有通过,这些软件都已安装,这里选择“ignore all”,然后点击“next”,出现 Oracle安装设置信息
+18)点击“Finish”,开始安装Oracle（等待30分左右……）
+    稍后会出现创建数据库的界面
+    数据库创建完后，弹出一个窗口,可以通过“Password Management”可以修改密码,如果不需要直接“OK”,然后弹出下面的窗 口。
+    提示需要在root用户下执行两个脚本：
+    oraInstRoot.sh和root.sh
+    这是需要打开一个命令行,然后切换到Root用户执行这两个脚本,然后点击“OK”,回到安装 界面。
+    稍候就安装成功！
+点击“Close”,安装结束。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 七、测试安装结果</span><br><span class="line"></span><br><span class="line">切换到Oracle用户 ```su - oracle``` ,然后输入 ```sqlplus / as sysdba``` 登录到Oracle数据库, 然后执行 ```desc tab``` ,如果能够打印出表结构证明Oracle已经安装并启动成功了。</span><br><span class="line"></span><br><span class="line">## 八、修改防火墙配置,将Oracle端口添加 到例外</span><br><span class="line">使用 ```vi /etc/sysconfig/iptables``` ,打开防火墙配置文件。在 ```-A INPUT -i lo -j ACCEPT ```下添加下面的内容,如果有，不需要添加，跳过此步骤</span><br><span class="line">  	-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">然后使用 ```service iptables restart``` 重启防火墙使配置生效。</span><br><span class="line"></span><br><span class="line">## 九、将Oracle设置自启动</span><br><span class="line"></span><br><span class="line">使用 ```vi /etc/oratab``` 编辑oratab,进入vi编辑器后,找	到 ```orcl:/opt/oracle/oracle:N``` ,</span><br><span class="line">改	为 ```orcl:/opt/oracle/oracle:Y``` 。修改完成后,保存退出。</span><br><span class="line"></span><br><span class="line">###然后编辑rc.local</span><br><span class="line"></span><br><span class="line"> ```vi /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+<p> ####加入下面的内容,并保存####    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su oracle -lc &quot;/opt/oracle/oracle/bin/lsnrctl start&quot;</span><br><span class="line">su oracle -lc /opt/oracle/oracle/bin/dbstart</span><br></pre></td></tr></table></figure>
+<p>使用 <figure class="highlight plain"><figcaption><span>重启。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">重启完成后使用 ```lsnrctl status``` 检查监听是否启动。</span><br></pre></td></tr></table></figure></p>
+<p>[oracle@crmdb ~]$ lsnrctl start           //success 表明成功<br>[oracle@crmdb ~]$ dbstart   //启动监听器,我自己试了一下，没启动也没有事情<br>[oracle@crmdb ~]$ emctl start dbconsole<br>//自后出现啥啥啥success，代表成功 ，这个是可以启动浏览器的进行的操作<br>/**浏览器中输入<a href="https://localhost:1158/em/" target="_blank" rel="external">https://localhost:1158/em/</a> </p>
+<p>```</p>
+<h3 id="然后重复-七、测试安装结果-可测试数据库是否正常启动。"><a href="#然后重复-七、测试安装结果-可测试数据库是否正常启动。" class="headerlink" title="然后重复 七、测试安装结果 可测试数据库是否正常启动。"></a>然后重复 七、测试安装结果 可测试数据库是否正常启动。</h3>
       
     </div>
     
