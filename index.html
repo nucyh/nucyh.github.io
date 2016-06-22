@@ -799,8 +799,7 @@ sed -n 20,30p err.txt
 </table>
 <h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>在hadoop 2.x中通常由两个NameNode组成，一个处于active状态，另一个处于standby状态。Active NameNode对外提供服务，而Standby NameNode则不对外提供服务，仅同步active namenode的状态，以便能够在它失败时快速进行切换。<br>hadoop 2.x官方提供了两种HDFS HA的解决方案，一种是NFS，另一种是QJM。这里我们使用简单的QJM。在该方案中，主备NameNode之间通过一组JournalNode同步元数据信息，一条数据只要成功写入多数JournalNode即认为写入成功。通常配置奇数个JournalNode<br>这里还配置了一个zookeeper集群，用于ZKFC（DFSZKFailoverController）故障转移，当Active NameNode挂掉了，会自动切换Standby NameNode为standby状态</p>
 <h3 id="安装步骤："><a href="#安装步骤：" class="headerlink" title="安装步骤："></a>安装步骤：</h3><p>安装配置zooekeeper集群</p>
-<p>解压</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/</span><br></pre></td></tr></table></figure>
+<p>解压： tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/</p>
 <p>修改配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /hadoop/zookeeper-3.4.5/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
 <figure class="highlight vim"><figcaption><span>zoo.cfg```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">修改：</span><br><span class="line"></span><br><span class="line">```dataDir=/hadoop/zookeeper-<span class="number">3.4</span>.<span class="number">5</span>/tmp</span><br></pre></td></tr></table></figure>
