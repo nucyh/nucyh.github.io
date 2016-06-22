@@ -344,12 +344,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>####计算机是 电子数字计算机的简称。<br>     程序和数据 成为计算机软件。<br>     pc服务器：1U=4.445cm<br>     互联网企业都用戴尔服务器。其次 惠普、IBM<br>     BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才能启动操作系统。记录了电脑最基本的信息，是软件与硬件打交道的最基础的桥梁。<br>     硬盘未来是调优的关键点，硬盘的性能是决定网站的新年能的重要因素。<br>     磁盘和内存的优化：<br>     1、内存临时储存用户的数据，然后再写到disk中。（门户网站）<br>          1）速度快     2）丢数据<br>     2、写时：用户数据写到disk中，读时：数据再读到内存中再发给用户。 （并发量不大的中小企业）<br>          1）性能低     2）不丢数据</p>
-<p>####生产中的硬件应用小结</p>
-<p>#####1、PC服务器<br><br>     互联网公司，品牌DELL，HP，IBM。<br><br>     Dell品牌：2010年以前 1U的1850 1950，2U的2850 2950<br><br>     2010到2014：1U的R410/420 R610/620<br><br>     IBM： 2U的3750/3850/3950<br></p>
-<p>######2、内存<br><br>     进程：运行着的程序，进程会放在内存里。<br>     程序：静态的，在磁盘里。</p>
-<p>#####企业案例：<br>     1）、门户极端案例：高并发，大数据量：会把数据先写到内存，然后在定时或者定量的写到磁盘，最终还是会加载到内存。<br>     特点：<br>     a、高兵打的写入性能高。<br>     b、可能会丢失一部分在内存中还没来得及存入磁盘的数据。<br>     2）、中小企业案例：并发不是很大网站，会先把数据存放到磁盘，然后通过程序吧数据读入到内存里，再对外提供访问服务。<br>     由于90%的是网站都是读取为主，写入为辅，读写比例10：1，所以并发写入不是问题。<br>     提醒：这里的内存和硬盘，可能是多台机器组成的。</p>
-<p>#####3、磁盘<br>     磁盘接口：SAS SATA（这两个都是机械硬盘） SSD（固态硬盘）<br>     性能：SSD&gt;SATA&gt;SAS，<br>     应用：常规工作场景选SAS（转速15K）；<br>               SATA（转速7.2K-1W）线下的备份；<br>               高并发SSD。<br>     淘宝网：SATA和SSD混合起来用。</p>
+        <h4 id="计算机是-电子数字计算机的简称。"><a href="#计算机是-电子数字计算机的简称。" class="headerlink" title="计算机是 电子数字计算机的简称。"></a>计算机是 电子数字计算机的简称。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">程序和数据 成为计算机软件。</span><br><span class="line">pc服务器：1U=4.445cm</span><br><span class="line">互联网企业都用戴尔服务器。其次 惠普、IBM</span><br><span class="line">BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才能启动操作系统。记录了电脑最基本的信息，是软件与硬件打交道的最基础的桥梁。</span><br><span class="line">硬盘未来是调优的关键点，硬盘的性能是决定网站的新年能的重要因素。</span><br><span class="line">磁盘和内存的优化：</span><br><span class="line">1、内存临时储存用户的数据，然后再写到disk中。（门户网站）</span><br><span class="line">     1）速度快     2）丢数据</span><br><span class="line">2、写时：用户数据写到disk中，读时：数据再读到内存中再发给用户。 （并发量不大的中小企业）</span><br><span class="line">     1）性能低     2）不丢数据</span><br></pre></td></tr></table></figure>
+<h4 id="生产中的硬件应用小结"><a href="#生产中的硬件应用小结" class="headerlink" title="生产中的硬件应用小结"></a>生产中的硬件应用小结</h4><h5 id="1、PC服务器"><a href="#1、PC服务器" class="headerlink" title="1、PC服务器"></a>1、PC服务器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">互联网公司，品牌DELL，HP，IBM。</span><br><span class="line">Dell品牌：2010年以前 1U的1850 1950，2U的2850 2950</span><br><span class="line">2010到2014：1U的R410/420 R610/620</span><br><span class="line">IBM： 2U的3750/3850/3950</span><br></pre></td></tr></table></figure>
+<h6 id="2、内存"><a href="#2、内存" class="headerlink" title="2、内存"></a>2、内存</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">进程：运行着的程序，进程会放在内存里。</span><br><span class="line">程序：静态的，在磁盘里。</span><br></pre></td></tr></table></figure>
+<h5 id="企业案例："><a href="#企业案例：" class="headerlink" title="企业案例："></a>企业案例：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1）、门户极端案例：高并发，大数据量：会把数据先写到内存，然后在定时或者定量的写到磁盘，最终还是会加载到内存。</span><br><span class="line">特点：</span><br><span class="line">a、高并发的写入性能高。</span><br><span class="line">b、可能会丢失一部分在内存中还没来得及存入磁盘的数据。</span><br><span class="line">2）、中小企业案例：并发不是很大网站，会先把数据存放到磁盘，然后通过程序吧数据读入到内存里，再对外提供访问服务。</span><br><span class="line">由于90%的是网站都是读取为主，写入为辅，读写比例10：1，所以并发写入不是问题。</span><br><span class="line">提醒：这里的内存和硬盘，可能是多台机器组成的。</span><br></pre></td></tr></table></figure>
+<h5 id="3、磁盘"><a href="#3、磁盘" class="headerlink" title="3、磁盘"></a>3、磁盘</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">磁盘接口：SAS SATA（这两个都是机械硬盘） SSD（固态硬盘）</span><br><span class="line">性能：SSD&gt;SATA&gt;SAS，</span><br><span class="line">应用：常规工作场景选SAS（转速15K）；</span><br><span class="line">          SATA（转速7.2K-1W）线下的备份；</span><br><span class="line">          高并发SSD。</span><br><span class="line">淘宝网：SATA和SSD混合起来用。</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -545,21 +544,19 @@
 <h3 id="1-3-永久关闭SElinux"><a href="#1-3-永久关闭SElinux" class="headerlink" title="1.3 永久关闭SElinux"></a>1.3 永久关闭SElinux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/selinux/config,然后将SELINUX改成disabled，这样即使重启操作系统SElinux也是关闭状态。</span><br></pre></td></tr></table></figure>
 <h3 id="1-4-查看SElinux状态："><a href="#1-4-查看SElinux状态：" class="headerlink" title="1.4 查看SElinux状态："></a>1.4 查看SElinux状态：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/sestatus -v</span><br></pre></td></tr></table></figure>
 <h2 id="二、linux-CentOS-RedHat-命令行永久修改IP地址、网关、DNS"><a href="#二、linux-CentOS-RedHat-命令行永久修改IP地址、网关、DNS" class="headerlink" title="二、linux CentOS(RedHat)命令行永久修改IP地址、网关、DNS"></a>二、linux CentOS(RedHat)命令行永久修改IP地址、网关、DNS</h2><h3 id="2-1-设置IP"><a href="#2-1-设置IP" class="headerlink" title="2.1 设置IP"></a>2.1 设置IP</h3><p>[root@localhost etc]# vi /etc/sysconfig/network-scripts/ifcfg-eth0</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">ONBOOT=yes</span><br><span class="line">HWADDR=00:16:36:66:a3:ec</span><br><span class="line">IPADDR=10.0.0.11</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=10.0.0.1</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">USERCTL=no</span><br><span class="line">IPV6INIT=no</span><br><span class="line">PEERDNS=yes</span><br><span class="line"></span><br><span class="line">#################解释#################</span><br><span class="line"></span><br><span class="line">1.BOOTPROTO=static 就是手动设置静态IP，不需要自动获取(static/dhcp/bootp)</span><br><span class="line">2.USERCTL=no     不允许非root用户控制该设备</span><br><span class="line">3.PEERDNS=no     不修改/etc/resolv.conf(如果使用DHCP，则yes是默认选项)	</span><br><span class="line">4.TYPE=Ethernet 类型以太网	</span><br><span class="line">5.GATEWAY 网关	</span><br><span class="line">6.NETMASK 掩码	</span><br><span class="line">7.ONBOOT=yes 开机重启会自动加载	</span><br><span class="line">Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的选项动态创建的。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">ONBOOT=yes</span><br><span class="line">HWADDR=00:16:36:66:a3:ec</span><br><span class="line">IPADDR=10.0.0.11</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=10.0.0.1</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">USERCTL=no</span><br><span class="line">IPV6INIT=no</span><br><span class="line">PEERDNS=yes</span><br><span class="line">	</span><br><span class="line">#################解释#################</span><br><span class="line"></span><br><span class="line">1.BOOTPROTO=static 就是手动设置静态IP，不需要自动获取(static/dhcp/bootp)</span><br><span class="line">2.USERCTL=no     不允许非root用户控制该设备</span><br><span class="line">3.PEERDNS=no     不修改/etc/resolv.conf(如果使用DHCP，则yes是默认选项)	</span><br><span class="line">4.TYPE=Ethernet 类型以太网	</span><br><span class="line">5.GATEWAY 网关	</span><br><span class="line">6.NETMASK 掩码	</span><br><span class="line">7.ONBOOT=yes 开机重启会自动加载	</span><br><span class="line">Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的选项动态创建的。</span><br></pre></td></tr></table></figure>
 <h3 id="2-2-修改网关"><a href="#2-2-修改网关" class="headerlink" title="2.2 修改网关"></a>2.2 修改网关</h3><p>vim /etc/sysconfig/network</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">增加一条网关信息</span><br><span class="line">GATEWAY=192.168.1.1</span><br></pre></td></tr></table></figure>
 <h3 id="2-3-修改DNS"><a href="#2-3-修改DNS" class="headerlink" title="2.3 修改DNS"></a>2.3 修改DNS</h3><p>vim /etc/resolv.conf</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">增加DNS信息即可</span><br><span class="line">nameserver 192.168.1.1</span><br></pre></td></tr></table></figure>
-<p>##三、检查必要条件 </p>
-<p>###3.1、检查内存及交换分区###Oracle要求2GB以上的内存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">·查看内存大小	grep MemTotal /proc/meminfo 	</span><br><span class="line">·查看交换区大小	grep SwapTotal /proc/meminfo	</span><br><span class="line">·也可以使用下面的命令查看内存大小 free -m</span><br></pre></td></tr></table></figure></p>
-<p>##四、系统配置<br>系统配置说明：</p>
+<h2 id="三、检查必要条件"><a href="#三、检查必要条件" class="headerlink" title="三、检查必要条件"></a>三、检查必要条件</h2><h3 id="3-1、检查内存及交换分区-Oracle要求2GB以上的内存"><a href="#3-1、检查内存及交换分区-Oracle要求2GB以上的内存" class="headerlink" title="3.1、检查内存及交换分区###Oracle要求2GB以上的内存"></a>3.1、检查内存及交换分区###Oracle要求2GB以上的内存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">·查看内存大小	grep MemTotal /proc/meminfo 	</span><br><span class="line">·查看交换区大小	grep SwapTotal /proc/meminfo	</span><br><span class="line">·也可以使用下面的命令查看内存大小 free -m</span><br></pre></td></tr></table></figure>
+<h2 id="四、系统配置"><a href="#四、系统配置" class="headerlink" title="四、系统配置"></a>四、系统配置</h2><p>系统配置说明：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在安装光盘的iso文件中有个文件夹（package），在虚拟机中加载该iso文件后，可以在linux界面中直接打开光盘，进入该目录，然后右键-&gt;打开终端，在终端中进行安装。</span><br><span class="line">安装时，有些rpm包的版本和本文挡中的不同，可以先用“ls 包名前几个字母”然后按“tab”键，查找到该包名的完整名称，然后拷贝名称后进行安装。</span><br></pre></td></tr></table></figure>
-<p>###4.1、检查相应的rpm包的情况(等于或者高于下面版本）<br>rpm -qa | grep pagename(grep是搜索)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">binutils-2.17.50.0.6</span><br><span class="line">compat-libstdc++-33-3.2.3</span><br><span class="line">compat-libstdc++-33-3.2.3 (32 bit)</span><br><span class="line">elfutils-libelf-0.125</span><br><span class="line">elfutils-libelf-devel-0.125</span><br><span class="line">gcc-4.1.2</span><br><span class="line">gcc-c++-4.1.2</span><br><span class="line">glibc-2.5-24</span><br><span class="line">glibc-2.5-24 (32 bit)</span><br><span class="line">glibc-common-2.5</span><br><span class="line">glibc-devel-2.5</span><br><span class="line">glibc-devel-2.5 (32 bit)</span><br><span class="line">glibc-headers-2.5</span><br><span class="line">ksh-20060214</span><br><span class="line">libaio-0.3.106</span><br><span class="line">libaio-0.3.106 (32 bit)</span><br><span class="line">libaio-devel-0.3.106</span><br><span class="line">libaio-devel-0.3.106 (32 bit)</span><br><span class="line">libgcc-4.1.2</span><br><span class="line">libgcc-4.1.2 (32 bit)</span><br><span class="line">libstdc++-4.1.2</span><br><span class="line">libstdc++-4.1.2 (32 bit)</span><br><span class="line">libstdc++-devel 4.1.2</span><br><span class="line">make-3.81</span><br><span class="line">numactl-devel-0.9.8.x86_64</span><br><span class="line">sysstat-7.0.2</span><br><span class="line">unixODBC-2.2.11</span><br><span class="line">unixODBC-2.2.11 (32 bit)</span><br><span class="line">unixODBC-devel-2.2.11</span><br><span class="line">unixODBC-devel-2.2.11 (32 bit)</span><br></pre></td></tr></table></figure></p>
-<p>###务必先在光盘中找到以上包名安装后，大约有1-2个包名在光盘中无法找到，可以到我给那你们发送的文件夹中找（只找需要的，不能全部安装）</p>
-<hr>
+<h3 id="4-1-检查相应的rpm包的情况-等于或者高于下面版本）"><a href="#4-1-检查相应的rpm包的情况-等于或者高于下面版本）" class="headerlink" title="4.1 检查相应的rpm包的情况(等于或者高于下面版本）"></a>4.1 检查相应的rpm包的情况(等于或者高于下面版本）</h3><p>rpm -qa | grep pagename(grep是搜索)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">binutils-2.17.50.0.6</span><br><span class="line">compat-libstdc++-33-3.2.3</span><br><span class="line">compat-libstdc++-33-3.2.3 (32 bit)</span><br><span class="line">elfutils-libelf-0.125</span><br><span class="line">elfutils-libelf-devel-0.125</span><br><span class="line">gcc-4.1.2</span><br><span class="line">gcc-c++-4.1.2</span><br><span class="line">glibc-2.5-24</span><br><span class="line">glibc-2.5-24 (32 bit)</span><br><span class="line">glibc-common-2.5</span><br><span class="line">glibc-devel-2.5</span><br><span class="line">glibc-devel-2.5 (32 bit)</span><br><span class="line">glibc-headers-2.5</span><br><span class="line">ksh-20060214</span><br><span class="line">libaio-0.3.106</span><br><span class="line">libaio-0.3.106 (32 bit)</span><br><span class="line">libaio-devel-0.3.106</span><br><span class="line">libaio-devel-0.3.106 (32 bit)</span><br><span class="line">libgcc-4.1.2</span><br><span class="line">libgcc-4.1.2 (32 bit)</span><br><span class="line">libstdc++-4.1.2</span><br><span class="line">libstdc++-4.1.2 (32 bit)</span><br><span class="line">libstdc++-devel 4.1.2</span><br><span class="line">make-3.81</span><br><span class="line">numactl-devel-0.9.8.x86_64</span><br><span class="line">sysstat-7.0.2</span><br><span class="line">unixODBC-2.2.11</span><br><span class="line">unixODBC-2.2.11 (32 bit)</span><br><span class="line">unixODBC-devel-2.2.11</span><br><span class="line">unixODBC-devel-2.2.11 (32 bit)</span><br></pre></td></tr></table></figure></p>
+<h3 id="务必先在光盘中找到以上包名安装后，大约有1-2个包名在光盘中无法找到，可以到我给那你们发送的文件夹中找（只找需要的，不能全部安装）"><a href="#务必先在光盘中找到以上包名安装后，大约有1-2个包名在光盘中无法找到，可以到我给那你们发送的文件夹中找（只找需要的，不能全部安装）" class="headerlink" title="务必先在光盘中找到以上包名安装后，大约有1-2个包名在光盘中无法找到，可以到我给那你们发送的文件夹中找（只找需要的，不能全部安装）"></a>务必先在光盘中找到以上包名安装后，大约有1-2个包名在光盘中无法找到，可以到我给那你们发送的文件夹中找（只找需要的，不能全部安装）</h3><hr>
 <p>pdksh-5.2.14-1 —这个包需要下载，安装前需要卸载掉    ksh-20100621-6.el6包在安装oracle11gR2时，需要安装pdksh-5.2.14-1.i386.rpm包。安装该包时，出现了以下问题：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm -Uvh pdksh-5.2.14-1.i386.rpm </span><br><span class="line">error: Failed dependencies:</span><br><span class="line">pdksh conflicts with ksh-20100621-12.el6.i686</span><br></pre></td></tr></table></figure>
-<p>####解决方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rpm_for_AS6]# rpm -e ksh-20100621-12.el6.i686</span><br><span class="line">[root@localhost ~]# rpm -Uvh pdksh-5.2.14-1.i386.rpm </span><br><span class="line">Preparing...                ########################################### [100%]</span><br><span class="line">1:pdksh                  ########################################### [100%]</span><br></pre></td></tr></table></figure></p>
+<h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost rpm_for_AS6]# rpm -e ksh-20100621-12.el6.i686</span><br><span class="line">[root@localhost ~]# rpm -Uvh pdksh-5.2.14-1.i386.rpm </span><br><span class="line">Preparing...                ########################################### [100%]</span><br><span class="line">1:pdksh                  ########################################### [100%]</span><br></pre></td></tr></table></figure>
 <hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -e ksh-20100621-6.el6</span><br><span class="line">安装缺少的rpm包</span><br><span class="line">rpm -ivh pagename(根据提示，如果缺少依赖包，也需要加上去)</span><br></pre></td></tr></table></figure>
 <h3 id="4-2-添加组和用户"><a href="#4-2-添加组和用户" class="headerlink" title="4.2 添加组和用户"></a>4.2 添加组和用户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/groupadd oinstall（添加oinstall组）</span><br><span class="line">/usr/sbin/groupadd -g 502 dba（添加dba组）</span><br><span class="line">/usr/sbin/useradd -u 502 -g oinstall -G dba oracle（添加用户oracle，主组oinstall，辅助组dba）</span><br><span class="line">passwd oracle（修改oracle用户密码）这里输入：oracle 后重复，不管提示</span><br></pre></td></tr></table></figure>
@@ -570,13 +567,10 @@
 <p>vi /etc/pam.d/login</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session required /lib/security/pam_limits.so</span><br><span class="line">session required pam_limits.so</span><br></pre></td></tr></table></figure>
 <h3 id="4-6-修改或者添加-etc-sysctl-conf中信息"><a href="#4-6-修改或者添加-etc-sysctl-conf中信息" class="headerlink" title="4.6 修改或者添加/etc/sysctl.conf中信息"></a>4.6 修改或者添加/etc/sysctl.conf中信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fs.aio-max-nr = 1048576</span><br><span class="line">fs.file-max = 6815744</span><br><span class="line">kernel.shmall = 1048576</span><br><span class="line">kernel.shmmax = 536870912</span><br><span class="line">kernel.shmmni = 4096</span><br><span class="line">kernel.sem = 250 32000 100 128</span><br><span class="line">net.ipv4.ip_local_port_range = 9000 65500</span><br><span class="line">net.core.rmem_default = 262144</span><br><span class="line">net.core.rmem_max = 4194304</span><br><span class="line">net.core.wmem_default = 262144</span><br><span class="line">net.core.wmem_max = 1048586</span><br><span class="line">net.ipv4.tcp_wmem = 262144 262144 262144</span><br><span class="line">net.ipv4.tcp_rmem = 4194304 4194304 4194304</span><br></pre></td></tr></table></figure>
-<p>####注意注释掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Disable netfilter on bridges.</span><br><span class="line">#net.bridge.bridge-nf-call-ip6tables = 0</span><br><span class="line">#net.bridge.bridge-nf-call-iptables = 0</span><br><span class="line">#net.bridge.bridge-nf-call-arptables = 0</span><br></pre></td></tr></table></figure></p>
+<h4 id="注意注释掉"><a href="#注意注释掉" class="headerlink" title="注意注释掉"></a>注意注释掉</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Disable netfilter on bridges.</span><br><span class="line">#net.bridge.bridge-nf-call-ip6tables = 0</span><br><span class="line">#net.bridge.bridge-nf-call-iptables = 0</span><br><span class="line">#net.bridge.bridge-nf-call-arptables = 0</span><br></pre></td></tr></table></figure>
 <p>—/sbin/sysctl -p（重新加载这些参数，不用重启系统）</p>
-<h3 id="4-7-编辑vi-etc-profile"><a href="#4-7-编辑vi-etc-profile" class="headerlink" title="4.7 编辑vi /etc/profile"></a>4.7 编辑vi /etc/profile</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if [ $USER = &quot;oracle&quot; ]; then</span><br><span class="line">	if [ $SHELL = &quot;/bin/ksh&quot; ];    </span><br><span class="line">		then</span><br><span class="line">  			ulimit -p 16384</span><br><span class="line">	  		ulimit -n 65536</span><br><span class="line">		else</span><br><span class="line">	  		ulimit -u 16384 -n 65536</span><br><span class="line">	fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>-注意空格，在用户切换时使用su - username，这样才会加载后面的环境变量的配置信息（不要使用su username切换）</p>
-<h3 id="4-8-配置环境变量"><a href="#4-8-配置环境变量" class="headerlink" title="4.8 配置环境变量"></a>4.8 配置环境变量</h3><p>在oracle用户下的.bash_profile文件中添加下面信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ORACLE_BASE=/opt/oracle</span><br><span class="line">ORACLE_HOME=$ORACLE_BASE/oracle</span><br><span class="line">ORACLE_SID=zqaccp(这里要写要安装的oracle的sid)</span><br><span class="line">PATH=$ORACLE_HOME/bin:$PATH</span><br><span class="line">NLS_LANG=AMERICAN_AMERICA.ZHS16GBK</span><br><span class="line">export ORACLE_BASE ORACLE_HOME ORACLE_SID PATH NLS_LANG</span><br></pre></td></tr></table></figure>
-<p>source ~/.bash_profile  环境变量立即生效<br>用echo命令测试环境变量设置是否正确：<br>echo $ORACLE_HOME</p>
+<h3 id="4-7-编辑"><a href="#4-7-编辑" class="headerlink" title="4.7 编辑"></a>4.7 编辑<figure class="highlight plain"><figcaption><span>/etc/profile```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">if [ $USER = &quot;oracle&quot; ]; then</span><br><span class="line">	if [ $SHELL = &quot;/bin/ksh&quot; ];    </span><br><span class="line">		then</span><br><span class="line">  			ulimit -p 16384</span><br><span class="line">	  		ulimit -n 65536</span><br><span class="line">		else</span><br><span class="line">	  		ulimit -u 16384 -n 65536</span><br><span class="line">	fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure></h3><p>-注意空格，在用户切换时使用<figure class="highlight plain"><figcaption><span>- username```，这样才会加载后面的环境变量的配置信息（不要使用```su username```切换）</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 4.8 配置环境变量</span><br><span class="line"></span><br><span class="line">在oracle用户下的.bash_profile文件中添加下面信息</span><br></pre></td></tr></table></figure></p>
+<p>ORACLE_BASE=/opt/oracle<br>ORACLE_HOME=$ORACLE_BASE/oracle<br>ORACLE_SID=zqaccp(这里要写要安装的oracle的sid)<br>PATH=$ORACLE_HOME/bin:$PATH<br>NLS_LANG=AMERICAN_AMERICA.ZHS16GBK<br>export ORACLE_BASE ORACLE_HOME ORACLE_SID PATH NLS_LANG<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```source ~/.bash_profile```  环境变量立即生效</span><br><span class="line">用echo命令测试环境变量设置是否正确：</span><br><span class="line">```echo $ORACLE_HOME</span><br></pre></td></tr></table></figure></p>
 <hr>
 <h3 id="4-9-解压缩oracle文件"><a href="#4-9-解压缩oracle文件" class="headerlink" title="4.9 解压缩oracle文件"></a>4.9 解压缩oracle文件</h3><p>使用：unzip 压缩文件名称    即可</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip linux_11gR2_database_1of2.zip</span><br><span class="line">unzip linux_11gR2_database_2of2.zip</span><br></pre></td></tr></table></figure>
@@ -611,11 +605,11 @@
     这是需要打开一个命令行,然后切换到Root用户执行这两个脚本,然后点击“OK”,回到安装 界面。
     稍候就安装成功！
 点击“Close”,安装结束。
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 七、测试安装结果</span><br><span class="line"></span><br><span class="line">切换到Oracle用户 ```su - oracle``` ,然后输入 ```sqlplus / as sysdba``` 登录到Oracle数据库, 然后执行 ```desc tab``` ,如果能够打印出表结构证明Oracle已经安装并启动成功了。</span><br><span class="line"></span><br><span class="line">## 八、修改防火墙配置,将Oracle端口添加 到例外</span><br><span class="line">使用 ```vi /etc/sysconfig/iptables``` ,打开防火墙配置文件。在 ```-A INPUT -i lo -j ACCEPT ```下添加下面的内容,如果有，不需要添加，跳过此步骤</span><br><span class="line">  	-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">然后使用 ```service iptables restart``` 重启防火墙使配置生效。</span><br><span class="line"></span><br><span class="line">## 九、将Oracle设置自启动</span><br><span class="line"></span><br><span class="line">使用 ```vi /etc/oratab``` 编辑oratab,进入vi编辑器后,找	到 ```orcl:/opt/oracle/oracle:N``` ,</span><br><span class="line">改	为 ```orcl:/opt/oracle/oracle:Y``` 。修改完成后,保存退出。</span><br><span class="line"></span><br><span class="line">###然后编辑rc.local</span><br><span class="line"></span><br><span class="line"> ```vi /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 七、测试安装结果</span><br><span class="line"></span><br><span class="line">切换到Oracle用户 ```su - oracle``` ,然后输入 ```sqlplus / as sysdba``` 登录到Oracle数据库, 然后执行 ```desc tab``` ,如果能够打印出表结构证明Oracle已经安装并启动成功了。</span><br><span class="line"></span><br><span class="line">## 八、修改防火墙配置,将Oracle端口添加 到例外</span><br><span class="line">使用 ```vi /etc/sysconfig/iptables``` ,打开防火墙配置文件。在 ```-A INPUT -i lo -j ACCEPT ```下添加下面的内容,如果有，不需要添加，跳过此步骤</span><br><span class="line">  	-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span><br><span class="line"></span><br><span class="line">然后使用 ```service iptables restart``` 重启防火墙使配置生效。</span><br><span class="line"></span><br><span class="line">## 九、将Oracle设置自启动</span><br><span class="line"></span><br><span class="line">使用 ```vi /etc/oratab``` 编辑oratab,进入vi编辑器后,找	到 ```orcl:/opt/oracle/oracle:N``` ,</span><br><span class="line">改	为 ```orcl:/opt/oracle/oracle:Y``` 。修改完成后,保存退出。</span><br><span class="line"></span><br><span class="line">### 然后编辑rc.local</span><br><span class="line"></span><br><span class="line"> ```vi /etc/rc.d/rc.local</span><br></pre></td></tr></table></figure>
 <p> ####加入下面的内容,并保存####    </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su oracle -lc &quot;/opt/oracle/oracle/bin/lsnrctl start&quot;</span><br><span class="line">su oracle -lc /opt/oracle/oracle/bin/dbstart</span><br></pre></td></tr></table></figure>
 <p>使用 <figure class="highlight plain"><figcaption><span>重启。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">重启完成后使用 ```lsnrctl status``` 检查监听是否启动。</span><br></pre></td></tr></table></figure></p>
-<p>[oracle@crmdb ~]$ lsnrctl start           //success 表明成功<br>[oracle@crmdb ~]$ dbstart   //启动监听器,我自己试了一下，没启动也没有事情<br>[oracle@crmdb ~]$ emctl start dbconsole<br>//自后出现啥啥啥success，代表成功 ，这个是可以启动浏览器的进行的操作<br>/**浏览器中输入<a href="https://localhost:1158/em/" target="_blank" rel="external">https://localhost:1158/em/</a> </p>
+<p>[oracle@oracle ~]$ lsnrctl start           //success 表明成功<br>[oracle@oracle ~]$ dbstart   //启动监听器,我自己试了一下，没启动也没有事情<br>[oracle@oracle ~]$ emctl start dbconsole<br>//自后出现啥啥啥success，代表成功 ，这个是可以启动浏览器的进行的操作<br>/**浏览器中输入<a href="https://localhost:1158/em/" target="_blank" rel="external">https://localhost:1158/em/</a> </p>
 <p>```</p>
 <h3 id="然后重复-七、测试安装结果-可测试数据库是否正常启动。"><a href="#然后重复-七、测试安装结果-可测试数据库是否正常启动。" class="headerlink" title="然后重复 七、测试安装结果 可测试数据库是否正常启动。"></a>然后重复 七、测试安装结果 可测试数据库是否正常启动。</h3>
       
@@ -786,245 +780,103 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>###hadoop 2.0简介<br>hadoop2.0已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。</p>
+        <h3 id="hadoop-2-x简介"><a href="#hadoop-2-x简介" class="headerlink" title="hadoop 2.x简介"></a>hadoop 2.x简介</h3><p>hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。</p>
 <p>注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，<br>所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译</p>
-<p>###前期准备</p>
-<p>####1.修改Linux主机名</p>
-<p>####2.修改IP</p>
-<p>####3.修改主机名和IP的映射关系</p>
-<pre><code>######注意######如果是租用的服务器或是使用的云主机（如华为用主机、阿里云主机等）
-/etc/hosts里面要配置的是内网IP地址和主机名的映射关系    
-</code></pre><p>####4.关闭防火墙</p>
-<p>####5.ssh免登陆 </p>
-<p>####6.安装JDK，配置环境变量等</p>
-<p>###集群规划：<br>    主机名        IP            安装的软件                运行的进程<br>    yun01    192.168.1.201    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun02    192.168.1.202    jdk、hadoop            NameNode、DFSZKFailoverController<br>    yun03    192.168.1.203    jdk、hadoop            ResourceManager<br>    yun04    192.168.1.204    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun05    192.168.1.205    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain<br>    yun06    192.168.1.206    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain</p>
-<p>####说明：<br>    在hadoop2.0中通常由两个NameNode组成，一个处于active状态，另一个处于standby状态。Active NameNode对外提供服务，而Standby NameNode则不对外提供服务，仅同步active namenode的状态，以便能够在它失败时快速进行切换。<br>    hadoop2.0官方提供了两种HDFS HA的解决方案，一种是NFS，另一种是QJM。这里我们使用简单的QJM。在该方案中，主备NameNode之间通过一组JournalNode同步元数据信息，一条数据只要成功写入多数JournalNode即认为写入成功。通常配置奇数个JournalNode<br>    这里还配置了一个zookeeper集群，用于ZKFC（DFSZKFailoverController）故障转移，当Active NameNode挂掉了，会自动切换Standby NameNode为standby状态</p>
-<p>###安装步骤：<br>    1.安装配置zooekeeper集群<br>        1.1解压<br>            tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/<br>        1.2修改配置<br>            cd /hadoop/zookeeper-3.4.5/conf/<br>            cp zoo_sample.cfg zoo.cfg<br>            vim zoo.cfg<br>            修改：dataDir=/hadoop/zookeeper-3.4.5/tmp<br>            在最后添加：<br>            server.1=yun04:2888:3888<br>            server.2=yun05:2888:3888<br>            server.3=yun06:2888:3888<br>            保存退出<br>            然后创建一个tmp文件夹<br>            mkdir /hadoop/zookeeper-3.4.5/tmp<br>            再创建一个空文件<br>            touch /hadoop/zookeeper-3.4.5/tmp/myid<br>            最后向该文件写入ID<br>            echo 1 &gt; /hadoop/zookeeper-3.4.5/tmp/myid<br>        1.3将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)<br>            scp -r /hadoop/zookeeper-3.4.5/ yun05:/hadoop/<br>            scp -r /hadoop/zookeeper-3.4.5/ yun06:/hadoop/</p>
-<pre><code>        注意：修改yun05、yun06对应/hadoop/zookeeper-3.4.5/tmp/myid内容
-        yun05：
-            echo 2 &gt; /hadoop/zookeeper-3.4.5/tmp/myid
-        yun06：
-            echo 3 &gt; /hadoop/zookeeper-3.4.5/tmp/myid
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="1-修改Linux主机名"><a href="#1-修改Linux主机名" class="headerlink" title="1.修改Linux主机名"></a>1.修改Linux主机名</h4><h4 id="2-修改IP"><a href="#2-修改IP" class="headerlink" title="2.修改IP"></a>2.修改IP</h4><h4 id="3-修改主机名和IP的映射关系"><a href="#3-修改主机名和IP的映射关系" class="headerlink" title="3.修改主机名和IP的映射关系"></a>3.修改主机名和IP的映射关系</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注意:如果是租用的服务器或是使用的云主机（如华为用主机、阿里云主机等）</span><br><span class="line">/etc/hosts里面要配置的是内网IP地址和主机名的映射关系</span><br></pre></td></tr></table></figure>
+<h4 id="4-关闭防火墙"><a href="#4-关闭防火墙" class="headerlink" title="4.关闭防火墙"></a>4.关闭防火墙</h4><h4 id="5-ssh免登陆"><a href="#5-ssh免登陆" class="headerlink" title="5.ssh免登陆"></a>5.ssh免登陆</h4><h4 id="6-安装JDK，配置环境变量等"><a href="#6-安装JDK，配置环境变量等" class="headerlink" title="6.安装JDK，配置环境变量等"></a>6.安装JDK，配置环境变量等</h4><h3 id="集群规划："><a href="#集群规划：" class="headerlink" title="集群规划："></a>集群规划：</h3><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th style="text-align:center">IP</th>
+<th style="text-align:center">安装的软件</th>
+<th style="text-align:center">运行的进程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yun01</td>
+<td style="text-align:center">192.168.1.201</td>
+<td style="text-align:center">jdk、hadoop</td>
+<td style="text-align:center">NameNode、DFSZKFailoverController</td>
+</tr>
+<tr>
+<td>yun02</td>
+<td style="text-align:center">192.168.1.202</td>
+<td style="text-align:center">jdk、hadoop</td>
+<td style="text-align:center">NameNode、DFSZKFailoverController</td>
+</tr>
+<tr>
+<td>yun03</td>
+<td style="text-align:center">192.168.1.203</td>
+<td style="text-align:center">jdk、hadoop</td>
+<td style="text-align:center">ResourceManager</td>
+</tr>
+<tr>
+<td>yun04</td>
+<td style="text-align:center">192.168.1.204</td>
+<td style="text-align:center">jdk、hadoop、zookeeper</td>
+<td style="text-align:center">DataNode、NodeManager、JournalNode、QuorumPeerMain</td>
+</tr>
+<tr>
+<td>yun04</td>
+<td style="text-align:center">192.168.1.205</td>
+<td style="text-align:center">jdk、hadoop、zookeeper</td>
+<td style="text-align:center">DataNode、NodeManager、JournalNode、QuorumPeerMain</td>
+</tr>
+<tr>
+<td>yun04</td>
+<td style="text-align:center">192.168.1.206</td>
+<td style="text-align:center">jdk、hadoop、zookeeper</td>
+<td style="text-align:center">DataNode、NodeManager、JournalNode、QuorumPeerMain</td>
+</tr>
+</tbody>
+</table>
+<pre><code>主机名        IP            安装的软件                运行的进程
+yun01    192.168.1.201    jdk、hadoop            NameNode、DFSZKFailoverController
+yun02    192.168.1.202    jdk、hadoop            NameNode、DFSZKFailoverController
+yun03    192.168.1.203    jdk、hadoop            ResourceManager
+yun04    192.168.1.204    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain
+yun05    192.168.1.205    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain
+yun06    192.168.1.206    jdk、hadoop、zookeeper        DataNode、NodeManager、JournalNode、QuorumPeerMain
+</code></pre><h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>在hadoop 2.x中通常由两个NameNode组成，一个处于active状态，另一个处于standby状态。Active NameNode对外提供服务，而Standby NameNode则不对外提供服务，仅同步active namenode的状态，以便能够在它失败时快速进行切换。<br>hadoop 2.x官方提供了两种HDFS HA的解决方案，一种是NFS，另一种是QJM。这里我们使用简单的QJM。在该方案中，主备NameNode之间通过一组JournalNode同步元数据信息，一条数据只要成功写入多数JournalNode即认为写入成功。通常配置奇数个JournalNode<br>这里还配置了一个zookeeper集群，用于ZKFC（DFSZKFailoverController）故障转移，当Active NameNode挂掉了，会自动切换Standby NameNode为standby状态</p>
+<h3 id="安装步骤："><a href="#安装步骤：" class="headerlink" title="安装步骤："></a>安装步骤：</h3><h4 id="1-安装配置zooekeeper集群"><a href="#1-安装配置zooekeeper集群" class="headerlink" title="1.安装配置zooekeeper集群"></a>1.安装配置zooekeeper集群</h4><h5 id="1-1-解压"><a href="#1-1-解压" class="headerlink" title="1.1 解压"></a>1.1 解压</h5><figure class="highlight plain"><figcaption><span>-zxvf zookeeper-3.4.5.tar.gz -C</span><a href="/hadoop/```">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">##### 1.2 修改配置</span><br></pre></td></tr></table></figure>
+<p>cd /hadoop/zookeeper-3.4.5/conf/<br>cp zoo_sample.cfg zoo.cfg<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```vim zoo.cfg</span><br></pre></td></tr></table></figure></p>
+<p>修改：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在最后添加：</span><br></pre></td></tr></table></figure></p>
+<p>server.1=yun04:2888:3888<br>server.2=yun05:2888:3888<br>server.3=yun06:2888:3888<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">保存退出</span><br><span class="line">然后创建一个```tmp```文件夹</span><br><span class="line"></span><br><span class="line">```mkdir /hadoop/zookeeper-3.4.5/tmp</span><br></pre></td></tr></table></figure></p>
+<p>再创建一个空文件<br><figure class="highlight plain"><figcaption><span>/hadoop/zookeeper-3.4.5/tmp/myid```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后向该文件写入ID</span><br><span class="line">```echo 1 &gt; /hadoop/zookeeper-3.4.5/tmp/myid</span><br></pre></td></tr></table></figure></p>
+<h5 id="1-3-将配置好的zookeeper拷贝到其他节点-首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir-yun"><a href="#1-3-将配置好的zookeeper拷贝到其他节点-首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir-yun" class="headerlink" title="1.3 将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)"></a>1.3 将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scp -r /hadoop/zookeeper-3.4.5/ yun05:/hadoop/</span><br><span class="line">scp -r /hadoop/zookeeper-3.4.5/ yun06:/hadoop/</span><br><span class="line">```			</span><br><span class="line">注意：修改yun05、yun06对应```/hadoop/zookeeper-3.4.5/tmp/myid```内容</span><br><span class="line"></span><br><span class="line">yun05：</span><br><span class="line">	```echo 2 &gt; /hadoop/zookeeper-3.4.5/tmp/myid</span><br></pre></td></tr></table></figure>
+<p>yun06：<br>    <figure class="highlight plain"><figcaption><span>3 ></span><a href="/hadoop/zookeeper-3.4.5/tmp/myid```">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#### 2.安装配置hadoop集群</span><br><span class="line">##### 2.1 解压</span><br><span class="line">```tar -zxvf hadoop-2.7.2.tar.gz -C /hadoop/</span><br></pre></td></tr></table></figure></p>
+<h5 id="2-2-配置HDFS（hadoop2-x所有的配置文件都在-HADOOP-HOME-etc-hadoop目录下）"><a href="#2-2-配置HDFS（hadoop2-x所有的配置文件都在-HADOOP-HOME-etc-hadoop目录下）" class="headerlink" title="2.2 配置HDFS（hadoop2.x所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）"></a>2.2 配置HDFS（hadoop2.x所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）</h5><p>将hadoop添加到环境变量中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br><span class="line">export HADOOP_HOME=/hadoop/hadoop-2.7.2</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>hadoop 2.x的配置文件全部在<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /hadoop/hadoop-2.7.2/etc/hadoop</span><br><span class="line">			</span><br><span class="line">##### 2.2.1 修改hadoop-env.sh</span><br><span class="line">vi hadoop-env.sh</span><br></pre></td></tr></table></figure></p>
+<p>export JAVA_HOME=/usr/java/jdk1.8<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">				</span><br><span class="line">##### 2.2.2 修改core-site.xml</span><br></pre></td></tr></table></figure></p>
+<configuration><br>    <!-- 指定hdfs的nameservice为ns1 --><br>    <property><br>        <name>fs.defaultFS</name><br>        <value>hdfs://ns1</value><br>    </property><br>    <!-- 指定hadoop临时目录 --><br>    <property><br>        <name>hadoop.tmp.dir</name><br>        <value>/hadoop/hadoop-2.7.2/tmp</value><br>    </property><br>    <!-- 指定zookeeper地址 --><br>    <property><br>        <name>ha.zookeeper.quorum</name><br>        <value>yun04:2181,yun05:2181,yun06:2181</value><br>    </property><br></configuration>
 
-2.安装配置hadoop集群
-    2.1解压
-        tar -zxvf hadoop-2.7.2.tar.gz -C /hadoop/
-    2.2配置HDFS（hadoop2.0所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）
-        #将hadoop添加到环境变量中
-        vim /etc/profile
-        export JAVA_HOME=/usr/java/jdk1.8
-        export HADOOP_HOME=/hadoop/hadoop-2.7.2
-        export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin
-
-        #hadoop2.0的配置文件全部在$HADOOP_HOME/etc/hadoop下
-        cd /hadoop/hadoop-2.7.2/etc/hadoop
-
-        2.2.1修改hadoo-env.sh
-            export JAVA_HOME=/usr/java/jdk1.8
-
-        2.2.2修改core-site.xml
-            &lt;configuration&gt;
-                &lt;!-- 指定hdfs的nameservice为ns1 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;fs.defaultFS&lt;/name&gt;
-                    &lt;value&gt;hdfs://ns1&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 指定hadoop临时目录 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-                    &lt;value&gt;/hadoop/hadoop-2.7.2/tmp&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 指定zookeeper地址 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt;
-                    &lt;value&gt;yun04:2181,yun05:2181,yun06:2181&lt;/value&gt;
-                &lt;/property&gt;
-            &lt;/configuration&gt;
-
-        2.2.3修改hdfs-site.xml
-            &lt;configuration&gt;
-                &lt;!--指定hdfs的nameservice为ns1，需要和core-site.xml中的保持一致 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.nameservices&lt;/name&gt;
-                    &lt;value&gt;ns1&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- ns1下面有两个NameNode，分别是nn1，nn2 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.ha.namenodes.ns1&lt;/name&gt;
-                    &lt;value&gt;nn1,nn2&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- nn1的RPC通信地址 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.namenode.rpc-address.ns1.nn1&lt;/name&gt;
-                    &lt;value&gt;yun01:9000&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- nn1的http通信地址 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.namenode.http-address.ns1.nn1&lt;/name&gt;
-                    &lt;value&gt;yun01:50070&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- nn2的RPC通信地址 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.namenode.rpc-address.ns1.nn2&lt;/name&gt;
-                    &lt;value&gt;yun02:9000&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- nn2的http通信地址 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.namenode.http-address.ns1.nn2&lt;/name&gt;
-                    &lt;value&gt;yun02:50070&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 指定NameNode的元数据在JournalNode上的存放位置 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.namenode.shared.edits.dir&lt;/name&gt;
-                    &lt;value&gt;qjournal://yun04:8485;yun05:8485;yun06:8485/ns1&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 指定JournalNode在本地磁盘存放数据的位置 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.journalnode.edits.dir&lt;/name&gt;
-                    &lt;value&gt;/hadoop/hadoop-2.7.2/journal&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 开启NameNode失败自动切换 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.ha.automatic-failover.enabled&lt;/name&gt;
-                    &lt;value&gt;true&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 配置失败自动切换实现方式 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.client.failover.proxy.provider.ns1&lt;/name&gt;
-                    &lt;value&gt;org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行--&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.ha.fencing.methods&lt;/name&gt;
-                    &lt;value&gt;
-                        sshfence
-                        shell(/bin/true)
-                    &lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 使用sshfence隔离机制时需要ssh免登陆 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.ha.fencing.ssh.private-key-files&lt;/name&gt;
-                    &lt;value&gt;/root/.ssh/id_rsa&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 配置sshfence隔离机制超时时间 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;dfs.ha.fencing.ssh.connect-timeout&lt;/name&gt;
-                    &lt;value&gt;30000&lt;/value&gt;
-                &lt;/property&gt;
-            &lt;/configuration&gt;
-
-        2.2.4修改mapred-site.xml
-            &lt;configuration&gt;
-                &lt;!-- 指定mr框架为yarn方式 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
-                    &lt;value&gt;yarn&lt;/value&gt;
-                &lt;/property&gt;
-            &lt;/configuration&gt;    
-
-        2.2.5修改yarn-site.xml
-            &lt;configuration&gt;
-                &lt;!-- 指定resourcemanager地址 --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
-                    &lt;value&gt;yun03&lt;/value&gt;
-                &lt;/property&gt;
-                &lt;!-- 指定nodemanager启动时加载server的方式为shuffle server --&gt;
-                &lt;property&gt;
-                    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
-                    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
-                &lt;/property&gt;
-            &lt;/configuration&gt;
-
-
-        2.2.6修改slaves(slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置)
-            yun04
-            yun05
-            yun06
-
-        2.2.7配置免密码登陆
-            #首先要配置yun01到yun02、yun03、yun04、yun05、yun06的免密码登陆
-            #在yun01上生产一对钥匙
-            ssh-keygen -t rsa
-            #将公钥拷贝到其他节点，包括自己
-            ssh-coyp-id yun01
-            ssh-coyp-id yun02
-            ssh-coyp-id yun03
-            ssh-coyp-id yun04
-            ssh-coyp-id yun05
-            ssh-coyp-id yun06
-
-            #配置yun03到yun04、yun05、yun06的免密码登陆
-            #在yun03上生产一对钥匙
-            ssh-keygen -t rsa
-            #将公钥拷贝到其他节点
-            ssh-coyp-id yun04
-            ssh-coyp-id yun05
-            ssh-coyp-id yun06
-
-            #注意：两个namenode之间要配置ssh免密码登陆，别忘了配置yun02到yun01的免登陆
-            在yun02上生产一对钥匙
-            ssh-keygen -t rsa
-            ssh-coyp-id -i yun01                
-
-    2.4将配置好的hadoop拷贝到其他节点
-        scp -r /hadoop/ yun02:/
-        scp -r /hadoop/ yun03:/
-        scp -r /hadoop/hadoop-2.7.2/ root@yun04:/hadoop/
-        scp -r /hadoop/hadoop-2.7.2/ root@yun05:/hadoop/
-        scp -r /hadoop/hadoop-2.7.2/ root@yun06:/hadoop/
-
-    ###注意：严格按照下面的步骤
-    2.5启动zookeeper集群（分别在yun04、yun05、yun06上启动zk）
-        cd /hadoop/zookeeper-3.4.5/bin/
-        ./zkServer.sh start
-        #查看状态：一个leader，两个follower
-        ./zkServer.sh status
-
-    2.6启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons.sh这个脚本，注意是复数s的那个脚本）
-        cd /hadoop/hadoop-2.7.2
-        sbin/hadoop-daemons.sh start journalnode
-        #运行jps命令检验，yun04、yun05、yun06上多了JournalNode进程
-
-    2.7格式化HDFS
-        #在yun01上执行命令:
-        hdfs namenode -format
-        #格式化后会在根据core-site.xml中的hadoop.tmp.dir配置生成个文件，这里我配置的是/hadoop/hadoop-2.7.2/tmp，然后将/hadoop/hadoop-2.7.2/tmp拷贝到yun02的/hadoop/hadoop-2.7.2/下。
-        scp -r tmp/ yun02:/hadoop/hadoop-2.7.2/
-
-    2.8格式化ZK(在yun01上执行即可)
-        hdfs zkfc -formatZK
-
-    2.9启动HDFS(在yun01上执行)
-        sbin/start-dfs.sh
-
-    2.10启动YARN(#####注意#####：是在yun03上执行start-yarn.sh，把namenode和resourcemanager分开是因为性能问题，因为他们都要占用大量资源，所以把他们分开了，他们分开了就要分别在不同的机器上启动)
-        sbin/start-yarn.sh
-
-    hadoop2.7.2配置完毕
-</code></pre><p>###测试集群，通过浏览器访问:<br>        <a href="http://192.168.1.201:50070" target="_blank" rel="external">http://192.168.1.201:50070</a><br>        NameNode ‘yun01:9000’ (active)<br>        <a href="http://192.168.1.202:50070" target="_blank" rel="external">http://192.168.1.202:50070</a><br>        NameNode ‘yun02:9000’ (standby)</p>
-<pre><code>验证HDFS HA
-    首先向hdfs上传一个文件
-    hadoop fs -put /etc/profile /profile
-    hadoop fs -ls /
-    然后再kill掉active的NameNode
-    kill -9 &lt;pid of NN&gt;
-    通过浏览器访问：http://192.168.1.202:50070
-    NameNode &apos;yun02:9000&apos; (active)
-    这个时候yun02上的NameNode变成了active
-    在执行命令：
-    hadoop fs -ls /
-    -rw-r--r--   3 root supergroup       1926 2014-02-06 15:36 /profile
-    刚才上传的文件依然存在！！！
-    手动启动那个挂掉的NameNode
-    sbin/hadoop-daemon.sh start namenode
-    通过浏览器访问：http://192.168.1.201:50070
-    NameNode &apos;yun01:9000&apos; (standby)
-
-验证YARN：
-    运行一下hadoop提供的demo中的WordCount程序：
-    hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.2.0.jar wordcount /profile /out
-</code></pre><p>OK，集群搭建成功，enjoy it！</p>
+<h5 id="2-2-3-修改hdfs-site-xml"><a href="#2-2-3-修改hdfs-site-xml" class="headerlink" title="2.2.3 修改hdfs-site.xml"></a>2.2.3 修改hdfs-site.xml</h5><p>vi hdfs-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!--指定hdfs的nameservice为ns1，需要和core-site.xml中的保持一致 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">			&lt;name&gt;dfs.nameservices&lt;/name&gt;</span><br><span class="line">			&lt;value&gt;ns1&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- ns1下面有两个NameNode，分别是nn1，nn2 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.ha.namenodes.ns1&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;nn1,nn2&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- nn1的RPC通信地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.rpc-address.ns1.nn1&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yun01:9000&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- nn1的http通信地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.http-address.ns1.nn1&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yun01:50070&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- nn2的RPC通信地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.rpc-address.ns1.nn2&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yun02:9000&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- nn2的http通信地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.http-address.ns1.nn2&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yun02:50070&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 指定NameNode的元数据在JournalNode上的存放位置 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.namenode.shared.edits.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;qjournal://yun04:8485;yun05:8485;yun06:8485/ns1&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 指定JournalNode在本地磁盘存放数据的位置 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.journalnode.edits.dir&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;/hadoop/hadoop-2.7.2/journal&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 开启NameNode失败自动切换 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.ha.automatic-failover.enabled&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;true&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 配置失败自动切换实现方式 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.client.failover.proxy.provider.ns1&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行--&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.ha.fencing.methods&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;</span><br><span class="line">			sshfence</span><br><span class="line">			shell(/bin/true)</span><br><span class="line">		&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 使用sshfence隔离机制时需要ssh免登陆 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.ha.fencing.ssh.private-key-files&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;/root/.ssh/id_rsa&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 配置sshfence隔离机制超时时间 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.ha.fencing.ssh.connect-timeout&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;30000&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-4-修改mapred-site-xml"><a href="#2-2-4-修改mapred-site-xml" class="headerlink" title="2.2.4 修改mapred-site.xml"></a>2.2.4 修改mapred-site.xml</h4><p>vi mapred-site.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 指定mr框架为yarn方式 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;	</span><br><span class="line">```			</span><br><span class="line">#### 2.2.5 修改yarn-site.xml</span><br><span class="line">vi yarn-site.xml</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 指定resourcemanager地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yun03&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">	&lt;!-- 指定nodemanager启动时加载server的方式为shuffle server --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br><span class="line">			</span><br><span class="line">				</span><br><span class="line">#### 2.2.6 修改slaves(slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置)</span><br></pre></td></tr></table></figure>
+<p>yun04<br>yun05<br>yun06<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">				</span><br><span class="line"></span><br><span class="line">#### 2.2.7 配置免密码登陆</span><br><span class="line"></span><br><span class="line">首先要配置yun01到yun02、yun03、yun04、yun05、yun06的免密码登陆</span><br><span class="line"></span><br><span class="line">在yun01上生产一对钥匙```ssh-keygen -t rsa```将公钥拷贝到其他节点，包括自己</span><br></pre></td></tr></table></figure></p>
+<p>ssh-copy-id yun01<br>ssh-copy-id yun02<br>ssh-copy-id yun03<br>ssh-copy-id yun04<br>ssh-copy-id yun05<br>ssh-copy-id yun06<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">配置yun03到yun04、yun05、yun06的免密码登陆</span><br><span class="line"></span><br><span class="line">在yun03上生产一对钥匙```ssh-keygen -t rsa```将公钥拷贝到其他节点</span><br></pre></td></tr></table></figure></p>
+<p>ssh-copy-id yun04<br>ssh-copy-id yun05<br>ssh-copy-id yun06<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：两个namenode之间要配置ssh免密码登陆，别忘了配置yun02到yun01的免登陆,在yun02上生产一对钥匙```ssh-keygen -t rsa</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i yun01				</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line">### 2.4 将配置好的hadoop拷贝到其他节点</span><br></pre></td></tr></table></figure>
+<p>scp -r /hadoop/ yun02:/<br>scp -r /hadoop/ yun03:/<br>scp -r /hadoop/hadoop-2.7.2/ root@yun04:/hadoop/<br>scp -r /hadoop/hadoop-2.7.2/ root@yun05:/hadoop/<br>scp -r /hadoop/hadoop-2.7.2/ root@yun06:/hadoop/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##注意：严格按照下面的步骤</span><br><span class="line">### 2.5 启动zookeeper集群（分别在yun04、yun05、yun06上启动zk）</span><br><span class="line">			</span><br><span class="line">```cd /hadoop/zookeeper-3.4.5/bin/</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh start</span><br></pre></td></tr></table></figure>
+<p>查看状态：一个leader，两个follower<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh status</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-6-启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons-sh这个脚本，注意是复数s的那个脚本）"><a href="#2-6-启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons-sh这个脚本，注意是复数s的那个脚本）" class="headerlink" title="2.6 启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons.sh这个脚本，注意是复数s的那个脚本）"></a>2.6 启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons.sh这个脚本，注意是复数s的那个脚本）</h3><figure class="highlight plain"><figcaption><span>/hadoop/hadoop-2.7.2```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>sbin/hadoop-daemons.sh start journalnode<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">运行jps命令检验，yun04、yun05、yun06上多了JournalNode进程</span><br><span class="line">		</span><br><span class="line">### 2.7 格式化HDFS</span><br><span class="line"></span><br><span class="line">在yun01上执行命令:```hdfs namenode -format</span><br></pre></td></tr></table></figure></p>
+<p>格式化后会在根据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```scp -r tmp/ yun02:/hadoop/hadoop-2.7.2/</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-8-格式化ZK-在yun01上执行即可"><a href="#2-8-格式化ZK-在yun01上执行即可" class="headerlink" title="2.8 格式化ZK(在yun01上执行即可)"></a>2.8 格式化ZK(在yun01上执行即可)</h3><figure class="highlight plain"><figcaption><span>zkfc -formatZK```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line">### 2.9 启动HDFS(在yun01上执行)</span><br><span class="line">```sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+<h3 id="2-10-启动YARN"><a href="#2-10-启动YARN" class="headerlink" title="2.10 启动YARN"></a>2.10 启动YARN</h3><p>(注意：是在yun03上执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```sbin/start-yarn.sh</span><br></pre></td></tr></table></figure></p>
+<p>hadoop2.7.2配置完毕!!!</p>
+<p>###测试集群，通过浏览器访问:</p>
+<figure class="highlight plain"><figcaption><span>'yun01:9000' (active)</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">```http://192.168.1.202:50070```NameNode &apos;yun02:9000&apos; (standby)</span><br><span class="line">	</span><br><span class="line">####验证HDFS HA</span><br><span class="line">		</span><br><span class="line">首先向hdfs上传一个文件</span><br><span class="line">```hadoop fs -put /etc/profile /profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls /</span><br></pre></td></tr></table></figure>
+<p>然后再kill掉active的NameNode <figure class="highlight plain"><figcaption><span>-9 <pid of="" nn="">```</pid></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">通过浏览器访问：http://192.168.1.202:50070</span><br><span class="line">NameNode &apos;yun02:9000&apos; (active)</span><br><span class="line">这个时候yun02上的NameNode变成了active</span><br><span class="line">在执行命令:```hadoop fs -ls /</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--   3 root supergroup       1926 2014-02-06 15:36 /profile</span><br></pre></td></tr></table></figure>
+<p>刚才上传的文件依然存在！！！<br>手动启动那个挂掉的NameNode <figure class="highlight plain"><figcaption><span>start namenode```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">通过浏览器访问：http://192.168.1.201:50070</span><br><span class="line">NameNode &apos;yun01:9000&apos; (standby)</span><br><span class="line">	</span><br><span class="line">### 验证YARN：</span><br><span class="line">运行一下hadoop提供的demo中的WordCount程序：</span><br></pre></td></tr></table></figure></p>
+<p>hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar wordcount /profile /out<br>```<br>OK，集群搭建成功，enjoy it！</p>
 
       
     </div>
