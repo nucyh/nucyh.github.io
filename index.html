@@ -186,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2集群搭建-前期准备/">hadoop 2.7.2集群搭建(前期准备)</a></li></ul>
                     </div>
                 </section>
                 
@@ -262,6 +262,105 @@
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-hadoop 2.7.2集群搭建(前期准备)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/" class="article-date">
+      <time datetime="2016-06-23T03:17:15.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">hadoop 2.7.2集群搭建(前期准备)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h3 id="修改Linux主机名"><a href="#修改Linux主机名" class="headerlink" title="修改Linux主机名"></a>修改Linux主机名</h3><p>修改/etc/sysconfig/network中的hostname</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network</span><br><span class="line">HOSTNAME=localhost.localdomain  #修改localhost.localdomain为yun01(自己主机的名字)</span><br></pre></td></tr></table></figure>
+<p>修改network的HOSTNAME项。点前面是主机名，点后面是域名。没有点就是主机名。</p>
+<p>这个是永久修改，重启后生效。</p>
+<p>修改/etc/hosts文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br><span class="line"></span><br><span class="line">127.0.0.1    localhost.localdomain  #修改localhost.localdomain为yun01(自己主机的名字)</span><br><span class="line">shutdown -r now</span><br></pre></td></tr></table></figure>
+<p>最后，重启服务器即可</p>
+<h3 id="linux-CentOS命令行永久修改IP地址、网关、DNS"><a href="#linux-CentOS命令行永久修改IP地址、网关、DNS" class="headerlink" title="linux CentOS命令行永久修改IP地址、网关、DNS"></a>linux CentOS命令行永久修改IP地址、网关、DNS</h3><h4 id="设置IP"><a href="#设置IP" class="headerlink" title="设置IP"></a>设置IP</h4><p><strong>[root@localhost etc]# vi /etc/sysconfig/network-scripts/ifcfg-eth0</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">ONBOOT=yes</span><br><span class="line">HWADDR=00:16:36:66:a3:ec </span><br><span class="line">IPADDR=10.0.0.11</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=10.0.0.1</span><br><span class="line">TYPE=Ethernet</span><br><span class="line">USERCTL=no</span><br><span class="line">IPV6INIT=no</span><br><span class="line">PEERDNS=yes</span><br><span class="line"></span><br><span class="line">###########解释###########</span><br><span class="line">1.BOOTPROTO=static 就是手动设置静态IP，不需要自动获取(static/dhcp/bootp)</span><br><span class="line">2.USERCTL=no     不允许非root用户控制该设备</span><br><span class="line">3.PEERDNS=no     不修改/etc/resolv.conf(如果使用DHCP，则yes是默认选项)</span><br><span class="line">4.TYPE=Ethernet 类型以太网</span><br><span class="line">5.GATEWAY 网关</span><br><span class="line">6.NETMASK 掩码</span><br><span class="line">7.ONBOOT=yes 开机重启会自动加载</span><br><span class="line">Red Hat中没有提供缺省的/etc/resolv.conf文件，它的内容是根据在安装时给出的选项动态创建的。</span><br></pre></td></tr></table></figure>
+<h4 id="修改网关"><a href="#修改网关" class="headerlink" title="修改网关"></a>修改网关</h4><p><strong>vim /etc/sysconfig/network</strong></p>
+<p>增加一条网关信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GATEWAY=192.168.1.1</span><br></pre></td></tr></table></figure>
+<h4 id="修改DNS"><a href="#修改DNS" class="headerlink" title="修改DNS"></a>修改DNS</h4><p><strong>vim /etc/resolv.conf</strong></p>
+<p>增加DNS信息即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nameserver 192.168.1.1</span><br></pre></td></tr></table></figure>
+<h4 id="重新加载网络配置"><a href="#重新加载网络配置" class="headerlink" title="重新加载网络配置"></a>重新加载网络配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/network restart</span><br></pre></td></tr></table></figure>
+<h3 id="修改主机名和IP的映射关系"><a href="#修改主机名和IP的映射关系" class="headerlink" title="修改主机名和IP的映射关系"></a>修改主机名和IP的映射关系</h3><p><strong>vi /etc/hosts</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.201	yun01</span><br><span class="line">192.168.1.201	yun02</span><br><span class="line">192.168.1.201	yun03</span><br><span class="line">192.168.1.201	yun04</span><br><span class="line">192.168.1.201	yun05</span><br><span class="line">192.168.1.201	yun06</span><br><span class="line">192.168.1.201	yun07</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>你的集群要用几个主机搭建，就配置几个主机ip地址</p>
+<h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><h4 id="查看iptables和SElinux状态："><a href="#查看iptables和SElinux状态：" class="headerlink" title="查看iptables和SElinux状态："></a>查看iptables和SElinux状态：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables status</span><br><span class="line">getenforce</span><br></pre></td></tr></table></figure>
+<h4 id="关闭iptables和SElinux："><a href="#关闭iptables和SElinux：" class="headerlink" title="关闭iptables和SElinux："></a>关闭iptables和SElinux：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop   #临时关闭防火墙</span><br><span class="line">chkconfig iptables off    #永久关闭防火墙，开机不自启动，想自启动改成on</span><br><span class="line">setenforce 0    #临时关闭SElinux,临时打开SElinux状态命令：setenforce 1</span><br></pre></td></tr></table></figure>
+<h4 id="永久关闭SElinux"><a href="#永久关闭SElinux" class="headerlink" title="永久关闭SElinux"></a>永久关闭SElinux</h4><p><strong>vim /etc/selinux/config</strong>,然后将SELINUX改成<strong>disabled</strong>，这样即使重启操作系统SElinux也是关闭状态。</p>
+<h4 id="查看SElinux状态："><a href="#查看SElinux状态：" class="headerlink" title="查看SElinux状态："></a>查看SElinux状态：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/sbin/sestatus -v</span><br></pre></td></tr></table></figure>
+<h3 id="配置ssh免登陆"><a href="#配置ssh免登陆" class="headerlink" title="配置ssh免登陆"></a>配置ssh免登陆</h3><p>生成ssh免登陆密钥，进入到我的home目录下的.ssh文件夹</p>
+<pre><code>cd ~/.ssh
+</code></pre><p>开始生成私钥和公钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa （然后直接敲四个回车）</span><br></pre></td></tr></table></figure>
+<p>执行完这个命令后，会生成两个文件id_rsa（私钥）、id_rsa.pub（公钥）<br>将公钥拷贝到要免登陆的机器上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id localhost(你配置的主机名或者ip地址)</span><br></pre></td></tr></table></figure>
+<h3 id="安装idk，配置环境变量"><a href="#安装idk，配置环境变量" class="headerlink" title="安装idk，配置环境变量"></a>安装idk，配置环境变量</h3><p>安装JDK</p>
+<p>将 <strong>jdk-8u92-linux-x64.tar.gz</strong>上传到Linux 的 <strong>/</strong> 根目录下</p>
+<p>解压jdk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#创建文件夹</span><br><span class="line">mkdir /usr/java</span><br><span class="line">#解压</span><br><span class="line">tar -zxvf jdk-8u92-linux-x64.tar.gz -C /usr/java</span><br><span class="line">#修改解压后jdk的名字</span><br><span class="line">cd /usr/java</span><br><span class="line">mv jdk-8u_92-i585/ jdk1.8</span><br></pre></td></tr></table></figure>
+<p>将java添加到环境变量中</p>
+<pre><code>vim /etc/profile
+
+#在文件最后添加
+export JAVA_HOME=/usr/java/jdk1.8
+export PATH=$PATH:$JAVA_HOME/bin
+
+#刷新配置
+source /etc/profile
+</code></pre>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop-2-7-2集群搭建-前期准备/">hadoop 2.7.2集群搭建(前期准备)</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-心得" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -719,6 +818,61 @@ sed -n 20,30p err.txt
 
 
   
+    <article id="post-查看Linux 下端口命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/12/查看Linux 下端口命令/" class="article-date">
+      <time datetime="2016-06-12T08:05:07.000Z" itemprop="datePublished">2016-06-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="快速学习"><a href="#快速学习" class="headerlink" title="快速学习"></a>快速学习</h2><h3 id="Linux下查看进程占用端口："><a href="#Linux下查看进程占用端口：" class="headerlink" title="Linux下查看进程占用端口："></a>Linux下查看进程占用端口：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查看程序对应进程号：ps –ef|grep 进程名</span><br><span class="line">REDHAT :查看进程号所占用的端口号：netstat –nltp|grep 进程号&lt;?xml:namespace prefix=&quot;o&quot;&gt;?xml:namespace&gt;</span><br><span class="line">ubuntu:查看进程占用端口号：netstat -anp|grep pid</span><br></pre></td></tr></table></figure>
+<h3 id="Linux下查看端口号所使用的进程号："><a href="#Linux下查看端口号所使用的进程号：" class="headerlink" title="Linux下查看端口号所使用的进程号："></a>Linux下查看端口号所使用的进程号：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用lsof命令： lsof –i:端口号</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-hadoop 2.7.2集群搭建 手把手教程（6台）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -748,8 +902,7 @@ sed -n 20,30p err.txt
           
         <h3 id="hadoop-2-x简介"><a href="#hadoop-2-x简介" class="headerlink" title="hadoop 2.x简介"></a>hadoop 2.x简介</h3><p>hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。</p>
 <p>注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，<br>所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译</p>
-<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h4 id="修改Linux主机名"><a href="#修改Linux主机名" class="headerlink" title="修改Linux主机名"></a>修改Linux主机名</h4><h4 id="修改IP"><a href="#修改IP" class="headerlink" title="修改IP"></a>修改IP</h4><h4 id="修改主机名和IP的映射关系"><a href="#修改主机名和IP的映射关系" class="headerlink" title="修改主机名和IP的映射关系"></a>修改主机名和IP的映射关系</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注意:如果是租用的服务器或是使用的云主机（如华为用主机、阿里云主机等）</span><br><span class="line">/etc/hosts里面要配置的是内网IP地址和主机名的映射关系</span><br></pre></td></tr></table></figure>
-<h4 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h4><h4 id="ssh免登陆"><a href="#ssh免登陆" class="headerlink" title="ssh免登陆"></a>ssh免登陆</h4><h4 id="安装JDK，配置环境变量等"><a href="#安装JDK，配置环境变量等" class="headerlink" title="安装JDK，配置环境变量等"></a>安装JDK，配置环境变量等</h4><h3 id="集群规划："><a href="#集群规划：" class="headerlink" title="集群规划："></a>集群规划：</h3><table>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h3 id="集群规划："><a href="#集群规划：" class="headerlink" title="集群规划："></a>集群规划：</h3><table>
 <thead>
 <tr>
 <th>主机名</th>
