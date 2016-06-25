@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="原豪" />
+
+
+
+<meta name="description" content="Sqoop是什么Sqoop 是连接传统关系型数据库和 Hadoop 的桥梁。它包括以下两个方面：　　1、 将关系型数据库的数据导入到 Hadoop 及其相关的系统中，如 Hive和HBase。　　2、 将数据从 Hadoop 系统里抽取并导出到关系型数据库。Sqoop 的核心设计思想是利用 MapReduce 加快数据传输速度。也就是说 Sqoop 的导入和导出功能是通过 MapReduce 作业">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解Sqoop的架构和安装部署">
+<meta property="og:url" content="http://yuanhao.space/2016/06/23/详解Sqoop的架构和安装部署/index.html">
+<meta property="og:site_name" content="原豪的个人博客">
+<meta property="og:description" content="Sqoop是什么Sqoop 是连接传统关系型数据库和 Hadoop 的桥梁。它包括以下两个方面：　　1、 将关系型数据库的数据导入到 Hadoop 及其相关的系统中，如 Hive和HBase。　　2、 将数据从 Hadoop 系统里抽取并导出到关系型数据库。Sqoop 的核心设计思想是利用 MapReduce 加快数据传输速度。也就是说 Sqoop 的导入和导出功能是通过 MapReduce 作业">
+<meta property="og:image" content="http://a1.qpic.cn/psb?/V11T2YKt1pMnWZ/X0rvkMDlhn*afoHXx.l82uAAj.R5XSbz94vcx4k.nVY!/b/dK4AAAAAAAAA&bo=5wLwAQAAAAADBzY!&rf=viewer_4">
+<meta property="og:image" content="http://a1.qpic.cn/psb?/V11T2YKt1pMnWZ/XxQj3oyTwIdqh25bq0d7wf7c3Ouh3bAKDesHK63SalQ!/b/dKUAAAAAAAAA&bo=wAGcAQAAAAADB34!&rf=viewer_4">
+<meta property="og:image" content="http://a3.qpic.cn/psb?/V11T2YKt1pMnWZ/DfkNHY8ZvkSAbOlxsygkPWJaE65Kpf9sTycKyW4nL4Y!/b/dLAAAAAAAAAA&bo=2gGeAQAAAAADB2Y!&rf=viewer_4">
+<meta property="og:updated_time" content="2016-06-25T00:58:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="详解Sqoop的架构和安装部署">
+<meta name="twitter:description" content="Sqoop是什么Sqoop 是连接传统关系型数据库和 Hadoop 的桥梁。它包括以下两个方面：　　1、 将关系型数据库的数据导入到 Hadoop 及其相关的系统中，如 Hive和HBase。　　2、 将数据从 Hadoop 系统里抽取并导出到关系型数据库。Sqoop 的核心设计思想是利用 MapReduce 加快数据传输速度。也就是说 Sqoop 的导入和导出功能是通过 MapReduce 作业">
+<meta name="twitter:image" content="http://a1.qpic.cn/psb?/V11T2YKt1pMnWZ/X0rvkMDlhn*afoHXx.l82uAAj.R5XSbz94vcx4k.nVY!/b/dK4AAAAAAAAA&bo=5wLwAQAAAAADBzY!&rf=viewer_4">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="原豪的个人博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>详解Sqoop的架构和安装部署 | 原豪的个人博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">原豪</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:153516796@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2集群搭建-前期准备/">hadoop 2.7.2集群搭建(前期准备)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://yuanhao.space/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注与大数据</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">原豪</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">原豪</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:153516796@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-详解Sqoop的架构和安装部署" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/23/详解Sqoop的架构和安装部署/" class="article-date">
+      <time datetime="2016-06-23T11:32:10.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      详解Sqoop的架构和安装部署
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Sqoop是什么"><a href="#Sqoop是什么" class="headerlink" title="Sqoop是什么"></a>Sqoop是什么</h2><p>Sqoop 是连接传统关系型数据库和 Hadoop 的桥梁。它包括以下两个方面：<br>　　1、 将关系型数据库的数据导入到 Hadoop 及其相关的系统中，如 Hive和HBase。<br>　　2、 将数据从 Hadoop 系统里抽取并导出到关系型数据库。<br>Sqoop 的核心设计思想是利用 MapReduce 加快数据传输速度。也就是说 Sqoop 的导入和导出功能是通过 MapReduce 作业实现的。所以它是一种批处理方式进行数据传输，难以实现实时的数据进行导入和导出。</p>
+<h2 id="为什么选择Sqoop"><a href="#为什么选择Sqoop" class="headerlink" title="为什么选择Sqoop"></a>为什么选择Sqoop</h2><p>我们为什么选择 Sqoop 呢？通常基于三个方面的考虑：<br>　　1、它可以高效、可控地利用资源，可以通过调整任务数来控制任务的并发度。另外它还可以配置数据库的访问时间等等。<br>　　 2、它可以自动的完成数据类型映射与转换。我们往往导入的数据是有类型的，它可以自动根据数据库中的类型转换到 Hadoop 中，当然用户也可以自定义它们之间的映射关系。<br>　　 3、它支持多种数据库，比如，<a href="http://lib.csdn.net/base/14" target="_blank" rel="external">MySQL</a>、Oracle和PostgreSQL等等数据库。</p>
+<h2 id="Sqoop-架构与常用操作"><a href="#Sqoop-架构与常用操作" class="headerlink" title="Sqoop 架构与常用操作"></a>Sqoop 架构与常用操作</h2><p>Sqoop 架构是非常简单的，它主要由三个部分组成：Sqoop client、HDFS/HBase/Hive、Database。下面我们来看一下 Sqoop 的架构图。 </p>
+<p><img src="http://a1.qpic.cn/psb?/V11T2YKt1pMnWZ/X0rvkMDlhn*afoHXx.l82uAAj.R5XSbz94vcx4k.nVY!/b/dK4AAAAAAAAA&amp;bo=5wLwAQAAAAADBzY!&amp;rf=viewer_4" alt=""></p>
+<p>用户向 Sqoop 发起一个命令之后，这个命令会转换为一个基于 Map Task 的 MapReduce 作业。Map Task 会访问数据库的元数据信息，通过并行的 Map Task 将数据库的数据读取出来，然后导入 Hadoop 中。 当然也可以将 Hadoop 中的数据，导入传统的关系型数据库中。它的核心思想就是通过基于 Map Task （只有 map）的 MapReduce 作业，实现数据的并发拷贝和传输，这样可以大大提高效率。</p>
+<h3 id="Sqoop与HDFS结合"><a href="#Sqoop与HDFS结合" class="headerlink" title="Sqoop与HDFS结合"></a>Sqoop与HDFS结合</h3><p>结合 HDFS，介绍 Sqoop 从关系型数据库的导入和导出。 </p>
+<p><strong>Sqoop import</strong><br>　　它的功能是将数据从关系型数据库导入 HDFS 中，其流程图如下所示。</p>
+<p><img src="http://a1.qpic.cn/psb?/V11T2YKt1pMnWZ/XxQj3oyTwIdqh25bq0d7wf7c3Ouh3bAKDesHK63SalQ!/b/dKUAAAAAAAAA&amp;bo=wAGcAQAAAAADB34!&amp;rf=viewer_4" alt=""></p>
+<p>分析一下 Sqoop 数据导入流程，首先用户输入一个 Sqoop import 命令，Sqoop 会从关系型数据库中获取元数据信息，比如要操作数据库表的 schema是什么样子，这个表有哪些字段，这些字段都是什么数据类型等。它获取这些信息之后，会将输入命令转化为基于 Map 的 MapReduce作业。这样 MapReduce作业中有很多 Map 任务，每个 Map 任务从数据库中读取一片数据，这样多个 Map 任务实现并发的拷贝，把整个数据快速的拷贝到 HDFS 上。 </p>
+<p>Sqoop 如何使用命令行来导入数据的，其命令行语法如下所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--target-dir /junior/sqoop/ \       //可选，不指定目录，数据默认导入到/user下</span><br><span class="line">--where &quot;sex=&apos;female&apos;&quot; \    //可选</span><br><span class="line">--as-sequencefile \     //可选，不指定格式，数据格式默认为 Text 文本格式</span><br><span class="line">--num-mappers 10 \      //可选，这个数值不宜太大</span><br><span class="line">--null-string &apos;\\N&apos; \       //可选 </span><br><span class="line">--null-non-string &apos;\\N&apos; \       //可选 </span><br><span class="line">--connect：指定 JDBC URL。</span><br><span class="line">--username/password：mysql 数据库的用户名。</span><br><span class="line">--table：要读取的数据库表。</span><br><span class="line">--target-dir：将数据导入到指定的 HDFS 目录下，文件名称如果不指定的话，会默认数据库的表名称。 </span><br><span class="line">--where：过滤从数据库中要导入的数据。</span><br><span class="line">--as-sequencefile：指定数据导入数据格式。</span><br><span class="line">--num-mappers：指定 Map 任务的并发度。</span><br><span class="line">--null-string，--null-non-string：同时使用可以将数据库中的空字段转化为&apos;\N&apos;，因为数据库中字段为 null，会占用很大的空间。</span><br></pre></td></tr></table></figure>
+<p>介绍几种 Sqoop 数据导入的特殊应用。</p>
+<p>1、Sqoop 每次导入数据的时候，不需要把以往的所有数据重新导入 HDFS，只需要把新增的数据导入 HDFS 即可，下面我们来看看如何导入新增数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line"></span><br><span class="line">####解释####</span><br><span class="line"></span><br><span class="line">--incremental append \      //代表只导入增量数据</span><br><span class="line">--check-column id \         //以主键id作为判断条件</span><br><span class="line">--last-value 999        //导入id大于999的新增数据</span><br><span class="line">上述三个组合使用，可以实现数据的增量导入。</span><br></pre></td></tr></table></figure>
+<p>2、Sqoop 数据导入过程中，直接输入明码存在安全隐患，我们可以通过下面两种方式规避这种风险。 </p>
+<p>2、Sqoop 数据导入过程中，直接输入明码存在安全隐患，我们可以通过下面两种方式规避这种风险。<br>　　 1)-P:sqoop 命令行最后使用 -P，此时提示用户输入密码，而且用户输入的密码是看不见的，起到安全保护作用。密码输入正确后，才会执行 sqoop 命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--table user \</span><br><span class="line">-P</span><br></pre></td></tr></table></figure>
+<p>​    2)–password-file：指定一个密码保存文件，读取密码。我们可以将这个文件设置为只有自己可读的文件，防止密码泄露。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--password-file my-sqoop-password</span><br></pre></td></tr></table></figure>
+<p><strong>Sqoop export</strong> </p>
+<p>　　 它的功能是将数据从 HDFS 导入关系型数据库表中，其流程图如下所示。 </p>
+<p><img src="http://a3.qpic.cn/psb?/V11T2YKt1pMnWZ/DfkNHY8ZvkSAbOlxsygkPWJaE65Kpf9sTycKyW4nL4Y!/b/dLAAAAAAAAAA&amp;bo=2gGeAQAAAAADB2Y!&amp;rf=viewer_4" alt=""></p>
+<p>​    来分析一下 Sqoop 数据导出流程，首先用户输入一个 Sqoop export 命令，它会获取关系型数据库的 schema，建立 Hadoop 字段与数据库表字段的映射关系。 然后会将输入命令转化为基于 Map 的 MapReduce作业，这样 MapReduce作业中有很多 Map 任务，它们并行的从 HDFS 读取数据，并将整个数据拷贝到数据库中。　　 </p>
+<p>我们来分析一下 Sqoop 数据导出流程，首先用户输入一个 Sqoop export 命令，它会获取关系型数据库的 schema，建立 Hadoop 字段与数据库表字段的映射关系。 然后会将输入命令转化为基于 Map 的 MapReduce作业，这样 MapReduce作业中有很多 Map 任务，它们并行的从 HDFS 读取数据，并将整个数据拷贝到数据库中。　　<br>　　 下面我们看一下 Sqoop 如何使用命令行来导出数据的，其命令行语法如下所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--export-dir user</span><br><span class="line"></span><br><span class="line">####解释####</span><br><span class="line"></span><br><span class="line">--connect：指定 JDBC URL。</span><br><span class="line">--username/password：mysql 数据库的用户名和密码。</span><br><span class="line">--table：要导入的数据库表。</span><br><span class="line">--export-dir：数据在 HDFS 上的存放目录。</span><br></pre></td></tr></table></figure>
+<p>下面我们介绍几种 Sqoop 数据导出的特殊应用。<br>　　 1、Sqoop export 将数据导入数据库，一般情况下是一条一条导入的，这样导入的效率非常低。这时我们可以使用 Sqoop export 的批量导入提高效率，其具体语法如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--Dsqoop.export.records.per.statement=10 \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--export-dir user \</span><br><span class="line">--batch</span><br><span class="line"></span><br><span class="line">####解释####</span><br><span class="line"></span><br><span class="line">--Dsqoop.export.records.per.statement：指定每次导入10条数据，--batch：指定是批量导入。</span><br></pre></td></tr></table></figure>
+<p>​     2、 在实际应用中还存在这样一个问题，比如导入数据的时候，Map Task 执行失败， 那么该 Map 任务会转移到另外一个节点执行重新运行，这时候之前导入的数据又要重新导入一份，造成数据重复导入。 因为 Map Task 没有回滚策略，一旦运行失败，已经导入数据库中的数据就无法恢复。Sqoop export 提供了一种机制能保证原子性， 使用–staging-table 选项指定临时导入的表。Sqoop export 导出数据的时候会分为两步：第一步，将数据导入数据库中的临时表，如果导入期间 Map Task 失败，会删除临时表数据重新导入；第二步，确认所有 Map Task 任务成功后，会将临时表名称为指定的表名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--staging-table staging_user</span><br></pre></td></tr></table></figure>
+<p>3、在 Sqoop 导出数据过程中，如果我们想更新已有数据，可以采取以下两种方式。<br>　　 1)通过 –update-key id 更新已有数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--update-key id</span><br></pre></td></tr></table></figure>
+<pre><code>2)使用 –update-key id和–update-mode allowinsert 两个选项的情况下，如果数据已经存在，则更新数据，如果数据不存在，则插入新数据记录。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--update-key id \</span><br><span class="line">--update-mode allowinsert</span><br></pre></td></tr></table></figure>
+<p>4、如果 HDFS 中的数据量比较大，很多字段并不需要，我们可以使用 –columns 来指定插入某几列数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--column username,sex</span><br></pre></td></tr></table></figure>
+<p>5、当导入的字段数据不存在或者为null的时候，我们使用–input-null-string和–input-null-non-string 来处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--input-null-string &apos;\\N&apos; \</span><br><span class="line">--input-null-non-string &apos;\\N&apos;</span><br></pre></td></tr></table></figure>
+<p><strong>Sqoop与其它系统结合</strong></p>
+<p>Sqoop 也可以与Hive、HBase等系统结合，实现数据的导入和导出，用户需要在 sqoop-env.sh 中添加HBASE_HOME、HIVE_HOME等环境变量。</p>
+<p>1、Sqoop与Hive结合比较简单，使用 –hive-import 选项就可以实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--hive-import</span><br></pre></td></tr></table></figure>
+<p>2、Sqoop与HBase结合稍微麻烦一些，需要使用 –hbase-table 指定表名称，使用 –column-family 指定列名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--hbase-table user \</span><br><span class="line">--column-family city</span><br></pre></td></tr></table></figure>
+<h2 id="Sqoop-的安装步骤"><a href="#Sqoop-的安装步骤" class="headerlink" title="Sqoop 的安装步骤"></a>Sqoop 的安装步骤</h2><p>​    我的Hadoop 集群安装的是 Hadoop 2.7.2 版本，所以 Sqoop 安装版本也要与之相匹配，否则后面 Sqoop 工具的使用会出现问题。这里我们选择 sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz版本安装。 安装 Sqoop 很简单，分为以下几步完成。 </p>
+<p>​    1、首先将下载的 sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz放到 /usr/java/目录下，然后对安装包解压、修改文件名和修改用户权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 soft]# tar zxvf sqoop-1.4.6.bin__hadoop-1.0.0.tar.gz //解压</span><br><span class="line">[root@yun05 soft]# rm sqoop-1.4.6.bin__hadoop-1.0.0.tar.gz //删除安装包</span><br><span class="line">[root@yun05 soft]# mv sqoop-1.4.6.bin__hadoop-1.0.0 sqoop //修改安装文件目录</span><br><span class="line">[root@yun05 soft]# chown -R hadoop:hadoop sqoop //赋予sqoop hadoop用户权限</span><br></pre></td></tr></table></figure>
+<p>​    2、切换到/sqoop/conf 目录下，执行以下命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 soft]$ cd sqoop/conf</span><br><span class="line">[root@yun05 conf]$ mv sqoop-env-template.sh sqoop-env.sh</span><br></pre></td></tr></table></figure>
+<p>​    3、然后使用 vi sqoop-env.sh 命令，打开文件添加如下内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#Set path to where bin/hadoop is available</span><br><span class="line">export HADOOP_COMMON_HOME=/usr/java/hadoop-2.2.0-x64</span><br><span class="line">#Set path to where hadoop-*-core.jar is available</span><br><span class="line">export HADOOP_MAPRED_HOME=/usr/java/hadoop-2.2.0-x64</span><br><span class="line">#set the path to where bin/hbase is available</span><br><span class="line">#export HBASE_HOME=</span><br><span class="line">#Set the path to where bin/hive is available</span><br><span class="line">export HIVE_HOME=/usr/java/hive-1.0.0</span><br><span class="line">#Set the path for where zookeper config dir is</span><br><span class="line">#export ZOOCFGDIR=</span><br></pre></td></tr></table></figure>
+<p>​    如果数据读取不涉及hbase和hive，那么相关hbase和hive的配置可以不加；如果集群有独立的zookeeper集群，那么配置zookeeper，反之，不用配置。</p>
+<p>​    4、 将相关的驱动 jar 包拷贝到 sqoop/lib 目录下。安装 Hadoop2.2.0 的核心 jar包有三个需要导入：commons-cli-1.2.jar、hadoop-common-2.2.0.jar和hadoop- mapreduce-client-core-2.2.0.jar。 数据库驱动 jar 包需要导入，这里我们使用的是 mysql 数据库，所以需要导入mysql-connector-java-5.1.21.jar包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 lib]$ cp commons-cli-1.2.jar /usr/java/sqoop/lib</span><br><span class="line">[root@yun05 common]$ cp hadoop-common-2.2.0.jar /usr/java/sqoop/lib</span><br><span class="line">[root@yun05 mapreduce]$ cp hadoop-mapreduce-client-core-2.2.0.jar /usr/java/sqoop/lib</span><br><span class="line">[root@yun05 java]$ cp mysql-connector-java-5.1.21.jar /usr/java/sqoop/lib</span><br></pre></td></tr></table></figure>
+<p>5、添加环境变量。</p>
+<p>vi /etc/profile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:$HOME/bin</span><br><span class="line">export SQOOP_HOME=/usr/java/sqoop //sqoop安装目录</span><br><span class="line">export PATH=$PATH:$SQOOP_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>环境添加完毕后，执行以下命令使环境生效。</p>
+<p>source /etc/profile</p>
+<p>6、测试运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 config]$ sqoop list-databases \</span><br><span class="line">&gt; --connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">&gt; --username sqoop \</span><br><span class="line">&gt; --password sqoop</span><br><span class="line">15/06/03 02:47:27 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6</span><br><span class="line">15/06/03 02:47:27 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.</span><br><span class="line">15/06/03 02:47:28 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.</span><br><span class="line">information_schema</span><br></pre></td></tr></table></figure>
+<p>sqoop 命令执行成功，代表安装成功。</p>
+<p>7、sqoop 使用</p>
+<p>第一类：数据库中的数据导入到HDFS上</p>
+<pre><code>sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --columns &apos;id, account, income, expenses&apos;
+</code></pre><p>指定输出路径、指定数据分隔符</p>
+<pre><code>sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --target-dir &apos;/sqoop/td&apos; --fields-terminated-by &apos;\t&apos;
+</code></pre><p>指定Map数量 -m </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --target-dir &apos;/sqoop/td1&apos; --fields-terminated-by &apos;\t&apos; -m 2</span><br></pre></td></tr></table></figure>
+<p>增加where条件, 注意：条件必须用引号引起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --where &apos;id&gt;3&apos; --target-dir &apos;/sqoop/td2&apos;</span><br></pre></td></tr></table></figure>
+<p>增加query语句(使用 \ 将语句换行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123 \</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<p>​    注意：如果使用–query这个命令的时候，需要注意的是where后面的参数，AND $CONDITIONS这个参数必须加上，而且存在单引号与双引号的区别，如果–query后面使用的是双引号，那么需要在$CONDITIONS前加上\即\$CONDITIONS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--query &apos;SELECT * FROM trade_detail where id &gt; 2 AND $CONDITIONS&apos; --split-by trade_detail.id --target-dir &apos;/sqoop/td3&apos;</span><br></pre></td></tr></table></figure>
+<p>第二类：将HDFS上的数据导出到数据库中(不要忘记指定分隔符)</p>
+<pre><code>sqoop export --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123 --export-dir &apos;/td3&apos; --table td_bak -m 1 --fields-terminated-by &apos;,&apos;
+</code></pre><p>4.配置mysql远程连接<br>    GRANT ALL PRIVILEGES ON db.<em> TO ‘root’@’192.168.1.205’ IDENTIFIED BY ‘123’ WITH GRANT OPTION;<br>    FLUSH PRIVILEGES;<br>    GRANT ALL PRIVILEGES ON </em>.* TO ‘root’@’%’ IDENTIFIED BY ‘123’ WITH GRANT OPTION;</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/06/23/详解Sqoop的架构和安装部署/">详解Sqoop的架构和安装部署</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
+        <p><span>Created:</span>2016-06-23, 19:32:10</p>
+        <p><span>Updated:</span>2016-06-25, 08:58:09</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/23/详解Sqoop的架构和安装部署/" title="详解Sqoop的架构和安装部署">http://yuanhao.space/2016/06/23/详解Sqoop的架构和安装部署/</a>
+            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/23/详解Sqoop的架构和安装部署/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">
+                    hadoop 2.7.2集群搭建(前期准备)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sqoop是什么"><span class="toc-number">1.</span> <span class="toc-text">Sqoop是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么选择Sqoop"><span class="toc-number">2.</span> <span class="toc-text">为什么选择Sqoop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sqoop-架构与常用操作"><span class="toc-number">3.</span> <span class="toc-text">Sqoop 架构与常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sqoop与HDFS结合"><span class="toc-number">3.1.</span> <span class="toc-text">Sqoop与HDFS结合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sqoop-的安装步骤"><span class="toc-number">4.</span> <span class="toc-text">Sqoop 的安装步骤</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+<script>
+    yiliaConfig.toc = ["Hide", "Show", !!"false"];
+</script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"详解Sqoop的架构和安装部署　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/" title="Next: hadoop 2.7.2集群搭建(前期准备)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/详解Sqoop的架构和安装部署/">详解Sqoop的架构和安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">hadoop 2.7.2集群搭建(前期准备)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/心得/">我的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/Linux 必须掌握的30个命令/">Linux 必须掌握的30个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/hadoop生态/">hadoop 生态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/Linux 下oracle的安装/">Linux 下oracle的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/测试/">测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 原豪
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

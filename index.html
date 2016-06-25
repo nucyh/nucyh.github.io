@@ -186,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2集群搭建-前期准备/">hadoop 2.7.2集群搭建(前期准备)</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2集群搭建-前期准备/">hadoop 2.7.2集群搭建(前期准备)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
                     </div>
                 </section>
                 
@@ -262,6 +262,141 @@
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-详解Sqoop的架构和安装部署" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/23/详解Sqoop的架构和安装部署/" class="article-date">
+      <time datetime="2016-06-23T11:32:10.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/详解Sqoop的架构和安装部署/">详解Sqoop的架构和安装部署</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Sqoop是什么"><a href="#Sqoop是什么" class="headerlink" title="Sqoop是什么"></a>Sqoop是什么</h2><p>Sqoop 是连接传统关系型数据库和 Hadoop 的桥梁。它包括以下两个方面：<br>　　1、 将关系型数据库的数据导入到 Hadoop 及其相关的系统中，如 Hive和HBase。<br>　　2、 将数据从 Hadoop 系统里抽取并导出到关系型数据库。<br>Sqoop 的核心设计思想是利用 MapReduce 加快数据传输速度。也就是说 Sqoop 的导入和导出功能是通过 MapReduce 作业实现的。所以它是一种批处理方式进行数据传输，难以实现实时的数据进行导入和导出。</p>
+<h2 id="为什么选择Sqoop"><a href="#为什么选择Sqoop" class="headerlink" title="为什么选择Sqoop"></a>为什么选择Sqoop</h2><p>我们为什么选择 Sqoop 呢？通常基于三个方面的考虑：<br>　　1、它可以高效、可控地利用资源，可以通过调整任务数来控制任务的并发度。另外它还可以配置数据库的访问时间等等。<br>　　 2、它可以自动的完成数据类型映射与转换。我们往往导入的数据是有类型的，它可以自动根据数据库中的类型转换到 Hadoop 中，当然用户也可以自定义它们之间的映射关系。<br>　　 3、它支持多种数据库，比如，<a href="http://lib.csdn.net/base/14" target="_blank" rel="external">MySQL</a>、Oracle和PostgreSQL等等数据库。</p>
+<h2 id="Sqoop-架构与常用操作"><a href="#Sqoop-架构与常用操作" class="headerlink" title="Sqoop 架构与常用操作"></a>Sqoop 架构与常用操作</h2><p>Sqoop 架构是非常简单的，它主要由三个部分组成：Sqoop client、HDFS/HBase/Hive、Database。下面我们来看一下 Sqoop 的架构图。 </p>
+<p><img src="http://a1.qpic.cn/psb?/V11T2YKt1pMnWZ/X0rvkMDlhn*afoHXx.l82uAAj.R5XSbz94vcx4k.nVY!/b/dK4AAAAAAAAA&amp;bo=5wLwAQAAAAADBzY!&amp;rf=viewer_4" alt=""></p>
+<p>用户向 Sqoop 发起一个命令之后，这个命令会转换为一个基于 Map Task 的 MapReduce 作业。Map Task 会访问数据库的元数据信息，通过并行的 Map Task 将数据库的数据读取出来，然后导入 Hadoop 中。 当然也可以将 Hadoop 中的数据，导入传统的关系型数据库中。它的核心思想就是通过基于 Map Task （只有 map）的 MapReduce 作业，实现数据的并发拷贝和传输，这样可以大大提高效率。</p>
+<h3 id="Sqoop与HDFS结合"><a href="#Sqoop与HDFS结合" class="headerlink" title="Sqoop与HDFS结合"></a>Sqoop与HDFS结合</h3><p>结合 HDFS，介绍 Sqoop 从关系型数据库的导入和导出。 </p>
+<p><strong>Sqoop import</strong><br>　　它的功能是将数据从关系型数据库导入 HDFS 中，其流程图如下所示。</p>
+<p><img src="http://a1.qpic.cn/psb?/V11T2YKt1pMnWZ/XxQj3oyTwIdqh25bq0d7wf7c3Ouh3bAKDesHK63SalQ!/b/dKUAAAAAAAAA&amp;bo=wAGcAQAAAAADB34!&amp;rf=viewer_4" alt=""></p>
+<p>分析一下 Sqoop 数据导入流程，首先用户输入一个 Sqoop import 命令，Sqoop 会从关系型数据库中获取元数据信息，比如要操作数据库表的 schema是什么样子，这个表有哪些字段，这些字段都是什么数据类型等。它获取这些信息之后，会将输入命令转化为基于 Map 的 MapReduce作业。这样 MapReduce作业中有很多 Map 任务，每个 Map 任务从数据库中读取一片数据，这样多个 Map 任务实现并发的拷贝，把整个数据快速的拷贝到 HDFS 上。 </p>
+<p>Sqoop 如何使用命令行来导入数据的，其命令行语法如下所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--target-dir /junior/sqoop/ \       //可选，不指定目录，数据默认导入到/user下</span><br><span class="line">--where &quot;sex=&apos;female&apos;&quot; \    //可选</span><br><span class="line">--as-sequencefile \     //可选，不指定格式，数据格式默认为 Text 文本格式</span><br><span class="line">--num-mappers 10 \      //可选，这个数值不宜太大</span><br><span class="line">--null-string &apos;\\N&apos; \       //可选 </span><br><span class="line">--null-non-string &apos;\\N&apos; \       //可选 </span><br><span class="line">--connect：指定 JDBC URL。</span><br><span class="line">--username/password：mysql 数据库的用户名。</span><br><span class="line">--table：要读取的数据库表。</span><br><span class="line">--target-dir：将数据导入到指定的 HDFS 目录下，文件名称如果不指定的话，会默认数据库的表名称。 </span><br><span class="line">--where：过滤从数据库中要导入的数据。</span><br><span class="line">--as-sequencefile：指定数据导入数据格式。</span><br><span class="line">--num-mappers：指定 Map 任务的并发度。</span><br><span class="line">--null-string，--null-non-string：同时使用可以将数据库中的空字段转化为&apos;\N&apos;，因为数据库中字段为 null，会占用很大的空间。</span><br></pre></td></tr></table></figure>
+<p>介绍几种 Sqoop 数据导入的特殊应用。</p>
+<p>1、Sqoop 每次导入数据的时候，不需要把以往的所有数据重新导入 HDFS，只需要把新增的数据导入 HDFS 即可，下面我们来看看如何导入新增数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line"></span><br><span class="line">####解释####</span><br><span class="line"></span><br><span class="line">--incremental append \      //代表只导入增量数据</span><br><span class="line">--check-column id \         //以主键id作为判断条件</span><br><span class="line">--last-value 999        //导入id大于999的新增数据</span><br><span class="line">上述三个组合使用，可以实现数据的增量导入。</span><br></pre></td></tr></table></figure>
+<p>2、Sqoop 数据导入过程中，直接输入明码存在安全隐患，我们可以通过下面两种方式规避这种风险。 </p>
+<p>2、Sqoop 数据导入过程中，直接输入明码存在安全隐患，我们可以通过下面两种方式规避这种风险。<br>　　 1)-P:sqoop 命令行最后使用 -P，此时提示用户输入密码，而且用户输入的密码是看不见的，起到安全保护作用。密码输入正确后，才会执行 sqoop 命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--table user \</span><br><span class="line">-P</span><br></pre></td></tr></table></figure>
+<p>​    2)–password-file：指定一个密码保存文件，读取密码。我们可以将这个文件设置为只有自己可读的文件，防止密码泄露。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--password-file my-sqoop-password</span><br></pre></td></tr></table></figure>
+<p><strong>Sqoop export</strong> </p>
+<p>　　 它的功能是将数据从 HDFS 导入关系型数据库表中，其流程图如下所示。 </p>
+<p><img src="http://a3.qpic.cn/psb?/V11T2YKt1pMnWZ/DfkNHY8ZvkSAbOlxsygkPWJaE65Kpf9sTycKyW4nL4Y!/b/dLAAAAAAAAAA&amp;bo=2gGeAQAAAAADB2Y!&amp;rf=viewer_4" alt=""></p>
+<p>​    来分析一下 Sqoop 数据导出流程，首先用户输入一个 Sqoop export 命令，它会获取关系型数据库的 schema，建立 Hadoop 字段与数据库表字段的映射关系。 然后会将输入命令转化为基于 Map 的 MapReduce作业，这样 MapReduce作业中有很多 Map 任务，它们并行的从 HDFS 读取数据，并将整个数据拷贝到数据库中。　　 </p>
+<p>我们来分析一下 Sqoop 数据导出流程，首先用户输入一个 Sqoop export 命令，它会获取关系型数据库的 schema，建立 Hadoop 字段与数据库表字段的映射关系。 然后会将输入命令转化为基于 Map 的 MapReduce作业，这样 MapReduce作业中有很多 Map 任务，它们并行的从 HDFS 读取数据，并将整个数据拷贝到数据库中。　　<br>　　 下面我们看一下 Sqoop 如何使用命令行来导出数据的，其命令行语法如下所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--export-dir user</span><br><span class="line"></span><br><span class="line">####解释####</span><br><span class="line"></span><br><span class="line">--connect：指定 JDBC URL。</span><br><span class="line">--username/password：mysql 数据库的用户名和密码。</span><br><span class="line">--table：要导入的数据库表。</span><br><span class="line">--export-dir：数据在 HDFS 上的存放目录。</span><br></pre></td></tr></table></figure>
+<p>下面我们介绍几种 Sqoop 数据导出的特殊应用。<br>　　 1、Sqoop export 将数据导入数据库，一般情况下是一条一条导入的，这样导入的效率非常低。这时我们可以使用 Sqoop export 的批量导入提高效率，其具体语法如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--Dsqoop.export.records.per.statement=10 \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--export-dir user \</span><br><span class="line">--batch</span><br><span class="line"></span><br><span class="line">####解释####</span><br><span class="line"></span><br><span class="line">--Dsqoop.export.records.per.statement：指定每次导入10条数据，--batch：指定是批量导入。</span><br></pre></td></tr></table></figure>
+<p>​     2、 在实际应用中还存在这样一个问题，比如导入数据的时候，Map Task 执行失败， 那么该 Map 任务会转移到另外一个节点执行重新运行，这时候之前导入的数据又要重新导入一份，造成数据重复导入。 因为 Map Task 没有回滚策略，一旦运行失败，已经导入数据库中的数据就无法恢复。Sqoop export 提供了一种机制能保证原子性， 使用–staging-table 选项指定临时导入的表。Sqoop export 导出数据的时候会分为两步：第一步，将数据导入数据库中的临时表，如果导入期间 Map Task 失败，会删除临时表数据重新导入；第二步，确认所有 Map Task 任务成功后，会将临时表名称为指定的表名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--staging-table staging_user</span><br></pre></td></tr></table></figure>
+<p>3、在 Sqoop 导出数据过程中，如果我们想更新已有数据，可以采取以下两种方式。<br>　　 1)通过 –update-key id 更新已有数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--update-key id</span><br></pre></td></tr></table></figure>
+<pre><code>2)使用 –update-key id和–update-mode allowinsert 两个选项的情况下，如果数据已经存在，则更新数据，如果数据不存在，则插入新数据记录。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--update-key id \</span><br><span class="line">--update-mode allowinsert</span><br></pre></td></tr></table></figure>
+<p>4、如果 HDFS 中的数据量比较大，很多字段并不需要，我们可以使用 –columns 来指定插入某几列数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--column username,sex</span><br></pre></td></tr></table></figure>
+<p>5、当导入的字段数据不存在或者为null的时候，我们使用–input-null-string和–input-null-non-string 来处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--input-null-string &apos;\\N&apos; \</span><br><span class="line">--input-null-non-string &apos;\\N&apos;</span><br></pre></td></tr></table></figure>
+<p><strong>Sqoop与其它系统结合</strong></p>
+<p>Sqoop 也可以与Hive、HBase等系统结合，实现数据的导入和导出，用户需要在 sqoop-env.sh 中添加HBASE_HOME、HIVE_HOME等环境变量。</p>
+<p>1、Sqoop与Hive结合比较简单，使用 –hive-import 选项就可以实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--hive-import</span><br></pre></td></tr></table></figure>
+<p>2、Sqoop与HBase结合稍微麻烦一些，需要使用 –hbase-table 指定表名称，使用 –column-family 指定列名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">--connect jdbc:mysql://db.haoyuan.net:3306/csdb_hadoop \</span><br><span class="line">--username sqoop \</span><br><span class="line">--password sqoop \</span><br><span class="line">--table user \</span><br><span class="line">--hbase-table user \</span><br><span class="line">--column-family city</span><br></pre></td></tr></table></figure>
+<h2 id="Sqoop-的安装步骤"><a href="#Sqoop-的安装步骤" class="headerlink" title="Sqoop 的安装步骤"></a>Sqoop 的安装步骤</h2><p>​    我的Hadoop 集群安装的是 Hadoop 2.7.2 版本，所以 Sqoop 安装版本也要与之相匹配，否则后面 Sqoop 工具的使用会出现问题。这里我们选择 sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz版本安装。 安装 Sqoop 很简单，分为以下几步完成。 </p>
+<p>​    1、首先将下载的 sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz放到 /usr/java/目录下，然后对安装包解压、修改文件名和修改用户权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 soft]# tar zxvf sqoop-1.4.6.bin__hadoop-1.0.0.tar.gz //解压</span><br><span class="line">[root@yun05 soft]# rm sqoop-1.4.6.bin__hadoop-1.0.0.tar.gz //删除安装包</span><br><span class="line">[root@yun05 soft]# mv sqoop-1.4.6.bin__hadoop-1.0.0 sqoop //修改安装文件目录</span><br><span class="line">[root@yun05 soft]# chown -R hadoop:hadoop sqoop //赋予sqoop hadoop用户权限</span><br></pre></td></tr></table></figure>
+<p>​    2、切换到/sqoop/conf 目录下，执行以下命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 soft]$ cd sqoop/conf</span><br><span class="line">[root@yun05 conf]$ mv sqoop-env-template.sh sqoop-env.sh</span><br></pre></td></tr></table></figure>
+<p>​    3、然后使用 vi sqoop-env.sh 命令，打开文件添加如下内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#Set path to where bin/hadoop is available</span><br><span class="line">export HADOOP_COMMON_HOME=/usr/java/hadoop-2.2.0-x64</span><br><span class="line">#Set path to where hadoop-*-core.jar is available</span><br><span class="line">export HADOOP_MAPRED_HOME=/usr/java/hadoop-2.2.0-x64</span><br><span class="line">#set the path to where bin/hbase is available</span><br><span class="line">#export HBASE_HOME=</span><br><span class="line">#Set the path to where bin/hive is available</span><br><span class="line">export HIVE_HOME=/usr/java/hive-1.0.0</span><br><span class="line">#Set the path for where zookeper config dir is</span><br><span class="line">#export ZOOCFGDIR=</span><br></pre></td></tr></table></figure>
+<p>​    如果数据读取不涉及hbase和hive，那么相关hbase和hive的配置可以不加；如果集群有独立的zookeeper集群，那么配置zookeeper，反之，不用配置。</p>
+<p>​    4、 将相关的驱动 jar 包拷贝到 sqoop/lib 目录下。安装 Hadoop2.2.0 的核心 jar包有三个需要导入：commons-cli-1.2.jar、hadoop-common-2.2.0.jar和hadoop- mapreduce-client-core-2.2.0.jar。 数据库驱动 jar 包需要导入，这里我们使用的是 mysql 数据库，所以需要导入mysql-connector-java-5.1.21.jar包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 lib]$ cp commons-cli-1.2.jar /usr/java/sqoop/lib</span><br><span class="line">[root@yun05 common]$ cp hadoop-common-2.2.0.jar /usr/java/sqoop/lib</span><br><span class="line">[root@yun05 mapreduce]$ cp hadoop-mapreduce-client-core-2.2.0.jar /usr/java/sqoop/lib</span><br><span class="line">[root@yun05 java]$ cp mysql-connector-java-5.1.21.jar /usr/java/sqoop/lib</span><br></pre></td></tr></table></figure>
+<p>5、添加环境变量。</p>
+<p>vi /etc/profile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:$HOME/bin</span><br><span class="line">export SQOOP_HOME=/usr/java/sqoop //sqoop安装目录</span><br><span class="line">export PATH=$PATH:$SQOOP_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>环境添加完毕后，执行以下命令使环境生效。</p>
+<p>source /etc/profile</p>
+<p>6、测试运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@yun05 config]$ sqoop list-databases \</span><br><span class="line">&gt; --connect jdbc:mysql://db.haoyuan.net:3306/djtdb_hadoop \</span><br><span class="line">&gt; --username sqoop \</span><br><span class="line">&gt; --password sqoop</span><br><span class="line">15/06/03 02:47:27 INFO sqoop.Sqoop: Running Sqoop version: 1.4.6</span><br><span class="line">15/06/03 02:47:27 WARN tool.BaseSqoopTool: Setting your password on the command-line is insecure. Consider using -P instead.</span><br><span class="line">15/06/03 02:47:28 INFO manager.MySQLManager: Preparing to use a MySQL streaming resultset.</span><br><span class="line">information_schema</span><br></pre></td></tr></table></figure>
+<p>sqoop 命令执行成功，代表安装成功。</p>
+<p>7、sqoop 使用</p>
+<p>第一类：数据库中的数据导入到HDFS上</p>
+<pre><code>sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --columns &apos;id, account, income, expenses&apos;
+</code></pre><p>指定输出路径、指定数据分隔符</p>
+<pre><code>sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --target-dir &apos;/sqoop/td&apos; --fields-terminated-by &apos;\t&apos;
+</code></pre><p>指定Map数量 -m </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --target-dir &apos;/sqoop/td1&apos; --fields-terminated-by &apos;\t&apos; -m 2</span><br></pre></td></tr></table></figure>
+<p>增加where条件, 注意：条件必须用引号引起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123  --table trade_detail --where &apos;id&gt;3&apos; --target-dir &apos;/sqoop/td2&apos;</span><br></pre></td></tr></table></figure>
+<p>增加query语句(使用 \ 将语句换行)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqoop import --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123 \</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<p>​    注意：如果使用–query这个命令的时候，需要注意的是where后面的参数，AND $CONDITIONS这个参数必须加上，而且存在单引号与双引号的区别，如果–query后面使用的是双引号，那么需要在$CONDITIONS前加上\即\$CONDITIONS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--query &apos;SELECT * FROM trade_detail where id &gt; 2 AND $CONDITIONS&apos; --split-by trade_detail.id --target-dir &apos;/sqoop/td3&apos;</span><br></pre></td></tr></table></figure>
+<p>第二类：将HDFS上的数据导出到数据库中(不要忘记指定分隔符)</p>
+<pre><code>sqoop export --connect jdbc:mysql://192.168.1.205:3306/db --username root --password 123 --export-dir &apos;/td3&apos; --table td_bak -m 1 --fields-terminated-by &apos;,&apos;
+</code></pre><p>4.配置mysql远程连接<br>    GRANT ALL PRIVILEGES ON db.<em> TO ‘root’@’192.168.1.205’ IDENTIFIED BY ‘123’ WITH GRANT OPTION;<br>    FLUSH PRIVILEGES;<br>    GRANT ALL PRIVILEGES ON </em>.* TO ‘root’@’%’ IDENTIFIED BY ‘123’ WITH GRANT OPTION;</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-hadoop 2.7.2集群搭建(前期准备)" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -756,6 +891,61 @@ sed -n 20,30p err.txt
 
 
   
+    <article id="post-查看Linux 下端口命令" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/12/查看Linux 下端口命令/" class="article-date">
+      <time datetime="2016-06-12T08:05:07.000Z" itemprop="datePublished">2016-06-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="快速学习"><a href="#快速学习" class="headerlink" title="快速学习"></a>快速学习</h2><h3 id="Linux下查看进程占用端口："><a href="#Linux下查看进程占用端口：" class="headerlink" title="Linux下查看进程占用端口："></a>Linux下查看进程占用端口：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查看程序对应进程号：ps –ef|grep 进程名</span><br><span class="line">REDHAT :查看进程号所占用的端口号：netstat –nltp|grep 进程号&lt;?xml:namespace prefix=&quot;o&quot;&gt;?xml:namespace&gt;</span><br><span class="line">ubuntu:查看进程占用端口号：netstat -anp|grep pid</span><br></pre></td></tr></table></figure>
+<h3 id="Linux下查看端口号所使用的进程号："><a href="#Linux下查看端口号所使用的进程号：" class="headerlink" title="Linux下查看端口号所使用的进程号："></a>Linux下查看端口号所使用的进程号：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用lsof命令： lsof –i:端口号</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -818,225 +1008,10 @@ sed -n 20,30p err.txt
 
 
   
-    <article id="post-查看Linux 下端口命令" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2016/06/12/查看Linux 下端口命令/" class="article-date">
-      <time datetime="2016-06-12T08:05:07.000Z" itemprop="datePublished">2016-06-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="快速学习"><a href="#快速学习" class="headerlink" title="快速学习"></a>快速学习</h2><h3 id="Linux下查看进程占用端口："><a href="#Linux下查看进程占用端口：" class="headerlink" title="Linux下查看进程占用端口："></a>Linux下查看进程占用端口：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查看程序对应进程号：ps –ef|grep 进程名</span><br><span class="line">REDHAT :查看进程号所占用的端口号：netstat –nltp|grep 进程号&lt;?xml:namespace prefix=&quot;o&quot;&gt;?xml:namespace&gt;</span><br><span class="line">ubuntu:查看进程占用端口号：netstat -anp|grep pid</span><br></pre></td></tr></table></figure>
-<h3 id="Linux下查看端口号所使用的进程号："><a href="#Linux下查看端口号所使用的进程号：" class="headerlink" title="Linux下查看端口号所使用的进程号："></a>Linux下查看端口号所使用的进程号：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用lsof命令： lsof –i:端口号</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hadoop 2.7.2集群搭建 手把手教程（6台）" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/" class="article-date">
-      <time datetime="2016-06-12T04:02:30.000Z" itemprop="datePublished">2016-06-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h3 id="hadoop-2-x简介"><a href="#hadoop-2-x简介" class="headerlink" title="hadoop 2.x简介"></a>hadoop 2.x简介</h3><p>hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。</p>
-<p>注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，<br>所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译</p>
-<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><h3 id="集群规划："><a href="#集群规划：" class="headerlink" title="集群规划："></a>集群规划：</h3><table>
-<thead>
-<tr>
-<th>主机名</th>
-<th style="text-align:center">IP</th>
-<th style="text-align:center">安装的软件</th>
-<th style="text-align:center">运行的进程</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>yun01</td>
-<td style="text-align:center">192.168.1.201</td>
-<td style="text-align:center">jdk、hadoop</td>
-<td style="text-align:center">NameNode、DFSZKFailoverController</td>
-</tr>
-<tr>
-<td>yun02</td>
-<td style="text-align:center">192.168.1.202</td>
-<td style="text-align:center">jdk、hadoop</td>
-<td style="text-align:center">NameNode、DFSZKFailoverController</td>
-</tr>
-<tr>
-<td>yun03</td>
-<td style="text-align:center">192.168.1.203</td>
-<td style="text-align:center">jdk、hadoop</td>
-<td style="text-align:center">ResourceManager</td>
-</tr>
-<tr>
-<td>yun04</td>
-<td style="text-align:center">192.168.1.204</td>
-<td style="text-align:center">jdk、hadoop、zookeeper</td>
-<td style="text-align:center">DataNode、NodeManager、JournalNode、QuorumPeerMain</td>
-</tr>
-<tr>
-<td>yun04</td>
-<td style="text-align:center">192.168.1.205</td>
-<td style="text-align:center">jdk、hadoop、zookeeper</td>
-<td style="text-align:center">DataNode、NodeManager、JournalNode、QuorumPeerMain</td>
-</tr>
-<tr>
-<td>yun04</td>
-<td style="text-align:center">192.168.1.206</td>
-<td style="text-align:center">jdk、hadoop、zookeeper</td>
-<td style="text-align:center">DataNode、NodeManager、JournalNode、QuorumPeerMain</td>
-</tr>
-</tbody>
-</table>
-<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p>在hadoop 2.x中通常由两个NameNode组成，一个处于active状态，另一个处于standby状态。Active NameNode对外提供服务，而Standby NameNode则不对外提供服务，仅同步active namenode的状态，以便能够在它失败时快速进行切换。<br>hadoop 2.x官方提供了两种HDFS HA的解决方案，一种是NFS，另一种是QJM。这里我们使用简单的QJM。在该方案中，主备NameNode之间通过一组JournalNode同步元数据信息，一条数据只要成功写入多数JournalNode即认为写入成功。通常配置奇数个JournalNode<br>这里还配置了一个zookeeper集群，用于ZKFC（DFSZKFailoverController）故障转移，当Active NameNode挂掉了，会自动切换Standby NameNode为standby状态<br>​    </p>
-<h3 id="安装步骤："><a href="#安装步骤：" class="headerlink" title="安装步骤："></a>安装步骤：</h3><p>安装配置zooekeeper集群</p>
-<p>解压： <strong>tar -zxvf zookeeper-3.4.5.tar.gz -C /hadoop/</strong></p>
-<p>修改配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /hadoop/zookeeper-3.4.5/conf/</span><br><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
-<p>vim zoo.cfg 修改：</p>
-<p>dataDir=/hadoop/zookeeper-3.4.5/tmp</p>
-<p>在最后添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.1=yun04:2888:3888</span><br><span class="line">server.2=yun05:2888:3888</span><br><span class="line">server.3=yun06:2888:3888</span><br></pre></td></tr></table></figure>
-<p>保存退出<br>然后创建一个<strong>tmp</strong>文件夹</p>
-<p><code>mkdir /hadoop/zookeeper-3.4.5/tmp</code></p>
-<p>再创建一个空文件<br><code>touch /hadoop/zookeeper-3.4.5/tmp/myid</code></p>
-<p>最后向该文件写入ID<br><code>echo 1 &gt; /hadoop/zookeeper-3.4.5/tmp/myid</code></p>
-<h5 id="将配置好的zookeeper拷贝到其他节点-首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir-yun"><a href="#将配置好的zookeeper拷贝到其他节点-首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir-yun" class="headerlink" title="将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)"></a>将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r /hadoop/zookeeper-3.4.5/ yun05:/hadoop/</span><br><span class="line">scp -r /hadoop/zookeeper-3.4.5/ yun06:/hadoop/</span><br></pre></td></tr></table></figure>
-<p>注意：修改yun05、yun06对应<code>/hadoop/zookeeper-3.4.5/tmp/myid</code>内容</p>
-<p>yun05： <code>echo 2 &gt; /hadoop/zookeeper-3.4.5/tmp/myid</code><br>yun06： <code>echo 3 &gt; /hadoop/zookeeper-3.4.5/tmp/myid</code></p>
-<h4 id="安装配置hadoop集群"><a href="#安装配置hadoop集群" class="headerlink" title="安装配置hadoop集群"></a>安装配置hadoop集群</h4><h5 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h5><p><code>tar -zxvf hadoop-2.7.2.tar.gz -C /hadoop/</code></p>
-<h5 id="配置HDFS（hadoop2-x所有的配置文件都在-HADOOP-HOME-etc-hadoop目录下）"><a href="#配置HDFS（hadoop2-x所有的配置文件都在-HADOOP-HOME-etc-hadoop目录下）" class="headerlink" title="配置HDFS（hadoop2.x所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）"></a>配置HDFS（hadoop2.x所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）</h5><p>将hadoop添加到环境变量中<br>vim /etc/profile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br><span class="line">export HADOOP_HOME=/hadoop/hadoop-2.7.2</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>hadoop 2.x的配置文件全部在$HADOOP_HOME/etc/hadoop下<br><code>cd /hadoop/hadoop-2.7.2/etc/hadoop</code><br>​            </p>
-<h5 id="修改hadoop-env-sh"><a href="#修改hadoop-env-sh" class="headerlink" title="修改hadoop-env.sh"></a>修改hadoop-env.sh</h5><p>vi hadoop-env.sh</p>
-<p><code>export JAVA_HOME=/usr/java/jdk1.8</code></p>
-<h5 id="修改core-site-xml"><a href="#修改core-site-xml" class="headerlink" title="修改core-site.xml"></a>修改core-site.xml</h5><p>vi core-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定hdfs的nameservice为ns1 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://ns1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定hadoop临时目录 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/hadoop/hadoop-2.7.2/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定zookeeper地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>ha.zookeeper.quorum<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yun04:2181,yun05:2181,yun06:2181<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="修改hdfs-site-xml"><a href="#修改hdfs-site-xml" class="headerlink" title="修改hdfs-site.xml"></a>修改hdfs-site.xml</h5><p>vi hdfs-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--指定hdfs的nameservice为ns1，需要和core-site.xml中的保持一致 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.nameservices<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>ns1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- ns1下面有两个NameNode，分别是nn1，nn2 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.namenodes.ns1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>nn1,nn2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- nn1的RPC通信地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.rpc-address.ns1.nn1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yun01:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- nn1的http通信地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.http-address.ns1.nn1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yun01:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- nn2的RPC通信地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.rpc-address.ns1.nn2<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yun02:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- nn2的http通信地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.http-address.ns1.nn2<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yun02:50070<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定NameNode的元数据在JournalNode上的存放位置 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.shared.edits.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>qjournal://yun04:8485;yun05:8485;yun06:8485/ns1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定JournalNode在本地磁盘存放数据的位置 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.journalnode.edits.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/hadoop/hadoop-2.7.2/journal<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 开启NameNode失败自动切换 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.automatic-failover.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置失败自动切换实现方式 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.client.failover.proxy.provider.ns1<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置隔离机制方法，多个机制用换行分割，即每个机制暂用一行--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.fencing.methods<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span></span><br><span class="line">			sshfence</span><br><span class="line">			shell(/bin/true)</span><br><span class="line">		<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 使用sshfence隔离机制时需要ssh免登陆 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.fencing.ssh.private-key-files<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>/root/.ssh/id_rsa<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 配置sshfence隔离机制超时时间 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.ha.fencing.ssh.connect-timeout<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>30000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="修改mapred-site-xml"><a href="#修改mapred-site-xml" class="headerlink" title="修改mapred-site.xml"></a>修改mapred-site.xml</h4><p>vi mapred-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定mr框架为yarn方式 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.framework.name<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yarn<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="修改yarn-site-xml"><a href="#修改yarn-site-xml" class="headerlink" title="修改yarn-site.xml"></a>修改yarn-site.xml</h4><p>vi yarn-site.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定resourcemanager地址 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>yun03<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 指定nodemanager启动时加载server的方式为shuffle server --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">value</span>&gt;</span>mapreduce_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="修改slaves-slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置"><a href="#修改slaves-slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置" class="headerlink" title="修改slaves(slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置)"></a>修改slaves(slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yun04</span><br><span class="line">yun05</span><br><span class="line">yun06</span><br></pre></td></tr></table></figure>
-<h4 id="配置免密码登陆"><a href="#配置免密码登陆" class="headerlink" title="配置免密码登陆"></a>配置免密码登陆</h4><p>首先要配置yun01到yun02、yun03、yun04、yun05、yun06的免密码登陆</p>
-<p>在yun01上生产一对钥匙 <strong>ssh-keygen -t rsa</strong> 将公钥拷贝到其他节点，包括自己</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id yun01</span><br><span class="line">ssh-copy-id yun02</span><br><span class="line">ssh-copy-id yun03</span><br><span class="line">ssh-copy-id yun04</span><br><span class="line">ssh-copy-id yun05</span><br><span class="line">ssh-copy-id yun06</span><br></pre></td></tr></table></figure>
-<p>配置yun03到yun04、yun05、yun06的免密码登陆</p>
-<p>在yun03上生产一对钥匙 <strong>ssh-keygen -t rsa</strong> 将公钥拷贝到其他节点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id yun04</span><br><span class="line">ssh-copy-id yun05</span><br><span class="line">ssh-copy-id yun06</span><br></pre></td></tr></table></figure>
-<p>注意：两个namenode之间要配置ssh免密码登陆，别忘了配置yun02到yun01的免登陆,在yun02上生产一对钥匙 <strong>ssh-keygen -t rsa</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i yun01</span><br></pre></td></tr></table></figure>
-<h3 id="将配置好的hadoop拷贝到其他节点"><a href="#将配置好的hadoop拷贝到其他节点" class="headerlink" title="将配置好的hadoop拷贝到其他节点"></a>将配置好的hadoop拷贝到其他节点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -r /hadoop/ yun02:/</span><br><span class="line">scp -r /hadoop/ yun03:/</span><br><span class="line">scp -r /hadoop/hadoop-2.7.2/ root@yun04:/hadoop/</span><br><span class="line">scp -r /hadoop/hadoop-2.7.2/ root@yun05:/hadoop/</span><br><span class="line">scp -r /hadoop/hadoop-2.7.2/ root@yun06:/hadoop/</span><br></pre></td></tr></table></figure>
-<p>##注意：严格按照下面的步骤</p>
-<h3 id="启动zookeeper集群（分别在yun04、yun05、yun06上启动zk）"><a href="#启动zookeeper集群（分别在yun04、yun05、yun06上启动zk）" class="headerlink" title="启动zookeeper集群（分别在yun04、yun05、yun06上启动zk）"></a>启动zookeeper集群（分别在yun04、yun05、yun06上启动zk）</h3><p><strong>cd /hadoop/zookeeper-3.4.5/bin/</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh start</span><br></pre></td></tr></table></figure>
-<p>查看状态：一个leader，两个follower<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./zkServer.sh status</span><br></pre></td></tr></table></figure></p>
-<h3 id="启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons-sh这个脚本，注意是复数s的那个脚本）"><a href="#启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons-sh这个脚本，注意是复数s的那个脚本）" class="headerlink" title="启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons.sh这个脚本，注意是复数s的那个脚本）"></a>启动journalnode（在yun01上启动所有journalnode，注意：是调用的hadoop-daemons.sh这个脚本，注意是复数s的那个脚本）</h3><p><strong>cd /hadoop/hadoop-2.7.2</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sbin/hadoop-daemons.sh start journalnode</span><br></pre></td></tr></table></figure>
-<p>运行jps命令检验，yun04、yun05、yun06上多了JournalNode进程<br>​        </p>
-<h3 id="格式化HDFS"><a href="#格式化HDFS" class="headerlink" title="格式化HDFS"></a>格式化HDFS</h3><p>在yun01上执行命令: <strong>hdfs namenode -format</strong><br>格式化后会在根据<em>core-site.xml</em>中的hadoop.tmp.dir配置生成个文件，这里我配置的是/hadoop/hadoop-2.7.2/tmp，然后将/hadoop/hadoop-2.7.2/tmp拷贝到yun02的/hadoop/hadoop-2.7.2/下。<br><strong>scp -r tmp/ yun02:/hadoop/hadoop-2.7.2/</strong><br>​        </p>
-<h3 id="格式化ZK-在yun01上执行即可"><a href="#格式化ZK-在yun01上执行即可" class="headerlink" title="格式化ZK(在yun01上执行即可)"></a>格式化ZK(在yun01上执行即可)</h3><p><strong>hdfs zkfc -formatZK</strong><br>​        </p>
-<h3 id="启动HDFS-在yun01上执行"><a href="#启动HDFS-在yun01上执行" class="headerlink" title="启动HDFS(在yun01上执行)"></a>启动HDFS(在yun01上执行)</h3><p><strong>sbin/start-dfs.sh</strong></p>
-<h3 id="启动YARN"><a href="#启动YARN" class="headerlink" title="启动YARN"></a>启动YARN</h3><p>(注意：是在yun03上执行<em>start-yarn.sh</em>，把namenode和resourcemanager分开是因为性能问题，因为他们都要占用大量资源，所以把他们分开了，他们分开了就要分别在不同的机器上启动)<br><strong>sbin/start-yarn.sh</strong><br>​<br>hadoop2.7.2配置完毕!!!</p>
-<h3 id="测试集群，通过浏览器访问"><a href="#测试集群，通过浏览器访问" class="headerlink" title="测试集群，通过浏览器访问:"></a>测试集群，通过浏览器访问:</h3><p><strong><a href="http://192.168.1.201:50070" target="_blank" rel="external">http://192.168.1.201:50070</a></strong> NameNode ‘yun01:9000’ (active)<br><strong><a href="http://192.168.1.202:50070" target="_blank" rel="external">http://192.168.1.202:50070</a></strong> NameNode ‘yun02:9000’ (standby)<br>​    </p>
-<h4 id="验证HDFS-HA"><a href="#验证HDFS-HA" class="headerlink" title="验证HDFS HA"></a>验证HDFS HA</h4><p>首先向hdfs上传一个文件<br><strong>hadoop fs -put /etc/profile /profile</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls /</span><br></pre></td></tr></table></figure>
-<p>然后再kill掉active的NameNode<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 &lt;pid of NN&gt;</span><br></pre></td></tr></table></figure></p>
-<p>通过浏览器访问：<a href="http://192.168.1.202:50070" target="_blank" rel="external">http://192.168.1.202:50070</a> <strong>NameNode ‘yun02:9000’ (active)</strong><br>这个时候yun02上的NameNode变成了active<br>在执行命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -ls /</span><br><span class="line"></span><br><span class="line">-rw-r--r--   3 root supergroup       1926 2016-06-06 15:36 /profile</span><br></pre></td></tr></table></figure>
-<p>刚才上传的文件依然存在！！！<br>手动启动那个挂掉的NameNode <strong>sbin/hadoop-daemon.sh start namenode</strong><br>通过浏览器访问：<a href="http://192.168.1.201:50070" target="_blank" rel="external">http://192.168.1.201:50070</a> <strong>NameNode ‘yun01:9000’ (standby)</strong><br>​    </p>
-<h3 id="验证YARN："><a href="#验证YARN：" class="headerlink" title="验证YARN："></a>验证YARN：</h3><p>运行一下hadoop提供的demo中的WordCount程序：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar wordcount /profile /out</span><br></pre></td></tr></table></figure>
-<p>OK，集群搭建成功，enjoy it！<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​<br>​    </p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
