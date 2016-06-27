@@ -280,7 +280,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/24/HBase集群搭建/">HBase 集群搭建</a>
+      <a class="article-title" href="/2016/06/24/HBase集群搭建/">HBase集群搭建</a>
     </h1>
   
 
@@ -313,22 +313,21 @@ vim hbase-site.xml
     &lt;!-- 指定zk的地址，多个用“,”分割 --&gt;
     &lt;property&gt;
             &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;
-            &lt;value&gt;itcast04:2181,itcast05:2181,itcast06:2181&lt;/value&gt;
+            &lt;value&gt;yun05:2181,yun06:2181,yun07:2181&lt;/value&gt;
     &lt;/property&gt;
 &lt;/configuration&gt;
 
 vim regionservers
-itcast03
-itcast04
-itcast05
-itcast06
+yun05
+yun06
+yun07
 
 3.2拷贝hbase到其他节点
-    scp -r /itcast/hbase-0.96.2-hadoop2/ itcast02:/itcast/
-    scp -r /itcast/hbase-0.96.2-hadoop2/ itcast03:/itcast/
-    scp -r /itcast/hbase-0.96.2-hadoop2/ itcast04:/itcast/
-    scp -r /itcast/hbase-0.96.2-hadoop2/ itcast05:/itcast/
-    scp -r /itcast/hbase-0.96.2-hadoop2/ itcast06:/itcast/
+    scp -r /hadoop/hbase-0.96.2-hadoop2/ yun02:/hadoop/
+    scp -r /hadoop/hbase-0.96.2-hadoop2/ yun03:/hadoop/
+    scp -r /hadoop/hbase-0.96.2-hadoop2/ yun04:/hadoop/
+    scp -r /hadoop/hbase-0.96.2-hadoop2/ yun05:/hadoop/
+    scp -r /hadoop/hbase-0.96.2-hadoop2/ yun06:/hadoop/
 </code></pre><p>4.将配置好的HBase拷贝到每一个节点并同步时间。</p>
 <p>5.启动所有的hbase<br>    分别启动zk<br>        ./zkServer.sh start<br>    启动hbase集群<br>        start-dfs.sh<br>    启动hbase，在主节点上运行：<br>        start-hbase.sh<br>6.通过浏览器访问hbase管理页面<br>    192.168.1.201:60010<br>7.为保证集群的可靠性，要启动多个HMaster<br>    hbase-daemon.sh start master</p>
 
