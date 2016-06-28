@@ -186,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-前期准备/">hadoop 2.7.2 前期准备</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS-7-运行级别/">CentOS 7, 运行级别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-前期准备/">hadoop 2.7.2 前期准备</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
                     </div>
                 </section>
                 
@@ -262,6 +262,76 @@
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-CentOS 7 修改默认运行级别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/26/CentOS 7 修改默认运行级别/" class="article-date">
+      <time datetime="2016-06-26T11:50:29.000Z" itemprop="datePublished">2016-06-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/26/CentOS 7 修改默认运行级别/">CentOS 7 修改默认运行级别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在虚拟机新安装了个CentOS 7，图形界面启动太慢，想调整一下按照以前的经验改运行级别，输入：</p>
+<p><strong>vi /etc/inittab</strong></p>
+<p>然后发现跟CentOS 6.x不一样了，在CentOS 6.x inittab设置不再生效：</p>
+<p>inittab文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># inittab is no longer used when using systemd.</span><br><span class="line">#</span><br><span class="line"># ADDING CONFIGURATION HERE WILL HAVE NO EFFECT ON YOUR SYSTEM.</span><br><span class="line">#</span><br><span class="line"># Ctrl-Alt-Delete is handled by /usr/lib/systemd/system/ctrl-alt-del.target</span><br><span class="line">#</span><br><span class="line"># systemd uses &apos;targets&apos; instead of runlevels. By default, there are two main targets:</span><br><span class="line">#</span><br><span class="line"># multi-user.target: analogous to runlevel 3</span><br><span class="line"># graphical.target: analogous to runlevel 5</span><br><span class="line">#</span><br><span class="line"># To view current default target, run:</span><br><span class="line"># systemctl get-default</span><br><span class="line">#</span><br><span class="line"># To set a default target, run:</span><br><span class="line"># systemctl set-default TARGET.target</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<p>仔细读一下上面的提示<br>multi-user.target 类似与之前的runlevel 3<br>graphical.target 类似与之前的runlevel 5</p>
+<p>按照上面的提示，查看当前的默认target输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl get-default</span><br><span class="line">graphical.target</span><br><span class="line">[root@localhost ~]# </span><br><span class="line">当前为graphical.target</span><br></pre></td></tr></table></figure>
+<p>修改为命令模式multi-user.target：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl set-default multi-user.target</span><br><span class="line">rm &apos;/etc/systemd/system/default.target&apos;</span><br><span class="line">ln -s &apos;/usr/lib/systemd/system/multi-user.target&apos; &apos;/etc/systemd/system/default.target&apos;</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<p>查看一下当前，发现得到预期要求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl get-default</span><br><span class="line">multi-user.target</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<p>最后重启发现，果然是命令模式~~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS-7-运行级别/">CentOS 7, 运行级别</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-HBase集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -577,60 +647,6 @@ source /etc/profile
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop-2-7-2-前期准备/">hadoop 2.7.2 前期准备</a></li></ul>
     </div>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-心得" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/20/心得/" class="article-date">
-      <time datetime="2016-06-20T05:47:32.000Z" itemprop="datePublished">2016-06-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/20/心得/">我的生活</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>记录我的生活…</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
       
       <div class="clearfix"></div>
     </div>
@@ -988,10 +1004,10 @@ sed -n 20,30p err.txt
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-查看Linux 下端口命令" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/12/hello-world/" class="article-date">
+      <a href="/2016/06/12/查看Linux 下端口命令/" class="article-date">
       <time datetime="2016-06-12T08:05:07.000Z" itemprop="datePublished">2016-06-12</time>
 </a>
     </div>
@@ -1005,7 +1021,7 @@ sed -n 20,30p err.txt
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/12/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a>
     </h1>
   
 
@@ -1015,15 +1031,8 @@ sed -n 20,30p err.txt
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h2 id="快速学习"><a href="#快速学习" class="headerlink" title="快速学习"></a>快速学习</h2><h3 id="Linux下查看进程占用端口："><a href="#Linux下查看进程占用端口：" class="headerlink" title="Linux下查看进程占用端口："></a>Linux下查看进程占用端口：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">查看程序对应进程号：ps –ef|grep 进程名</span><br><span class="line">REDHAT :查看进程号所占用的端口号：netstat –nltp|grep 进程号&lt;?xml:namespace prefix=&quot;o&quot;&gt;?xml:namespace&gt;</span><br><span class="line">ubuntu:查看进程占用端口号：netstat -anp|grep pid</span><br></pre></td></tr></table></figure>
+<h3 id="Linux下查看端口号所使用的进程号："><a href="#Linux下查看端口号所使用的进程号：" class="headerlink" title="Linux下查看端口号所使用的进程号："></a>Linux下查看端口号所使用的进程号：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用lsof命令： lsof –i:端口号</span><br></pre></td></tr></table></figure>
 
       
     </div>

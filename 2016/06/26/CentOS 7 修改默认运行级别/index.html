@@ -15,16 +15,28 @@
 
 
 
-<meta name="description" content="记录我的生活…">
+<meta name="description" content="在虚拟机新安装了个CentOS 7，图形界面启动太慢，想调整一下按照以前的经验改运行级别，输入：
+vi /etc/inittab
+然后发现跟CentOS 6.x不一样了，在CentOS 6.x inittab设置不再生效：
+inittab文件
+1234567891011121314151617# inittab is no longer used when using systemd.## ADD">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的生活">
-<meta property="og:url" content="http://yuanhao.space/2016/06/20/心得/index.html">
+<meta property="og:title" content="CentOS 7 修改默认运行级别">
+<meta property="og:url" content="http://yuanhao.space/2016/06/26/CentOS 7 修改默认运行级别/index.html">
 <meta property="og:site_name" content="原豪的个人博客">
-<meta property="og:description" content="记录我的生活…">
-<meta property="og:updated_time" content="2016-06-22T05:46:04.000Z">
+<meta property="og:description" content="在虚拟机新安装了个CentOS 7，图形界面启动太慢，想调整一下按照以前的经验改运行级别，输入：
+vi /etc/inittab
+然后发现跟CentOS 6.x不一样了，在CentOS 6.x inittab设置不再生效：
+inittab文件
+1234567891011121314151617# inittab is no longer used when using systemd.## ADD">
+<meta property="og:updated_time" content="2016-06-28T11:57:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的生活">
-<meta name="twitter:description" content="记录我的生活…">
+<meta name="twitter:title" content="CentOS 7 修改默认运行级别">
+<meta name="twitter:description" content="在虚拟机新安装了个CentOS 7，图形界面启动太慢，想调整一下按照以前的经验改运行级别，输入：
+vi /etc/inittab
+然后发现跟CentOS 6.x不一样了，在CentOS 6.x inittab设置不再生效：
+inittab文件
+1234567891011121314151617# inittab is no longer used when using systemd.## ADD">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>我的生活 | 原豪的个人博客</title>
+<title>CentOS 7 修改默认运行级别 | 原豪的个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -182,7 +194,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-前期准备/">hadoop 2.7.2 前期准备</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS-7-运行级别/">CentOS 7, 运行级别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-前期准备/">hadoop 2.7.2 前期准备</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li></ul>
                     </div>
                 </section>
                 
@@ -257,11 +269,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-心得" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-CentOS 7 修改默认运行级别" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/20/心得/" class="article-date">
-      <time datetime="2016-06-20T05:47:32.000Z" itemprop="datePublished">2016-06-20</time>
+      <a href="/2016/06/26/CentOS 7 修改默认运行级别/" class="article-date">
+      <time datetime="2016-06-26T11:50:29.000Z" itemprop="datePublished">2016-06-26</time>
 </a>
     </div>
   
@@ -274,7 +286,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      我的生活
+      CentOS 7 修改默认运行级别
     </h1>
   
 
@@ -284,6 +296,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS-7-运行级别/">CentOS 7, 运行级别</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -291,7 +307,19 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>记录我的生活…</p>
+        <p>在虚拟机新安装了个CentOS 7，图形界面启动太慢，想调整一下按照以前的经验改运行级别，输入：</p>
+<p><strong>vi /etc/inittab</strong></p>
+<p>然后发现跟CentOS 6.x不一样了，在CentOS 6.x inittab设置不再生效：</p>
+<p>inittab文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># inittab is no longer used when using systemd.</span><br><span class="line">#</span><br><span class="line"># ADDING CONFIGURATION HERE WILL HAVE NO EFFECT ON YOUR SYSTEM.</span><br><span class="line">#</span><br><span class="line"># Ctrl-Alt-Delete is handled by /usr/lib/systemd/system/ctrl-alt-del.target</span><br><span class="line">#</span><br><span class="line"># systemd uses &apos;targets&apos; instead of runlevels. By default, there are two main targets:</span><br><span class="line">#</span><br><span class="line"># multi-user.target: analogous to runlevel 3</span><br><span class="line"># graphical.target: analogous to runlevel 5</span><br><span class="line">#</span><br><span class="line"># To view current default target, run:</span><br><span class="line"># systemctl get-default</span><br><span class="line">#</span><br><span class="line"># To set a default target, run:</span><br><span class="line"># systemctl set-default TARGET.target</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<p>仔细读一下上面的提示<br>multi-user.target 类似与之前的runlevel 3<br>graphical.target 类似与之前的runlevel 5</p>
+<p>按照上面的提示，查看当前的默认target输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl get-default</span><br><span class="line">graphical.target</span><br><span class="line">[root@localhost ~]# </span><br><span class="line">当前为graphical.target</span><br></pre></td></tr></table></figure>
+<p>修改为命令模式multi-user.target：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl set-default multi-user.target</span><br><span class="line">rm &apos;/etc/systemd/system/default.target&apos;</span><br><span class="line">ln -s &apos;/usr/lib/systemd/system/multi-user.target&apos; &apos;/etc/systemd/system/default.target&apos;</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<p>查看一下当前，发现得到预期要求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl get-default</span><br><span class="line">multi-user.target</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<p>最后重启发现，果然是命令模式~~</p>
 
       
     </div>
@@ -300,13 +328,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/06/20/心得/">我的生活</a></p>
+        <p><span>Title:</span><a href="/2016/06/26/CentOS 7 修改默认运行级别/">CentOS 7 修改默认运行级别</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
-        <p><span>Created:</span>2016-06-20, 13:47:32</p>
-        <p><span>Updated:</span>2016-06-22, 13:46:04</p>
+        <p><span>Created:</span>2016-06-26, 19:50:29</p>
+        <p><span>Updated:</span>2016-06-28, 19:57:11</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/06/20/心得/" title="我的生活">http://yuanhao.space/2016/06/20/心得/</a>
-            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/20/心得/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/26/CentOS 7 修改默认运行级别/" title="CentOS 7 修改默认运行级别">http://yuanhao.space/2016/06/26/CentOS 7 修改默认运行级别/</a>
+            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/26/CentOS 7 修改默认运行级别/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -318,16 +346,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">
-                    hadoop 2.7.2集群搭建(前期准备)
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/06/18/计算机基础及Linux入门/">
-                    计算机基础及linux入门
+                <a href="/2016/06/24/HBase集群搭建/">
+                    HBase集群搭建
                 </a>
             </div>
         
@@ -369,7 +391,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"我的生活　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"CentOS 7 修改默认运行级别　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -389,21 +411,19 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/" title="Pre: hadoop 2.7.2集群搭建(前期准备)">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/06/18/计算机基础及Linux入门/" title="Next: 计算机基础及linux入门">
+            <a href="/2016/06/24/HBase集群搭建/" title="Next: HBase集群搭建">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/24/HBase集群搭建/">HBase集群搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/详解Sqoop的架构和安装部署/">详解Sqoop的架构和安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">hadoop 2.7.2集群搭建(前期准备)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/20/心得/">我的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/Linux 必须掌握的30个命令/">Linux 必须掌握的30个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/hadoop生态/">hadoop 生态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/Linux 下oracle的安装/">Linux 下oracle的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/测试/">测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/">hadoop 2.7.2集群搭建（7台）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/26/CentOS 7 修改默认运行级别/">CentOS 7 修改默认运行级别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/24/HBase集群搭建/">HBase集群搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/详解Sqoop的架构和安装部署/">详解Sqoop的架构和安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">hadoop 2.7.2集群搭建(前期准备)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/Linux 必须掌握的30个命令/">Linux 必须掌握的30个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/hadoop生态/">hadoop 生态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/Linux 下oracle的安装/">Linux 下oracle的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/测试/">测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/">hadoop 2.7.2集群搭建（7台）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a></li></ul>
 
 
 
