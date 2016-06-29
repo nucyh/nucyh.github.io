@@ -15,16 +15,28 @@
 
 
 
-<meta name="description" content="我只是一个测试~ :) 哈哈 还不错哟！">
+<meta name="description" content="说明32位Linux操作系统可以直接下载编译好的Hadoop使用，但是64位Linux操作系统需要自己编译。后来官网从hadoop2.5版本开始就提供了64位。可以直接下载使用。不过自己动手，丰衣足食，就当是学习了。
+下面开始：
+1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。到hadoop官网，点击source下载hadoop-2.7.2-src.tar.gz。
+解压之
+tar">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://yuanhao.space/2016/06/13/测试/index.html">
+<meta property="og:title" content="CentOS 7 编译Hadoop-2.7.2详解">
+<meta property="og:url" content="http://yuanhao.space/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/index.html">
 <meta property="og:site_name" content="原豪的个人博客">
-<meta property="og:description" content="我只是一个测试~ :) 哈哈 还不错哟！">
-<meta property="og:updated_time" content="2016-06-14T00:23:01.000Z">
+<meta property="og:description" content="说明32位Linux操作系统可以直接下载编译好的Hadoop使用，但是64位Linux操作系统需要自己编译。后来官网从hadoop2.5版本开始就提供了64位。可以直接下载使用。不过自己动手，丰衣足食，就当是学习了。
+下面开始：
+1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。到hadoop官网，点击source下载hadoop-2.7.2-src.tar.gz。
+解压之
+tar">
+<meta property="og:updated_time" content="2016-06-29T14:31:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
-<meta name="twitter:description" content="我只是一个测试~ :) 哈哈 还不错哟！">
+<meta name="twitter:title" content="CentOS 7 编译Hadoop-2.7.2详解">
+<meta name="twitter:description" content="说明32位Linux操作系统可以直接下载编译好的Hadoop使用，但是64位Linux操作系统需要自己编译。后来官网从hadoop2.5版本开始就提供了64位。可以直接下载使用。不过自己动手，丰衣足食，就当是学习了。
+下面开始：
+1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。到hadoop官网，点击source下载hadoop-2.7.2-src.tar.gz。
+解压之
+tar">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +68,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>测试 | 原豪的个人博客</title>
+<title>CentOS 7 编译Hadoop-2.7.2详解 | 原豪的个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -257,10 +269,10 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-测试" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-CentOS 7 编译Hadoop-2.7.2详解" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/13/测试/" class="article-date">
+      <a href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/" class="article-date">
       <time datetime="2016-06-13T06:52:30.000Z" itemprop="datePublished">2016-06-13</time>
 </a>
     </div>
@@ -274,7 +286,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      测试
+      CentOS 7 编译Hadoop-2.7.2详解
     </h1>
   
 
@@ -284,6 +296,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译Hadoop-CentOS-7/">编译Hadoop CentOS 7</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -291,7 +307,91 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>我只是一个测试~ :) 哈哈 还不错哟！</p>
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>32位Linux操作系统可以直接下载编译好的Hadoop使用，但是64位Linux操作系统需要自己编译。后来官网从hadoop2.5版本开始就提供了64位。可以直接下载使用。不过自己动手，丰衣足食，就当是学习了。</p>
+<p>下面开始：</p>
+<h2 id="1-工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。"><a href="#1-工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。" class="headerlink" title="1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。"></a>1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。</h2><p>到hadoop官网，点击source下载hadoop-2.7.2-src.tar.gz。</p>
+<p>解压之</p>
+<p><strong>tar -zxvf hadoop-2.7.2-src.tar.gz</strong></p>
+<p>得到hadoop-2.7.2-src文件夹。</p>
+<p>进入hadoop-2.7.2-src文件夹，查看BUILDING.txt</p>
+<p><strong>cd hadoop-2.7.1-src</strong><br><strong>vim BUILDING.txt</strong></p>
+<p>可以看到编译所需的库或者工具：</p>
+<p>包括:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JDK1.7+</span><br><span class="line">maven 3.0 or later</span><br><span class="line">findbugs 1.3.9</span><br><span class="line">protocolBuffer 2.5.0</span><br><span class="line">cmake 2.6</span><br><span class="line">zlib-devel</span><br><span class="line">openssl-devel</span><br></pre></td></tr></table></figure>
+<p>除了上面这些，为了不出错，实际还需要autoconf  automake  gcc等。</p>
+<p>下面开始准备这些工具：</p>
+<p>首先使用su命令获取root权限，以免受到各种限制</p>
+<h2 id="2-下载jdk-8u65-linux-x64-tar-gz，解压后移动到-opt目录下"><a href="#2-下载jdk-8u65-linux-x64-tar-gz，解压后移动到-opt目录下" class="headerlink" title="2.下载jdk-8u65-linux-x64.tar.gz，解压后移动到/opt目录下"></a>2.下载jdk-8u65-linux-x64.tar.gz，解压后移动到/opt目录下</h2><p><strong>tar -zxvf jdk-8u65-linux-x64.tar.gz</strong></p>
+<p><strong>mv jdk1.8.0_65 /opt</strong></p>
+<p>然后打开/etc/profile配置jdk环境变量</p>
+<p><strong>vim /etc/profile</strong></p>
+<p>按 i 进入插入模式，在文件末尾添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/opt/jdk1.8.0_65</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JRE_HOME=/opt/jdk1.8.0_65/jre</span><br><span class="line">export PATH=$PATH:$JRE_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>先后按Esc, Shift+:， wq， 回车即可保存并退出编辑。</p>
+<p>输入 <strong>source /etc/profile</strong> 回车即可保存更改。</p>
+<p>运行javac -version 查看状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 java]# javac -version</span><br><span class="line">javac 1.8.0_65</span><br><span class="line">[root@server1 java]#</span><br></pre></td></tr></table></figure>
+<h2 id="3-安装各种库"><a href="#3-安装各种库" class="headerlink" title="3.安装各种库"></a>3.安装各种库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install svn ncurses-devel gcc*</span><br><span class="line">yum -y install lzo-devel zlib-devel autoconf automake libtool cmake openssl-devel</span><br></pre></td></tr></table></figure>
+<h2 id="4-安装protobuf-2-5-0-tar-gz（注意版本必须是2-5-0）"><a href="#4-安装protobuf-2-5-0-tar-gz（注意版本必须是2-5-0）" class="headerlink" title="4.安装protobuf-2.5.0.tar.gz（注意版本必须是2.5.0）"></a>4.安装protobuf-2.5.0.tar.gz（注意版本必须是2.5.0）</h2><p><strong>tar zxvf protobuf-2.5.0.tar.gz</strong></p>
+<p>进入protobuf-2.5.0依次执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd protobuf-2.5.0</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>验证安装是否完成</p>
+<p><strong>protoc —version</strong></p>
+<p>出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 protobuf-2.5.0]# protoc --version</span><br><span class="line">libprotoc 2.5.0</span><br><span class="line">[root@server1 protobuf-2.5.0]#</span><br></pre></td></tr></table></figure>
+<h2 id="5-安装maven"><a href="#5-安装maven" class="headerlink" title="5.安装maven"></a>5.安装maven</h2><p>下载apache-maven-3.3.9-bin.tar.gz</p>
+<p>解压缩并配置环境变量</p>
+<p>解压：</p>
+<p><strong>tar -zxvf apache-maven-3.3.9-bin.tar.gz</strong></p>
+<p>移动到/opt目录下：</p>
+<p><strong>mv apache-maven-3.3.9 /opt</strong></p>
+<p>配置环境变量：</p>
+<p><strong>vim /etc/profile</strong></p>
+<p>在末尾添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export MAVEN_HOME=/opt/apache-maven-3.3.9</span><br><span class="line">export MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;</span><br><span class="line">export PATH=$PATH:$MAVEN_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>先按Esc, Shift+:， wq， 回车即可保存并推出编辑。</p>
+<p>输入 <strong>source /etc/profile</strong> 回车即可保存更改。</p>
+<p>查看安装状态： <strong>mvn -version</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 ~]# mvn -version</span><br><span class="line">Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T00:41:47+08:00)</span><br><span class="line">Maven home: /usr/local/maven-3.3.9</span><br><span class="line">Java version: 1.8.0_65, vendor: Oracle Corporation</span><br><span class="line">Java home: /usr/java/jdk1.8.0_65/jre</span><br><span class="line">Default locale: en_US, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;linux&quot;, version: &quot;3.10.0-229.el7.x86_64&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;</span><br><span class="line">[root@server1 ~]#</span><br></pre></td></tr></table></figure>
+<p>6.安装ant</p>
+<p>下载apache-ant-1.9.7-bin.tar.gz</p>
+<p>解压缩并配置环境变量</p>
+<p>解压：</p>
+<p><strong>tar -zxvf apache-ant-1.9.7-bin.tar.gz</strong></p>
+<p>移动到/opt目录下</p>
+<p><strong>mv apache-ant-1.9.7 /opt</strong></p>
+<p>配置环境变量</p>
+<p>同上，在/etc/profile文件末未添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ANT_HOME=/opt/apache-ant-1.9.7</span><br><span class="line">export PATH=$PATH:$ANT_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>然后保存，退出，并使更改生效。</p>
+<p>查看安装结果：</p>
+<p>ant -version</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 ~]# ant -version</span><br><span class="line">Apache Ant(TM) version 1.9.7 compiled on April 9 2016</span><br><span class="line">[root@server1 ~]#</span><br></pre></td></tr></table></figure>
+<h2 id="7-安装findbugs"><a href="#7-安装findbugs" class="headerlink" title="7.安装findbugs"></a>7.安装findbugs</h2><p>下载findbugs-3.0.1.tar.gz，选择上面的standard version即可</p>
+<p>解压缩并配置环境变量</p>
+<p>解压：</p>
+<p><strong>tar -zxvf findbugs-3.0.1.tar.gz</strong></p>
+<p>移动到 /opt目录下</p>
+<p><strong>mv findbugs-3.0.1 /opt</strong></p>
+<p>配置环境变量:</p>
+<p>在 /etc/profile 文件末尾添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export FINDBUGS_HOME=/opt/findbugs-3.0.1</span><br><span class="line">export PATH=$PATH:$FINDBUGS_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>保存退出，并使更改生效。</p>
+<p>查看安装结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 ~]# findbugs -version</span><br><span class="line">3.0.1</span><br><span class="line">[root@server1 ~]#</span><br></pre></td></tr></table></figure>
+<h2 id="8-准备完成，下面开始编译hadoop"><a href="#8-准备完成，下面开始编译hadoop" class="headerlink" title="8.准备完成，下面开始编译hadoop"></a>8.准备完成，下面开始编译hadoop</h2><p>进入到hadoop-2.7.2-src目录</p>
+<p>使用命令：</p>
+<p><strong>mvn clean package –Pdist,native –DskipTests –Dtar</strong></p>
+<p>或者：</p>
+<p><strong>mvn package -Pdist,native -DskipTests -Dtar</strong></p>
+<p>进行编译。　　</p>
+<p>务必保持网络畅通，经过漫长的等待，看到下图即表明编译成功！</p>
+<p>由于本人的网络中途出现问题，重新编译了一次，差不多折腾了3个小时。</p>
+<p><strong>编译好的文件在/hadoop-dist/target/hadoop-2.7.2.tar.gz下</strong>。</p>
+<p>注意事项：</p>
+<p>1.所有命令，建议手敲，不建议复制粘贴，以避免因为页面空格造成的不必要错误。</p>
+<p>2.务必保持网络畅通，如果出现缺少某个文件，则要先清理maven(使用命令 mvn clean) 再重新编译。</p>
+<p>3.如果总是出现同一个错误导致编译失败，则可能是缺少某个库或者工具，检查上述工具是否都安装成功，并且版本正确。</p>
 
       
     </div>
@@ -300,13 +400,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/06/13/测试/">测试</a></p>
+        <p><span>Title:</span><a href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/">CentOS 7 编译Hadoop-2.7.2详解</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
         <p><span>Created:</span>2016-06-13, 14:52:30</p>
-        <p><span>Updated:</span>2016-06-14, 08:23:01</p>
+        <p><span>Updated:</span>2016-06-29, 22:31:06</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/06/13/测试/" title="测试">http://yuanhao.space/2016/06/13/测试/</a>
-            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/13/测试/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/" title="CentOS 7 编译Hadoop-2.7.2详解">http://yuanhao.space/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/</a>
+            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -319,15 +419,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/">
-                    CentOS 7 编译Hadoop-2.7.2详解
+                <a href="/2016/06/14/Linux 下oracle的安装/">
+                    Linux 下oracle的安装
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/06/12/hello-world/">
-                    Hello World
+                <a href="/2016/06/13/测试/">
+                    测试
                 </a>
             </div>
         
@@ -338,7 +438,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。"><span class="toc-number">2.</span> <span class="toc-text">1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-下载jdk-8u65-linux-x64-tar-gz，解压后移动到-opt目录下"><span class="toc-number">3.</span> <span class="toc-text">2.下载jdk-8u65-linux-x64.tar.gz，解压后移动到/opt目录下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-安装各种库"><span class="toc-number">4.</span> <span class="toc-text">3.安装各种库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-安装protobuf-2-5-0-tar-gz（注意版本必须是2-5-0）"><span class="toc-number">5.</span> <span class="toc-text">4.安装protobuf-2.5.0.tar.gz（注意版本必须是2.5.0）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-安装maven"><span class="toc-number">6.</span> <span class="toc-text">5.安装maven</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-安装findbugs"><span class="toc-number">7.</span> <span class="toc-text">7.安装findbugs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-准备完成，下面开始编译hadoop"><span class="toc-number">8.</span> <span class="toc-text">8.准备完成，下面开始编译hadoop</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn,
@@ -369,7 +469,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"测试　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"CentOS 7 编译Hadoop-2.7.2详解　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -389,7 +489,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/" title="Pre: CentOS 7 编译Hadoop-2.7.2详解">
+            <a href="/2016/06/14/Linux 下oracle的安装/" title="Pre: Linux 下oracle的安装">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -397,7 +497,7 @@
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/06/12/hello-world/" title="Next: Hello World">
+            <a href="/2016/06/13/测试/" title="Next: 测试">
                 <i class="fa fa-angle-right"></i>
             </a>
         
