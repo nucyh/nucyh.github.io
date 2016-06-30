@@ -186,7 +186,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS-7-运行级别/">CentOS 7, 运行级别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-前期准备/">hadoop 2.7.2 前期准备</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译Hadoop-CentOS-7/">编译Hadoop CentOS 7</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS-7-运行级别/">CentOS 7, 运行级别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HBase/">HBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7-eclipse/">centos7 eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-前期准备/">hadoop 2.7.2 前期准备</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqoop/">sqoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编译Hadoop-CentOS-7/">编译Hadoop CentOS 7</a></li></ul>
                     </div>
                 </section>
                 
@@ -262,6 +262,90 @@
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-centos 7 安装 eclipse" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/28/centos 7 安装 eclipse/" class="article-date">
+      <time datetime="2016-06-28T05:24:30.000Z" itemprop="datePublished">2016-06-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/28/centos 7 安装 eclipse/">centos7 安装 eclipse</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="centos7-安装-eclipse"><a href="#centos7-安装-eclipse" class="headerlink" title="centos7 安装 eclipse"></a>centos7 安装 eclipse</h2><p>Eclipse是一个集成开发环境（IDE），包含一个基工作区和定制环境的可扩展插件系统。大部分使用 Java 编写，Eclipse 可以用来开发应用程序。通过各种插件，Eclipse 也可以用于其他编程语言开发应用程序：Ada、ABAP、C、C++、COBOL、 Fortran、Haskell、 JavaScript、Lasso、Natural、Perl、 PHP、 Prolog、 Python、Ruby、Scala、Clojure、 Groovy、Scheme 和 Erlang。它也可以用来开发Mathematica软件包。开发环境包括 Eclipse Java 开发工具（JDT）支持 Java与Scala，Eclipse CDT C / C + +和Eclipse PDT PHP，等等。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="1、安装java"><a href="#1、安装java" class="headerlink" title="1、安装java"></a>1、安装java</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install java</span><br></pre></td></tr></table></figure>
+<p>yum （全称为 <code>Yellow dog Updater, Modified</code>),能够从指定的服务器自动下载gz包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。</p>
+<p>yum （全称为 <code>Yellow dog Updater, Modified</code>),能够从指定的服务器自动下载gz包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。<br>yum的命令形式一般是如下：<code>yum [options] [command] [package ...]</code></p>
+<p>yum （全称为 <code>Yellow dog Updater, Modified</code>),能够从指定的服务器自动下载gz包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。<br>yum的命令形式一般是如下：<code>yum [options] [command] [package ...]</code><br>其中的[options]是可选的，选项包括-h（帮助），-y（当安装过程提示选择全部为”yes”），-q（不显示安装的过程）等等。[command]为所要进行的操作，[package …]是操作的对象。</p>
+<p>yum （全称为 <code>Yellow dog Updater, Modified</code>),能够从指定的服务器自动下载gz包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。<br>yum的命令形式一般是如下：<code>yum [options] [command] [package ...]</code><br>其中的[options]是可选的，选项包括-h（帮助），-y（当安装过程提示选择全部为”yes”），-q（不显示安装的过程）等等。[command]为所要进行的操作，[package …]是操作的对象。<br>yum 是linux系统的自动安装系统</p>
+<p>yum （全称为 <code>Yellow dog Updater, Modified</code>),能够从指定的服务器自动下载gz包并且安装，可以自动处理依赖性关系，并且一次安装所有依赖的软体包，无须繁琐地一次次下载、安装。yum提供了查找、安装、删除某一个、一组甚至全部软件包的命令，而且命令简洁而又好记。<br>yum的命令形式一般是如下：<code>yum [options] [command] [package ...]</code><br>其中的[options]是可选的，选项包括-h（帮助），-y（当安装过程提示选择全部为”yes”），-q（不显示安装的过程）等等。[command]为所要进行的操作，[package …]是操作的对象。<br>yum 是linux系统的自动安装系统<br>yum install 仅安装指定的软件</p>
+<h3 id="2、检查java版本"><a href="#2、检查java版本" class="headerlink" title="2、检查java版本"></a>2、检查java版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line"></span><br><span class="line">java version &quot;1.7.0_51&quot;</span><br><span class="line">OpenJDK Runtime Environment (rhel-2.4.5.5.el7-x86_64 u51-b31)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 24.51-b03, mixed mode)</span><br></pre></td></tr></table></figure>
+<p>java -version 查看java的版本</p>
+<h3 id="3、下载eclipse-luna版压缩包并解压"><a href="#3、下载eclipse-luna版压缩包并解压" class="headerlink" title="3、下载eclipse-luna版压缩包并解压"></a>3、下载eclipse-luna版压缩包并解压</h3><p>下载地址<a href="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR2/eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz" target="_blank" rel="external">http://www.eclipse.org/downloads/download.php?file=/technology/epp/dow…</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">解压到/opt 目录下</span><br><span class="line">tar -zxvf eclipse-java-luna-SR1-linux-gtk-x86_64.tar.gz -C /opt</span><br></pre></td></tr></table></figure>
+<p><code>/opt 表示解压到/opt目录下，加了-C,后面要添加路径</code></p>
+<h3 id="4、使用符号连接目录"><a href="#4、使用符号连接目录" class="headerlink" title="4、使用符号连接目录"></a>4、使用符号连接目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /opt/eclipse/eclipse /usr/bin/eclipse  </span><br><span class="line">eclipse与/usr之间有空格</span><br></pre></td></tr></table></figure>
+<p><code>注意</code></p>
+<p><code>注意</code><br><strong>符号链接的用法 ln -s 源文件 目标文件 ，-s 是符号的意思（symbolic）软连接</strong></p>
+<p><code>注意</code><br><strong>符号链接的用法 ln -s 源文件 目标文件 ，-s 是符号的意思（symbolic）软连接</strong><br>符号链接是通过创建一个特殊的类型的文件来起作用，它只会在你选定的位置上生成一个文件的镜像，它的功能是为某一个文件在另外一个位置建立一个同步的链接.当我们需要在不同的目录，用到相同的文件时，我们不需要在每一个需要的目录下都放一个必须相同的文件，我们只要在某个固定的目录，放上该文件，然后在 其它的目录下用ln命令链接（link）它就可以，不必重复的占用磁盘空间。跟windows下的快捷键差不多，这样不用在终端敲指令就可以实现打开软件。</p>
+<p><code>注意</code><br><strong>符号链接的用法 ln -s 源文件 目标文件 ，-s 是符号的意思（symbolic）软连接</strong><br>符号链接是通过创建一个特殊的类型的文件来起作用，它只会在你选定的位置上生成一个文件的镜像，它的功能是为某一个文件在另外一个位置建立一个同步的链接.当我们需要在不同的目录，用到相同的文件时，我们不需要在每一个需要的目录下都放一个必须相同的文件，我们只要在某个固定的目录，放上该文件，然后在 其它的目录下用ln命令链接（link）它就可以，不必重复的占用磁盘空间。跟windows下的快捷键差不多，这样不用在终端敲指令就可以实现打开软件。<br>如果你用ls察看一个目录时，发现有的文件后面有一个@的符号，那就是一个用ln命令生成的文件，用ls -l命令去察看，就可以看到显示的link的路径了</p>
+<p>命令的意思是，在/usr/bin/eclipse 目录下创建一个同步连接，而源文件在/opt/eclipse/eclipse目录下</p>
+<h3 id="5、-创建一个桌面启动器"><a href="#5、-创建一个桌面启动器" class="headerlink" title="5、 创建一个桌面启动器"></a>5、 创建一个桌面启动器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/applications/eclipse.desktop</span><br></pre></td></tr></table></figure>
+<p>vi 打开后是一个新的file</p>
+<p>添加如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Encoding=UTF-8</span><br><span class="line">Name=Eclipse 4.4.1</span><br><span class="line">Comment=Eclipse Luna</span><br><span class="line">Exec=/usr/bin/eclipse</span><br><span class="line">Icon=/opt/eclipse/icon.xpm</span><br><span class="line">Categories=Application;Development;Java;IDE</span><br><span class="line">Version=1.0</span><br><span class="line">Type=Application</span><br><span class="line">Terminal=0</span><br></pre></td></tr></table></figure>
+<p>上面是将eclipse显示在centos的应用程序上，并对其进行描述，比如编码方式，命名，显示的图标，版本，类型</p>
+<h3 id="6、检查eclipse是否被添加到应用程序"><a href="#6、检查eclipse是否被添加到应用程序" class="headerlink" title="6、检查eclipse是否被添加到应用程序"></a>6、检查eclipse是否被添加到应用程序</h3><p><img src="https://segmentfault.com/img/bVlh0F" alt="img"></p>
+<p>运行eclipse</p>
+<p><img src="https://segmentfault.com/img/bVlh0G" alt="img"></p>
+<p>完成！！！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7-eclipse/">centos7 eclipse</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-CentOS 7 修改默认运行级别" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -933,148 +1017,6 @@ sed -n 20,30p err.txt
       
 
       
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-CentOS 7 编译Hadoop-2.7.2详解" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/" class="article-date">
-      <time datetime="2016-06-13T06:52:30.000Z" itemprop="datePublished">2016-06-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/">CentOS 7 编译Hadoop-2.7.2详解</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>32位Linux操作系统可以直接下载编译好的Hadoop使用，但是64位Linux操作系统需要自己编译。后来官网从hadoop2.5版本开始就提供了64位。可以直接下载使用。不过自己动手，丰衣足食，就当是学习了。</p>
-<p>下面开始：</p>
-<h2 id="1-工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。"><a href="#1-工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。" class="headerlink" title="1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。"></a>1.工具准备，最靠谱的是hadoop说明文档里要求具备的那些工具。</h2><p>到hadoop官网，点击source下载hadoop-2.7.2-src.tar.gz。</p>
-<p>解压之</p>
-<p><strong>tar -zxvf hadoop-2.7.2-src.tar.gz</strong></p>
-<p>得到hadoop-2.7.2-src文件夹。</p>
-<p>进入hadoop-2.7.2-src文件夹，查看BUILDING.txt</p>
-<p><strong>cd hadoop-2.7.1-src</strong><br><strong>vim BUILDING.txt</strong></p>
-<p>可以看到编译所需的库或者工具：</p>
-<p>包括:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JDK1.7+</span><br><span class="line">maven 3.0 or later</span><br><span class="line">findbugs 1.3.9</span><br><span class="line">protocolBuffer 2.5.0</span><br><span class="line">cmake 2.6</span><br><span class="line">zlib-devel</span><br><span class="line">openssl-devel</span><br></pre></td></tr></table></figure>
-<p>除了上面这些，为了不出错，实际还需要autoconf  automake  gcc等。</p>
-<p>下面开始准备这些工具：</p>
-<p>首先使用su命令获取root权限，以免受到各种限制</p>
-<h2 id="2-下载jdk-8u65-linux-x64-tar-gz，解压后移动到-opt目录下"><a href="#2-下载jdk-8u65-linux-x64-tar-gz，解压后移动到-opt目录下" class="headerlink" title="2.下载jdk-8u65-linux-x64.tar.gz，解压后移动到/opt目录下"></a>2.下载jdk-8u65-linux-x64.tar.gz，解压后移动到/opt目录下</h2><p><strong>tar -zxvf jdk-8u65-linux-x64.tar.gz</strong></p>
-<p><strong>mv jdk1.8.0_65 /opt</strong></p>
-<p>然后打开/etc/profile配置jdk环境变量</p>
-<p><strong>vim /etc/profile</strong></p>
-<p>按 i 进入插入模式，在文件末尾添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/opt/jdk1.8.0_65</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JRE_HOME=/opt/jdk1.8.0_65/jre</span><br><span class="line">export PATH=$PATH:$JRE_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>先后按Esc, Shift+:， wq， 回车即可保存并退出编辑。</p>
-<p>输入 <strong>source /etc/profile</strong> 回车即可保存更改。</p>
-<p>运行javac -version 查看状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 java]# javac -version</span><br><span class="line">javac 1.8.0_65</span><br><span class="line">[root@server1 java]#</span><br></pre></td></tr></table></figure>
-<h2 id="3-安装各种库"><a href="#3-安装各种库" class="headerlink" title="3.安装各种库"></a>3.安装各种库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install svn ncurses-devel gcc*</span><br><span class="line">yum -y install lzo-devel zlib-devel autoconf automake libtool cmake openssl-devel</span><br></pre></td></tr></table></figure>
-<h2 id="4-安装protobuf-2-5-0-tar-gz（注意版本必须是2-5-0）"><a href="#4-安装protobuf-2-5-0-tar-gz（注意版本必须是2-5-0）" class="headerlink" title="4.安装protobuf-2.5.0.tar.gz（注意版本必须是2.5.0）"></a>4.安装protobuf-2.5.0.tar.gz（注意版本必须是2.5.0）</h2><p><strong>tar zxvf protobuf-2.5.0.tar.gz</strong></p>
-<p>进入protobuf-2.5.0依次执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd protobuf-2.5.0</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>验证安装是否完成</p>
-<p><strong>protoc —version</strong></p>
-<p>出现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 protobuf-2.5.0]# protoc --version</span><br><span class="line">libprotoc 2.5.0</span><br><span class="line">[root@server1 protobuf-2.5.0]#</span><br></pre></td></tr></table></figure>
-<h2 id="5-安装maven"><a href="#5-安装maven" class="headerlink" title="5.安装maven"></a>5.安装maven</h2><p>下载apache-maven-3.3.9-bin.tar.gz</p>
-<p>解压缩并配置环境变量</p>
-<p>解压：</p>
-<p><strong>tar -zxvf apache-maven-3.3.9-bin.tar.gz</strong></p>
-<p>移动到/opt目录下：</p>
-<p><strong>mv apache-maven-3.3.9 /opt</strong></p>
-<p>配置环境变量：</p>
-<p><strong>vim /etc/profile</strong></p>
-<p>在末尾添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export MAVEN_HOME=/opt/apache-maven-3.3.9</span><br><span class="line">export MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;</span><br><span class="line">export PATH=$PATH:$MAVEN_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>先按Esc, Shift+:， wq， 回车即可保存并推出编辑。</p>
-<p>输入 <strong>source /etc/profile</strong> 回车即可保存更改。</p>
-<p>查看安装状态： <strong>mvn -version</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 ~]# mvn -version</span><br><span class="line">Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T00:41:47+08:00)</span><br><span class="line">Maven home: /usr/local/maven-3.3.9</span><br><span class="line">Java version: 1.8.0_65, vendor: Oracle Corporation</span><br><span class="line">Java home: /usr/java/jdk1.8.0_65/jre</span><br><span class="line">Default locale: en_US, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;linux&quot;, version: &quot;3.10.0-229.el7.x86_64&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;</span><br><span class="line">[root@server1 ~]#</span><br></pre></td></tr></table></figure>
-<p>6.安装ant</p>
-<p>下载apache-ant-1.9.7-bin.tar.gz</p>
-<p>解压缩并配置环境变量</p>
-<p>解压：</p>
-<p><strong>tar -zxvf apache-ant-1.9.7-bin.tar.gz</strong></p>
-<p>移动到/opt目录下</p>
-<p><strong>mv apache-ant-1.9.7 /opt</strong></p>
-<p>配置环境变量</p>
-<p>同上，在/etc/profile文件末未添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ANT_HOME=/opt/apache-ant-1.9.7</span><br><span class="line">export PATH=$PATH:$ANT_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>然后保存，退出，并使更改生效。</p>
-<p>查看安装结果：</p>
-<p>ant -version</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 ~]# ant -version</span><br><span class="line">Apache Ant(TM) version 1.9.7 compiled on April 9 2016</span><br><span class="line">[root@server1 ~]#</span><br></pre></td></tr></table></figure>
-<h2 id="7-安装findbugs"><a href="#7-安装findbugs" class="headerlink" title="7.安装findbugs"></a>7.安装findbugs</h2><p>下载findbugs-3.0.1.tar.gz，选择上面的standard version即可</p>
-<p>解压缩并配置环境变量</p>
-<p>解压：</p>
-<p><strong>tar -zxvf findbugs-3.0.1.tar.gz</strong></p>
-<p>移动到 /opt目录下</p>
-<p><strong>mv findbugs-3.0.1 /opt</strong></p>
-<p>配置环境变量:</p>
-<p>在 /etc/profile 文件末尾添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export FINDBUGS_HOME=/opt/findbugs-3.0.1</span><br><span class="line">export PATH=$PATH:$FINDBUGS_HOME/bin</span><br></pre></td></tr></table></figure>
-<p>保存退出，并使更改生效。</p>
-<p>查看安装结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@server1 ~]# findbugs -version</span><br><span class="line">3.0.1</span><br><span class="line">[root@server1 ~]#</span><br></pre></td></tr></table></figure>
-<h2 id="8-准备完成，下面开始编译hadoop"><a href="#8-准备完成，下面开始编译hadoop" class="headerlink" title="8.准备完成，下面开始编译hadoop"></a>8.准备完成，下面开始编译hadoop</h2><p>进入到hadoop-2.7.2-src目录</p>
-<p>使用命令：</p>
-<p><strong>mvn clean package –Pdist,native –DskipTests –Dtar</strong></p>
-<p>或者：</p>
-<p><strong>mvn package -Pdist,native -DskipTests -Dtar</strong></p>
-<p>进行编译。　　</p>
-<p>务必保持网络畅通，经过漫长的等待，看到下图即表明编译成功！</p>
-<p>由于本人的网络中途出现问题，重新编译了一次，差不多折腾了3个小时。</p>
-<p><strong>编译好的文件在/hadoop-dist/target/hadoop-2.7.2.tar.gz下</strong>。</p>
-<p>注意事项：</p>
-<p>1.所有命令，建议手敲，不建议复制粘贴，以避免因为页面空格造成的不必要错误。</p>
-<p>2.务必保持网络畅通，如果出现缺少某个文件，则要先清理maven(使用命令 mvn clean) 再重新编译。</p>
-<p>3.如果总是出现同一个错误导致编译失败，则可能是缺少某个库或者工具，检查上述工具是否都安装成功，并且版本正确。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译Hadoop-CentOS-7/">编译Hadoop CentOS 7</a></li></ul>
-    </div>
-
       
       <div class="clearfix"></div>
     </div>
