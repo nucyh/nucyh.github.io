@@ -15,16 +15,22 @@
 
 
 
-<meta name="description" content="稍后发布。">
+<meta name="description" content="1.准备Linux环境
+1.0点击VMware快捷方式，右键打开文件所在位置 -&amp;gt; 双击vmnetcfg.exe -&amp;gt; VMnet1 host-only -&amp;gt;修改subnet ip 设置网段：192.168.1.0 子网掩码：255.255.255.0 -&amp;gt; apply -&amp;gt; ok
+    回到windows --&amp;gt; 打开网络和共享中心 -&amp;gt; 更改适配器设">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hadoop 生态">
-<meta property="og:url" content="http://yuanhao.space/2016/06/16/hadoop生态/index.html">
+<meta property="og:title" content="hadoop 2.7.2伪分布式">
+<meta property="og:url" content="http://yuanhao.space/2016/06/29/hadoop 2.7.2伪分布式/index.html">
 <meta property="og:site_name" content="原豪的个人博客">
-<meta property="og:description" content="稍后发布。">
-<meta property="og:updated_time" content="2016-06-16T15:09:00.000Z">
+<meta property="og:description" content="1.准备Linux环境
+1.0点击VMware快捷方式，右键打开文件所在位置 -&amp;gt; 双击vmnetcfg.exe -&amp;gt; VMnet1 host-only -&amp;gt;修改subnet ip 设置网段：192.168.1.0 子网掩码：255.255.255.0 -&amp;gt; apply -&amp;gt; ok
+    回到windows --&amp;gt; 打开网络和共享中心 -&amp;gt; 更改适配器设">
+<meta property="og:updated_time" content="2016-07-01T15:38:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hadoop 生态">
-<meta name="twitter:description" content="稍后发布。">
+<meta name="twitter:title" content="hadoop 2.7.2伪分布式">
+<meta name="twitter:description" content="1.准备Linux环境
+1.0点击VMware快捷方式，右键打开文件所在位置 -&amp;gt; 双击vmnetcfg.exe -&amp;gt; VMnet1 host-only -&amp;gt;修改subnet ip 设置网段：192.168.1.0 子网掩码：255.255.255.0 -&amp;gt; apply -&amp;gt; ok
+    回到windows --&amp;gt; 打开网络和共享中心 -&amp;gt; 更改适配器设">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -56,7 +62,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>hadoop 生态 | 原豪的个人博客</title>
+<title>hadoop 2.7.2伪分布式 | 原豪的个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -257,11 +263,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-hadoop生态" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-hadoop 2.7.2伪分布式" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/16/hadoop生态/" class="article-date">
-      <time datetime="2016-06-16T07:45:16.000Z" itemprop="datePublished">2016-06-16</time>
+      <a href="/2016/06/29/hadoop 2.7.2伪分布式/" class="article-date">
+      <time datetime="2016-06-29T06:52:30.000Z" itemprop="datePublished">2016-06-29</time>
 </a>
     </div>
   
@@ -274,7 +280,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      hadoop 生态
+      hadoop 2.7.2伪分布式
     </h1>
   
 
@@ -284,6 +290,10 @@
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/伪分布式/">伪分布式</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -291,8 +301,153 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>稍后发布。</p>
+        <p>1.准备Linux环境</p>
+<pre><code>1.0点击VMware快捷方式，右键打开文件所在位置 -&gt; 双击vmnetcfg.exe -&gt; VMnet1 host-only -&gt;修改subnet ip 设置网段：192.168.1.0 子网掩码：255.255.255.0 -&gt; apply -&gt; ok
+    回到windows --&gt; 打开网络和共享中心 -&gt; 更改适配器设置 -&gt; 右键VMnet1 -&gt; 属性 -&gt; 双击IPv4 -&gt; 设置windows的IP：192.168.1.100 子网掩码：255.255.255.0 -&gt; 点击确定
+    在虚拟软件上 --My Computer -&gt; 选中虚拟机 -&gt; 右键 -&gt; settings -&gt; network adapter -&gt; host only -&gt; ok    
+1.1修改主机名
+    vim /etc/sysconfig/network
 
+    NETWORKING=yes
+    HOSTNAME=yun01    ###
+
+1.2修改IP
+    两种方式：
+    第一种：通过Linux图形界面进行修改（强烈推荐）
+        进入Linux图形界面 -&gt; 右键点击右上方的两个小电脑 -&gt; 点击Edit connections -&gt; 选中当前网络System eth0 -&gt; 点击edit按钮 -&gt; 选择IPv4 -&gt; method选择为manual -&gt; 点击add按钮 -&gt; 添加IP：192.168.1.101 子网掩码：255.255.255.0 网关：192.168.1.1 -&gt; apply
+
+    第二种：修改配置文件方式（潘砍绦蛟匙ㄓ茫�
+        vim /etc/sysconfig/network-scripts/ifcfg-eth0
+
+        DEVICE=&quot;eth0&quot;
+        BOOTPROTO=&quot;static&quot;               ###
+        HWADDR=&quot;00:0C:29:3C:BF:E7&quot;
+        IPV6INIT=&quot;yes&quot;
+        NM_CONTROLLED=&quot;yes&quot;
+        ONBOOT=&quot;yes&quot;
+        TYPE=&quot;Ethernet&quot;
+        UUID=&quot;ce22eeca-ecde-4536-8cc2-ef0dc36d4a8c&quot;
+        IPADDR=&quot;192.168.1.101&quot;           ###
+        NETMASK=&quot;255.255.255.0&quot;          ###
+        GATEWAY=&quot;192.168.1.1&quot;            ###
+
+1.3修改主机名和IP的映射关系
+    vim /etc/hosts
+
+    192.168.1.101    yun01
+
+1.4关闭防火墙
+    #查看防火墙状态
+    service iptables status
+    #关闭防火墙
+    service iptables stop
+    #查看防火墙开机启动状态
+    chkconfig iptables --list
+    #关闭防火墙开机启动
+    chkconfig iptables off
+
+1.5重启Linux
+    reboot
+</code></pre><p>2.安装JDK<br>    2.1上传alt+p 后出现sftp窗口，然后put d:\xxx\yy\ll\jdk-7u_65-i585.tar.gz</p>
+<pre><code>2.2解压jdk
+    #创建文件夹
+    mkdir /home/hadoop/app
+    #解压
+    tar -zxvf jdk-7u55-linux-i586.tar.gz -C /home/hadoop/app
+
+2.3将java添加到环境变量中
+    vim /etc/profile
+    #在文件最后添加
+    export JAVA_HOME=/home/hadoop/app/jdk-7u_65-i585
+    export PATH=$PATH:$JAVA_HOME/bin
+
+    #刷新配置
+    source /etc/profile
+</code></pre><p>3.安装hadoop2.4.1<br>    先上传hadoop的安装包到服务器上去/home/hadoop/<br>    注意：hadoop2.x的配置文件$HADOOP_HOME/etc/hadoop<br>    伪分布式需要修改5个配置文件<br>    3.1配置hadoop<br>    第一个：hadoop-env.sh<br>        vim hadoop-env.sh</p>
+<pre><code>    #第27行
+    export JAVA_HOME=/usr/java/jdk1.7.0_65
+
+第二个：core-site.xml
+
+    &lt;!-- 指定HADOOP所使用的文件系统schema（URI），HDFS的老大（NameNode）的地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://yun01:9000&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;!-- 指定hadoop运行时产生文件的存储目录 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/home/hadoop/hadoop-2.7.2/tmp&lt;/value&gt;
+&lt;/property&gt;
+
+第三个：hdfs-site.xml   hdfs-default.xml  (3)
+    &lt;!-- 指定HDFS副本的数量 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+&lt;/property&gt;
+
+第四个：mapred-site.xml (mv mapred-site.xml.template mapred-site.xml)
+    mv mapred-site.xml.template mapred-site.xml
+    vim mapred-site.xml
+    &lt;!-- 指定mr运行在yarn上 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+        &lt;value&gt;yarn&lt;/value&gt;
+&lt;/property&gt;
+
+第五个：yarn-site.xml
+    &lt;!-- 指定YARN的老大（ResourceManager）的地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+        &lt;value&gt;yun01&lt;/value&gt;
+&lt;/property&gt;
+    &lt;!-- reducer获取数据的方式 --&gt;
+&lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+ &lt;/property&gt;
+
+3.2将hadoop添加到环境变量
+
+vim /etc/proflie
+    export JAVA_HOME=/usr/java/jdk1.7.0_65
+    export HADOOP_HOME=/itcast/hadoop-2.7.2
+    export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+
+source /etc/profile
+
+3.3格式化namenode（是对namenode进行初始化）
+    hdfs namenode -format (hadoop namenode -format)
+
+3.4启动hadoop
+    先启动HDFS
+    sbin/start-dfs.sh
+
+    再启动YARN
+    sbin/start-yarn.sh
+
+3.5验证是否启动成功
+    使用jps命令验证
+    27408 NameNode
+    28218 Jps
+    27643 SecondaryNameNode
+    28066 NodeManager
+    27803 ResourceManager
+    27512 DataNode
+
+    http://192.168.1.101:50070 （HDFS管理界面）
+    http://192.168.1.101:8088 （MR管理界面）
+</code></pre><p>4.配置ssh免登陆</p>
+<pre><code>#生成ssh免登陆密钥
+#进入到我的home目录
+cd ~/.ssh
+
+ssh-keygen -t rsa （四个回车）
+执行完这个命令后，会生成两个文件id_rsa（私钥）、id_rsa.pub（公钥）
+将公钥拷贝到要免登陆的机器上
+ssh-copy-id localhost
+</code></pre>
       
     </div>
     
@@ -300,13 +455,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/06/16/hadoop生态/">hadoop 生态</a></p>
+        <p><span>Title:</span><a href="/2016/06/29/hadoop 2.7.2伪分布式/">hadoop 2.7.2伪分布式</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
-        <p><span>Created:</span>2016-06-16, 15:45:16</p>
-        <p><span>Updated:</span>2016-06-16, 23:09:00</p>
+        <p><span>Created:</span>2016-06-29, 14:52:30</p>
+        <p><span>Updated:</span>2016-07-01, 23:38:04</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/06/16/hadoop生态/" title="hadoop 生态">http://yuanhao.space/2016/06/16/hadoop生态/</a>
-            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/16/hadoop生态/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/29/hadoop 2.7.2伪分布式/" title="hadoop 2.7.2伪分布式">http://yuanhao.space/2016/06/29/hadoop 2.7.2伪分布式/</a>
+            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/29/hadoop 2.7.2伪分布式/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -318,16 +473,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/17/Linux 必须掌握的30个命令/">
-                    Linux 必须掌握的30个命令
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/06/14/Linux 下oracle的安装/">
-                    Linux 下oracle的安装
+                <a href="/2016/06/28/centos 7 安装 eclipse/">
+                    centos7 安装 eclipse
                 </a>
             </div>
         
@@ -369,7 +518,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"hadoop 生态　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"hadoop 2.7.2伪分布式　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -389,15 +538,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/17/Linux 必须掌握的30个命令/" title="Pre: Linux 必须掌握的30个命令">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/06/14/Linux 下oracle的安装/" title="Next: Linux 下oracle的安装">
+            <a href="/2016/06/28/centos 7 安装 eclipse/" title="Next: centos7 安装 eclipse">
                 <i class="fa fa-angle-right"></i>
             </a>
         
