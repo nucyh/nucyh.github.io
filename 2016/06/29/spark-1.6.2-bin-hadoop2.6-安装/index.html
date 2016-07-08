@@ -15,31 +15,64 @@
 
 
 
-<meta name="description" content="计算机是 电子数字计算机的简称。程序和数据 成为计算机软件。
-pc服务器：1U=4.445cm
-互联网企业都用戴尔服务器。其次 惠普、IBM
-BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才能启动操作系统。记录了电脑最基本的信息，是软件与硬件打交道的最基础的桥梁。
-硬盘未来是调优的关键点，硬盘的性能是决定网站的新年能的重要因素。
-12345磁盘和内存的优化：1、内存临时储存用户的数据，">
+<meta name="description" content="准备工作
+安装好hadoop集群
+点击进入hadoop集群安装链接
+
+安装好scala
+1scala-2.10.6 版本
+
+spark安装包
+1spark-1.6.0-bin-hadoop2.6.tgz
+
+centos7 操作系统 桌面版
+
+
+集群环境如下
+s0为master主控制节
+12345192.168.1.110 spark0192.168.1.111 spark1192.168.1.11">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机基础及linux入门">
-<meta property="og:url" content="http://yuanhao.space/2016/06/18/计算机基础及Linux入门/index.html">
+<meta property="og:title" content="spark-1.6.2-bin-hadoop2.6-安装">
+<meta property="og:url" content="http://yuanhao.space/2016/06/29/spark-1.6.2-bin-hadoop2.6-安装/index.html">
 <meta property="og:site_name" content="原豪的个人博客">
-<meta property="og:description" content="计算机是 电子数字计算机的简称。程序和数据 成为计算机软件。
-pc服务器：1U=4.445cm
-互联网企业都用戴尔服务器。其次 惠普、IBM
-BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才能启动操作系统。记录了电脑最基本的信息，是软件与硬件打交道的最基础的桥梁。
-硬盘未来是调优的关键点，硬盘的性能是决定网站的新年能的重要因素。
-12345磁盘和内存的优化：1、内存临时储存用户的数据，">
-<meta property="og:updated_time" content="2016-06-22T05:44:51.000Z">
+<meta property="og:description" content="准备工作
+安装好hadoop集群
+点击进入hadoop集群安装链接
+
+安装好scala
+1scala-2.10.6 版本
+
+spark安装包
+1spark-1.6.0-bin-hadoop2.6.tgz
+
+centos7 操作系统 桌面版
+
+
+集群环境如下
+s0为master主控制节
+12345192.168.1.110 spark0192.168.1.111 spark1192.168.1.11">
+<meta property="og:image" content="https://opensourceteam.gitbooks.io/bigdata/content/spark/install/spark_master.png">
+<meta property="og:image" content="https://opensourceteam.gitbooks.io/bigdata/content/spark/install/spark_history_server.png">
+<meta property="og:updated_time" content="2016-07-06T07:10:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算机基础及linux入门">
-<meta name="twitter:description" content="计算机是 电子数字计算机的简称。程序和数据 成为计算机软件。
-pc服务器：1U=4.445cm
-互联网企业都用戴尔服务器。其次 惠普、IBM
-BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才能启动操作系统。记录了电脑最基本的信息，是软件与硬件打交道的最基础的桥梁。
-硬盘未来是调优的关键点，硬盘的性能是决定网站的新年能的重要因素。
-12345磁盘和内存的优化：1、内存临时储存用户的数据，">
+<meta name="twitter:title" content="spark-1.6.2-bin-hadoop2.6-安装">
+<meta name="twitter:description" content="准备工作
+安装好hadoop集群
+点击进入hadoop集群安装链接
+
+安装好scala
+1scala-2.10.6 版本
+
+spark安装包
+1spark-1.6.0-bin-hadoop2.6.tgz
+
+centos7 操作系统 桌面版
+
+
+集群环境如下
+s0为master主控制节
+12345192.168.1.110 spark0192.168.1.111 spark1192.168.1.11">
+<meta name="twitter:image" content="https://opensourceteam.gitbooks.io/bigdata/content/spark/install/spark_master.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -71,7 +104,7 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>计算机基础及linux入门 | 原豪的个人博客</title>
+<title>spark-1.6.2-bin-hadoop2.6-安装 | 原豪的个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -272,11 +305,11 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-计算机基础及Linux入门" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-spark-1.6.2-bin-hadoop2.6-安装" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/18/计算机基础及Linux入门/" class="article-date">
-      <time datetime="2016-06-18T13:42:01.000Z" itemprop="datePublished">2016-06-18</time>
+      <a href="/2016/06/29/spark-1.6.2-bin-hadoop2.6-安装/" class="article-date">
+      <time datetime="2016-06-29T08:22:48.000Z" itemprop="datePublished">2016-06-29</time>
 </a>
     </div>
   
@@ -289,7 +322,7 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
         
   
     <h1 class="article-title" itemprop="name">
-      计算机基础及linux入门
+      spark-1.6.2-bin-hadoop2.6-安装
     </h1>
   
 
@@ -299,6 +332,10 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
         
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark安装/">spark安装</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -306,23 +343,67 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="计算机是-电子数字计算机的简称。"><a href="#计算机是-电子数字计算机的简称。" class="headerlink" title="计算机是 电子数字计算机的简称。"></a>计算机是 电子数字计算机的简称。</h4><p>程序和数据 成为计算机软件。</p>
-<p>pc服务器：1U=4.445cm</p>
-<p>互联网企业都用戴尔服务器。其次 惠普、IBM</p>
-<p>BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才能启动操作系统。记录了电脑最基本的信息，是软件与硬件打交道的最基础的桥梁。</p>
-<p>硬盘未来是调优的关键点，硬盘的性能是决定网站的新年能的重要因素。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">磁盘和内存的优化：</span><br><span class="line">1、内存临时储存用户的数据，然后再写到disk中。（门户网站）</span><br><span class="line">     1）速度快     2）丢数据</span><br><span class="line">2、写时：用户数据写到disk中，读时：数据再读到内存中再发给用户。 （并发量不大的中小企业）</span><br><span class="line">     1）性能低     2）不丢数据</span><br></pre></td></tr></table></figure>
-<h4 id="生产中的硬件应用小结"><a href="#生产中的硬件应用小结" class="headerlink" title="生产中的硬件应用小结"></a>生产中的硬件应用小结</h4><h5 id="1、PC服务器"><a href="#1、PC服务器" class="headerlink" title="1、PC服务器"></a>1、PC服务器</h5><p>互联网公司，品牌DELL，HP，IBM。</p>
-<p>Dell品牌：2010年以前 1U的1850 1950，2U的2850 2950</p>
-<p>2010到2014：1U的R410/420 R610/620</p>
-<p>IBM： 2U的3750/3850/3950s</p>
-<h6 id="2、内存"><a href="#2、内存" class="headerlink" title="2、内存"></a>2、内存</h6><p>进程：运行着的程序，进程会放在内存里。</p>
-<p>程序：静态的，在磁盘里。</p>
-<h5 id="企业案例："><a href="#企业案例：" class="headerlink" title="企业案例："></a>企业案例：</h5><h6 id="1）、门户极端案例："><a href="#1）、门户极端案例：" class="headerlink" title="1）、门户极端案例："></a>1）、门户极端案例：</h6><p>高并发，大数据量：会把数据先写到内存，然后在定时或者定量的写到磁盘，最终还是会加载到内存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">特点：</span><br><span class="line">a、高并发的写入性能高。</span><br><span class="line">b、可能会丢失一部分在内存中还没来得及存入磁盘的数据。</span><br></pre></td></tr></table></figure>
-<h6 id="2）、中小企业案例："><a href="#2）、中小企业案例：" class="headerlink" title="2）、中小企业案例："></a>2）、中小企业案例：</h6><p>并发不是很大网站，会先把数据存放到磁盘，然后通过程序吧数据读入到内存里，再对外提供访问服务.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">由于90%的是网站都是读取为主，写入为辅，读写比例10：1，所以并发写入不是问题。</span><br><span class="line">提醒：这里的内存和硬盘，可能是多台机器组成的。</span><br></pre></td></tr></table></figure>
-<h5 id="3、磁盘"><a href="#3、磁盘" class="headerlink" title="3、磁盘"></a>3、磁盘</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">磁盘接口：SAS SATA（这两个都是机械硬盘） SSD（固态硬盘）</span><br><span class="line">性能：SSD&gt;SATA&gt;SAS，</span><br><span class="line">应用：常规工作场景选SAS（转速15K）；</span><br><span class="line">          SATA（转速7.2K-1W）线下的备份；</span><br><span class="line">          高并发SSD。</span><br><span class="line">淘宝网：SATA和SSD混合起来用。</span><br></pre></td></tr></table></figure>
+        <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li><p>安装好hadoop集群</p>
+<p><a href="http://yuanhao.space/2016/06/12/hadoop%202.7.2%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%20%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E7%A8%8B%EF%BC%887%E5%8F%B0%EF%BC%89/">点击进入hadoop集群安装链接</a></p>
+</li>
+<li><p>安装好scala</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala-2.10.6 版本</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>spark安装包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spark-1.6.0-bin-hadoop2.6.tgz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>centos7 操作系统 桌面版</p>
+</li>
+</ul>
+<h3 id="集群环境如下"><a href="#集群环境如下" class="headerlink" title="集群环境如下"></a>集群环境如下</h3><ul>
+<li><p>s0为master主控制节</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.110 spark0</span><br><span class="line">192.168.1.111 spark1</span><br><span class="line">192.168.1.112 spark2</span><br><span class="line">192.168.1.113 spark3</span><br><span class="line">192.168.1.114 spark4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>集群配置说明</p>
+<p>先在spark0上配置完成所有配置信息，然后同步到所有集群每一个节点上，所有配置包括安装路径是一样的</p>
+</li>
+</ul>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><ul>
+<li><p>解压安装包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf   spark-1.6.20-bin-hadoop2.6.tgz  -C    /opt/modules/bigdata/spark   即：$SPARK_HOME=/opt/modules/bigdata/spark/spark-1.6.2-bin-hadoop2.6</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><ul>
+<li><p>$SPARK_HOME/conf/spark-env.sh</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">复制$SPARK_HOME/conf/spark-env.sh.template 为 $SPARK_HOME/conf/spark-env.sh</span><br><span class="line"></span><br><span class="line">修改$SPARK_HOME/conf/spark-env.sh 增加</span><br><span class="line"></span><br><span class="line"> export    JAVA_HOME=/opt/modules/environment/jdk/jdk1.8.0_65</span><br><span class="line"> export    SCALA_HOME=/opt/modules/environment/scala/scala-2.10.6</span><br><span class="line"> export     HADOOP_HOME=/opt/modules/bigdata/hadoop/hadoop-2.6.0</span><br><span class="line"> export     HADOOP_CONF_DIR=/opt/modules/bigdata/hadoop/hadoop-2.6.0/etc/hadoop</span><br><span class="line"> export     SPARK_MASTER_IP=s0</span><br><span class="line"> export      SPARK_WORKER_MEMORY=1500M</span><br><span class="line"> export      SPARK_EXECUTOR_MEMORY=1500m</span><br><span class="line"> export      SPARK_DRIVER_MEMORY=1500m</span><br><span class="line"> export      SPARK_WORKER_CORES=2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cp $SPARK_HOME/conf/slaves.template $SPARK_HOME/conf/slaves 在末尾增加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spark0</span><br><span class="line">spark1</span><br><span class="line">spark2</span><br><span class="line">spark3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cp $SPARK_HOME/conf/spark-defaults.conf.template $SPARK_HOME/conf/spark-defaults.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spark.executor.extraJavaOptions          -XX:+PrintGCDetails -Dkey=value -Dnumbers=&quot;one two three&quot;</span><br><span class="line">spark.eventLog.enabled                     true</span><br><span class="line">spark.eventLog.dir                          hdfs://spark0:9000/historyserverforSpark</span><br><span class="line">spark.yarn.historyServer.address          s0:18080</span><br><span class="line">spark.history.fs.logDirectory             hdfs://spark0:9000/historyserverforSpark</span><br><span class="line">#spark.default.parallelism                 100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动spark</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$SPARK_HOME/sbin/start-all.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭spark</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$SPARK_HOME/sbin/stop-all.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动历史记录服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$SPARK_HOME/sbin/start-history-server.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭历史记录服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$SPARK_HOME/sbin/stop-history-server.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问界面</p>
+<p>访问 <a href="http://spark20:8080/" target="_blank" rel="external">http://Spark20:8080</a> 访问 <a href="http://spark20:18080/" target="_blank" rel="external">http://Spark20:18080</a></p>
+<p><img src="https://opensourceteam.gitbooks.io/bigdata/content/spark/install/spark_master.png" alt="![](spark_master.png)"><img src="https://opensourceteam.gitbooks.io/bigdata/content/spark/install/spark_history_server.png" alt="img"></p>
+</li>
+<li><p>提交并行计算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$SPARK_HOME/bin/spark-submit  --class org.apache.spark.examples.SparkPi  --master spark://s0:7077  ../lib/spark-examples-1.6.2-hadoop2.6.0.jar  1000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接客户端工具 Shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$SPARK_HOME/bin/spark-shell  --master spark://s0:7077</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>统计单词数量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.textFile(&quot;/library/wordcount/input/Data&quot;).flatMap(_.split(&quot; &quot;)).map(word =&gt; (word,1)).reduceByKey(_+_).map(pair =&gt; (pair._2,pair._1)).sortByKey(false).map(pair =&gt; (pair._2,pair._1)).saveAsTextFile(&quot;/library/wordcount/output/spark_word_count&quot;) ](http://spark.apache.org/docs/latest/building-spark.html)</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -331,13 +412,13 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a></p>
+        <p><span>Title:</span><a href="/2016/06/29/spark-1.6.2-bin-hadoop2.6-安装/">spark-1.6.2-bin-hadoop2.6-安装</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
-        <p><span>Created:</span>2016-06-18, 21:42:01</p>
-        <p><span>Updated:</span>2016-06-22, 13:44:51</p>
+        <p><span>Created:</span>2016-06-29, 16:22:48</p>
+        <p><span>Updated:</span>2016-07-06, 15:10:16</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/06/18/计算机基础及Linux入门/" title="计算机基础及linux入门">http://yuanhao.space/2016/06/18/计算机基础及Linux入门/</a>
-            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/18/计算机基础及Linux入门/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/29/spark-1.6.2-bin-hadoop2.6-安装/" title="spark-1.6.2-bin-hadoop2.6-安装">http://yuanhao.space/2016/06/29/spark-1.6.2-bin-hadoop2.6-安装/</a>
+            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/29/spark-1.6.2-bin-hadoop2.6-安装/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -350,15 +431,15 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">
-                    hadoop 2.7.2集群搭建(前期准备)
+                <a href="/2016/06/29/spark-1.6.2 源码编译/">
+                    spark-1.6.2 源码编译
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/06/17/Linux 必须掌握的30个命令/">
-                    Linux 必须掌握的30个命令
+                <a href="/2016/06/29/hadoop 2.7.2伪分布式/">
+                    hadoop 2.7.2伪分布式
                 </a>
             </div>
         
@@ -369,7 +450,7 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算机是-电子数字计算机的简称。"><span class="toc-number">1.</span> <span class="toc-text">计算机是 电子数字计算机的简称。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生产中的硬件应用小结"><span class="toc-number">2.</span> <span class="toc-text">生产中的硬件应用小结</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、PC服务器"><span class="toc-number">2.1.</span> <span class="toc-text">1、PC服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#2、内存"><span class="toc-number">2.1.1.</span> <span class="toc-text">2、内存</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#企业案例："><span class="toc-number">2.2.</span> <span class="toc-text">企业案例：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1）、门户极端案例："><span class="toc-number">2.2.1.</span> <span class="toc-text">1）、门户极端案例：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2）、中小企业案例："><span class="toc-number">2.2.2.</span> <span class="toc-text">2）、中小企业案例：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3、磁盘"><span class="toc-number">2.3.</span> <span class="toc-text">3、磁盘</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集群环境如下"><span class="toc-number">1.1.</span> <span class="toc-text">集群环境如下</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作步骤"><span class="toc-number">2.</span> <span class="toc-text">操作步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#修改配置文件"><span class="toc-number">2.1.</span> <span class="toc-text">修改配置文件</span></a></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn,
@@ -400,7 +481,7 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"计算机基础及linux入门　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"spark-1.6.2-bin-hadoop2.6-安装　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -420,7 +501,7 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/" title="Pre: hadoop 2.7.2集群搭建(前期准备)">
+            <a href="/2016/06/29/spark-1.6.2 源码编译/" title="Pre: spark-1.6.2 源码编译">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -428,7 +509,7 @@ BIOS芯片 主板通电后各部件自检，设置，保存，一切正常后才
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/06/17/Linux 必须掌握的30个命令/" title="Next: Linux 必须掌握的30个命令">
+            <a href="/2016/06/29/hadoop 2.7.2伪分布式/" title="Next: hadoop 2.7.2伪分布式">
                 <i class="fa fa-angle-right"></i>
             </a>
         
