@@ -14,56 +14,19 @@
 <meta name="author" content="原豪" />
 
 
-
-<meta name="description" content="hadoop 2.x简介hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
-注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
-前期准备集群规划：
+    
+    
 
 
-主机名
-IP
-安装的软件
-运行的进程
-
-
-
-
-yu">
-<meta property="og:type" content="article">
-<meta property="og:title" content="hadoop 2.7.2集群搭建（7台）">
-<meta property="og:url" content="http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/index.html">
+<meta name="description" content="记录我的点点滴滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="原豪的个人博客">
+<meta property="og:url" content="http://yuanhao.space/page/3/index.html">
 <meta property="og:site_name" content="原豪的个人博客">
-<meta property="og:description" content="hadoop 2.x简介hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
-注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
-前期准备集群规划：
-
-
-主机名
-IP
-安装的软件
-运行的进程
-
-
-
-
-yu">
-<meta property="og:updated_time" content="2016-06-25T02:27:08.000Z">
+<meta property="og:description" content="记录我的点点滴滴">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hadoop 2.7.2集群搭建（7台）">
-<meta name="twitter:description" content="hadoop 2.x简介hadoop 2.x已经发布了稳定版本了，增加了很多特性，比如HDFS HA、YARN等。
-注意：apache提供的hadoop-2.7.2的安装包是在32位操作系统编译的，因为hadoop依赖一些C++的本地库，所以如果在64位的操作上安装hadoop-2.7.2就需要重新在64操作系统上重新编译
-前期准备集群规划：
-
-
-主机名
-IP
-安装的软件
-运行的进程
-
-
-
-
-yu">
+<meta name="twitter:title" content="原豪的个人博客">
+<meta name="twitter:description" content="记录我的点点滴滴">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -91,11 +54,13 @@ yu">
 <link rel="stylesheet" href="/css/style.css">
 
 
+    <style> .article { opacity: 0;} </style>
+
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>hadoop 2.7.2集群搭建（7台） | 原豪的个人博客</title>
+<title>原豪的个人博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -104,8 +69,8 @@ yu">
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: false,
-        isPost: true,
+        isHome: true,
+        isPost: false,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -296,7 +261,9 @@ yu">
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-hadoop 2.7.2集群搭建 手把手教程（7台）" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
+  
+    <article id="post-hadoop 2.7.2集群搭建 手把手教程（7台）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/" class="article-date">
@@ -312,23 +279,12 @@ yu">
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      hadoop 2.7.2集群搭建（7台）
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/">hadoop 2.7.2集群搭建（7台）</a>
     </h1>
   
 
       </header>
-      
-      <div class="article-info article-info-post">
-        
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -461,79 +417,23 @@ yu">
       
     </div>
     
-  </div>
-  
-    
-    <div class="copyright">
-        <p><span>Title:</span><a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/">hadoop 2.7.2集群搭建（7台）</a></p>
-        <p><span>Author:</span><a href="/" title="Back to Homepage">原豪</a></p>
-        <p><span>Created:</span>2016-06-12, 12:02:30</p>
-        <p><span>Updated:</span>2016-06-25, 10:27:08</p>
-        <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/" title="hadoop 2.7.2集群搭建（7台）">http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/</a>
-            <span class="copy-path" data-clipboard-text="From http://yuanhao.space/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/　　By 原豪" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
-        </p>
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop-2-7-2-集群-7台/">hadoop 2.7.2 集群 7台</a></li></ul>
     </div>
 
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">
-                    hadoop 2.7.2集群搭建（6台）
-                </a>
-            </div>
-        
-        
-    </nav>
-
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
   
 </article>
 
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">Contents</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#hadoop-2-x简介"><span class="toc-number">1.</span> <span class="toc-text">hadoop 2.x简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前期准备"><span class="toc-number">2.</span> <span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集群规划："><span class="toc-number">3.</span> <span class="toc-text">集群规划：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明："><span class="toc-number">3.1.</span> <span class="toc-text">说明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装步骤："><span class="toc-number">4.</span> <span class="toc-text">安装步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#将配置好的zookeeper拷贝到其他节点-首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir-yun"><span class="toc-number">4.0.1.</span> <span class="toc-text">将配置好的zookeeper拷贝到其他节点(首先分别在yun05、yun06根目录下创建一个hadoop目录：mkdir /yun)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装配置hadoop集群"><span class="toc-number">4.1.</span> <span class="toc-text">安装配置hadoop集群</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#解压"><span class="toc-number">4.1.1.</span> <span class="toc-text">解压</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置HDFS（hadoop2-x所有的配置文件都在-HADOOP-HOME-etc-hadoop目录下）"><span class="toc-number">4.1.2.</span> <span class="toc-text">配置HDFS（hadoop2.x所有的配置文件都在$HADOOP_HOME/etc/hadoop目录下）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改hadoop-env-sh"><span class="toc-number">4.1.3.</span> <span class="toc-text">修改hadoop-env.sh</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改core-site-xml"><span class="toc-number">4.1.4.</span> <span class="toc-text">修改core-site.xml</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#修改hdfs-site-xml"><span class="toc-number">4.1.5.</span> <span class="toc-text">修改hdfs-site.xml</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改mapred-site-xml"><span class="toc-number">4.2.</span> <span class="toc-text">修改mapred-site.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改yarn-site-xml"><span class="toc-number">4.3.</span> <span class="toc-text">修改yarn-site.xml</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改slaves-slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置"><span class="toc-number">4.4.</span> <span class="toc-text">修改slaves(slaves是指定子节点的位置，因为要在yun01上启动HDFS、在yun03启动yarn，所以yun01上的slaves文件指定的是datanode的位置，yun03上的slaves文件指定的是nodemanager的位置)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置免密码登陆"><span class="toc-number">4.5.</span> <span class="toc-text">配置免密码登陆</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将配置好的hadoop拷贝到其他节点"><span class="toc-number">5.</span> <span class="toc-text">将配置好的hadoop拷贝到其他节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动zookeeper集群（分别在yun05、yun06、yun07上启动zk）"><span class="toc-number">6.</span> <span class="toc-text">启动zookeeper集群（分别在yun05、yun06、yun07上启动zk）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动journalnode"><span class="toc-number">7.</span> <span class="toc-text">启动journalnode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式化HDFS"><span class="toc-number">8.</span> <span class="toc-text">格式化HDFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式化ZK-在yun01上执行即可"><span class="toc-number">9.</span> <span class="toc-text">格式化ZK(在yun01上执行即可)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动HDFS-在yun01上执行"><span class="toc-number">10.</span> <span class="toc-text">启动HDFS(在yun01上执行)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启动YARN"><span class="toc-number">11.</span> <span class="toc-text">启动YARN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试集群，通过浏览器访问"><span class="toc-number">12.</span> <span class="toc-text">测试集群，通过浏览器访问:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#验证HDFS-HA"><span class="toc-number">12.1.</span> <span class="toc-text">验证HDFS HA</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证YARN："><span class="toc-number">13.</span> <span class="toc-text">验证YARN：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试集群工作状态的一些指令-："><span class="toc-number">14.</span> <span class="toc-text">测试集群工作状态的一些指令 ：</span></a></li></ol>
-</div>
-<style>
-    .left-col .switch-btn,
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
-
-<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
-
-<script>
-    yiliaConfig.toc = ["Hide", "Show", !!"false"];
-</script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"hadoop 2.7.2集群搭建（7台）　| 原豪的个人博客　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
 
 
 
@@ -541,33 +441,13 @@ yu">
 
 
 
-    
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/" title="Pre: hadoop 2.7.2集群搭建（6台）">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/03/Nutch简介/">Nutch简介</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/spark-1.6.2 源码编译/">spark-1.6.2 源码编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/spark-1.6.2-bin-hadoop2.6-安装/">spark-1.6.2-bin-hadoop2.6-安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/hadoop 2.7.2伪分布式/">hadoop 2.7.2伪分布式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/28/centos 7 安装 eclipse/">centos7 安装 eclipse</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/26/CentOS 7 修改默认运行级别/">CentOS 7 修改默认运行级别</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/24/HBase集群搭建/">HBase集群搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/详解Sqoop的架构和安装部署/">详解Sqoop的架构和安装部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/hadoop 2.7.2集群搭建(前期准备)/">hadoop 2.7.2集群搭建(前期准备)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/18/计算机基础及Linux入门/">计算机基础及linux入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/Linux 必须掌握的30个命令/">Linux 必须掌握的30个命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/hadoop生态/">hadoop 生态</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/Linux 下oracle的安装/">Linux 下oracle的安装</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/CentOS 7 编译Hadoop-2.7.2详解/">CentOS 7 编译Hadoop-2.7.2详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/测试副本/">测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/测试/">测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/VMware 克隆虚拟机 解决网卡丢失问题/">VMware 克隆虚拟机 解决网卡丢失问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/查看Linux 下端口命令/">查看Linux 下端口命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（6台）/">hadoop 2.7.2集群搭建（6台）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/12/hadoop 2.7.2集群搭建 手把手教程（7台）/">hadoop 2.7.2集群搭建（7台）</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
+  
 </div>
       <footer id="footer">
     <div class="outer">
