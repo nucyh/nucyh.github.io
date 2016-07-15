@@ -330,67 +330,6 @@
 
 
   
-    <article id="post-spark-1.6.2 源码编译" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/29/spark-1.6.2 源码编译/" class="article-date">
-      <time datetime="2016-06-29T08:22:48.000Z" itemprop="datePublished">2016-06-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/29/spark-1.6.2 源码编译/">spark-1.6.2 源码编译</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="一、安装maven"><a href="#一、安装maven" class="headerlink" title="一、安装maven"></a>一、安装maven</h2><hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.安装maven  tar -zxvf /opt/modules/apache/maven/apache-maven-3.3.9-bin.tar.gz  -C  /opt/modules/apache/maven/   即:$MAVEN_HOME=/opt/modules/apache/maven//opt/modules/apache/maven/apache-maven-3.3.9</span><br><span class="line">2.设置环境变量 </span><br><span class="line">    #设置MAVEN</span><br><span class="line">    export MAVEN_HOME=/opt/modules/apache/maven/apache-maven-3.3.9</span><br><span class="line">    # PATH 汇总</span><br><span class="line">    export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH</span><br><span class="line">3.验证maven安装  mvn -v  会输出mavne的版本信息</span><br></pre></td></tr></table></figure>
-<h2 id="二、用maven安装spark"><a href="#二、用maven安装spark" class="headerlink" title="二、用maven安装spark"></a>二、用maven安装spark</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 解压软件包  tar -zxvf spark-1.6.0.tgz -C /opt/modules/bigdata/spark  即  $SPARK_HOME=/opt/modules/bigdata/spark/spark-1.6.0</span><br><span class="line">2. cd  $SPARK_HOME</span><br><span class="line">3.防止maven内溢出:export MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;</span><br><span class="line">4.执行 apaven安装   mvn -Dhadoop.version=2.7.1 -Phadoop-2.6 -DskipTests clean package</span><br></pre></td></tr></table></figure>
-<h2 id="三、官网详细说明"><a href="#三、官网详细说明" class="headerlink" title="三、官网详细说明"></a>三、官网详细说明</h2><p><a href="http://spark.apache.org/docs/latest/building-spark.html" target="_blank" rel="external">http://spark.apache.org/docs/latest/building-spark.html</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
     <article id="post-spark-1.6.2-bin-hadoop2.6-安装" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -490,6 +429,67 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark安装/">spark安装</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-spark-1.6.2 源码编译" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/29/spark-1.6.2 源码编译/" class="article-date">
+      <time datetime="2016-06-29T08:22:48.000Z" itemprop="datePublished">2016-06-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/29/spark-1.6.2 源码编译/">spark-1.6.2 源码编译</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="一、安装maven"><a href="#一、安装maven" class="headerlink" title="一、安装maven"></a>一、安装maven</h2><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.安装maven  tar -zxvf /opt/modules/apache/maven/apache-maven-3.3.9-bin.tar.gz  -C  /opt/modules/apache/maven/   即:$MAVEN_HOME=/opt/modules/apache/maven//opt/modules/apache/maven/apache-maven-3.3.9</span><br><span class="line">2.设置环境变量 </span><br><span class="line">    #设置MAVEN</span><br><span class="line">    export MAVEN_HOME=/opt/modules/apache/maven/apache-maven-3.3.9</span><br><span class="line">    # PATH 汇总</span><br><span class="line">    export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH</span><br><span class="line">3.验证maven安装  mvn -v  会输出mavne的版本信息</span><br></pre></td></tr></table></figure>
+<h2 id="二、用maven安装spark"><a href="#二、用maven安装spark" class="headerlink" title="二、用maven安装spark"></a>二、用maven安装spark</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 解压软件包  tar -zxvf spark-1.6.0.tgz -C /opt/modules/bigdata/spark  即  $SPARK_HOME=/opt/modules/bigdata/spark/spark-1.6.0</span><br><span class="line">2. cd  $SPARK_HOME</span><br><span class="line">3.防止maven内溢出:export MAVEN_OPTS=&quot;-Xms256m -Xmx512m&quot;</span><br><span class="line">4.执行 apaven安装   mvn -Dhadoop.version=2.7.1 -Phadoop-2.6 -DskipTests clean package</span><br></pre></td></tr></table></figure>
+<h2 id="三、官网详细说明"><a href="#三、官网详细说明" class="headerlink" title="三、官网详细说明"></a>三、官网详细说明</h2><p><a href="http://spark.apache.org/docs/latest/building-spark.html" target="_blank" rel="external">http://spark.apache.org/docs/latest/building-spark.html</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spark/">spark</a></li></ul>
     </div>
 
       
